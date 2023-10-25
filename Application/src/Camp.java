@@ -1,18 +1,27 @@
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Objects;
+import java.util.HashSet;
+import java.util.Set;
 
+/**
+ * The `Camp` class represents a camping event, providing information
+ * about the camp, its attendees and the committee members.
+ *
+ * @author Ruin9999
+ * @version 1.0
+ */
 public class Camp {
     private final CampInformation campInformation;
-    private final ArrayList<Student> attendees;
-    private final ArrayList<Student> committee;
+    private final Set<Student> attendees;
+    private final Set<Student> committee;
 
-    Camp(String campName, Date[] dates, Date closingDate, Faculty faculty,
-         String location, int totalSlots, int committeeSlots, String description, Staff inCharge, boolean visibility) {
-        this.campInformation = new CampInformation(campName, dates, closingDate, faculty,
-                location, totalSlots, committeeSlots, description, inCharge, visibility);
-        this.attendees = new ArrayList<Student>();
-        this.committee = new ArrayList<Student>();
+    /***
+     * Constructs a new `Camp` object with the provided camp information.
+     * @param campInformation The information associated with the camp.
+     */
+    Camp(CampInformation campInformation) {
+        this.campInformation =  campInformation;
+        this.attendees = new HashSet<Student>();
+        this.committee = new HashSet<Student>();
     }
 
     //Setters
@@ -39,61 +48,55 @@ public class Camp {
     public Staff getInCharge() { return this.campInformation.inCharge; }
     public boolean getVisibility() { return this.campInformation.visibility; }
 
-    public ArrayList<Student> getAttendees() { return attendees; }
-    public ArrayList<Student> getCommittee() { return committee; }
+    /***
+     * Returns the set of attendees for this camp.
+     * @return A set of students who are attendees for the camp.
+     */
+    public Set<Student> getAttendees() { return attendees; }
 
+    /***
+     * Returns the set of committee members for the camp
+     * @return A set of students who are committee members for the camp.
+     */
+    public Set<Student> getCommittee() { return committee; }
 
     //Methods
+
+    /***
+     * Adds a student to the list of attendees for this camp.
+     * @param student The student to be added as an attendee
+     * @return `true` if the student is added successfully, `false` if the student is already an attendee.
+     */
     public boolean addAttendee(Student student) {
-        if(attendees.size() >= campInformation.totalSlots) return false; //If camp is full
-        if(new Date().after(campInformation.registrationClosingDate)) return false; //If date is past registration date
-        if(attendees.contains(student)) return true;
-
-        //ADD CHECK FOR IF STUDENT HAS CONFLICTING CAMP DATES -IMPL
-
-        if(attendees.add(student)) {
-            student.onAttendeeAdded(this);
-            return true;
-        }
-        return false;
+        if(attendees.size() >= campInformation.totalSlots) return false;
+        return attendees.add(student);
     }
+
+    /***
+     * Adds a student to the list of committee members for this camp.
+     * @param student The student to be added as a committee member
+     * @return `true` if the student was added successfully, `false`if the student was already a committee member.
+     */
+    public boolean addCommitteeMember(Student student) {
+        if(committee.size() >= campInformation.committeeSlots) return false;
+        return committee.add(student);
+    }
+
+    /***
+     * Removes a student from the list of attendees for this camp.
+     * @param student The student to be removed from the camp attendees.
+     * @return `true` if the student was removed successfully, `false` if the student was not already an attendee.
+     */
     public boolean removeAttendee(Student student) {
-        if(attendees.remove(student)) {
-            student.onAttendeeRemoved(this);
-            return true;
-        }
-        return false;
-    }
-    public boolean addCommittee(Student student) {
-        if(student.getRegisteredCommitteeCamp() != null) return false;
-        if(committee.contains(student)) return true;
-
-        committee.add(student);
-        student.onCommitteeMemberAdded(this);
-        return true;
-    }
-    public boolean removeCommittee(Student student) {
-        if(committee.remove(student)) {
-            student.onCommitteeMemberRemoved();
-            return true;
-        }
-        return false;
+        return attendees.remove(student);
     }
 
-    //Events
-    public void onCampAdded(Student student) {
-
-    }
-
-    public void onCampRemoved(Student student) {
-
-    }
-
-    public void onCampCommitteeAdded(Student student) {
-
-    }
-
-    public void onCampCommitteeRemoved(Student student) {
-        
+    /***
+     * Removes a student from the list of committee members for the camp.
+     * @param student The student to be removed from the committee members.
+     * @return `true` if the student was removed successfully, `false` if the student was not already a committee member.
+     */
+    public boolean removeCommitteeMember(Student student) {
+        return committee.remove(student);
     }
 }
