@@ -1,9 +1,19 @@
 package view;
 import model.Camp;
+/**
+ * The CampDetailView class is responsible for displaying the details of a specific camp.
+ * It provides a method to display information such as camp ID, name, dates, location, slots, and more.
+ */
 
 public class CampDetailView {
+    /**
+     * Displays the details of a specific camp.
+     *
+     * @param camp The Camp object containing the camp's information.
+     */
+
     public void displayCampDetails(Camp camp) {
-        // Display the details of a specific camp
+        
         System.out.println("Camp Details");
         System.out.println("Camp ID: " + camp.getCampID());
         System.out.println("Camp Name: " + camp.getName());
