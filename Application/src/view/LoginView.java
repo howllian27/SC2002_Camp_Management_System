@@ -12,4 +12,23 @@ public class LoginView {
         System.out.print("Enter your password: ");
         String password = scanner.nextLine();
     }
+    public void displayLoginSuccess() {
+        
+        System.out.println("Login Successful");
+        
+    }
+    
+    public void displayLoginError() {
+        
+        System.out.println("Login Failed. Please try again.");
+        
+    }
+    
+    public void displayPasswordChangeSuccess() {
+        System.out.println("Please enter you new password:");
+        Scanner scanner = new Scanner(System.in);
+        String password = scanner.nextLine();
+        System.out.println("Password Change Successful");
+        
+    }
 }
