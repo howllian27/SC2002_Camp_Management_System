@@ -52,9 +52,9 @@ public class Staff extends User {
     }
 
     // Reply to student enquiries
-    public void replyStudentEnquiries(Enquiry enquiry, String reply) {
-        // Implementation to reply to a student enquiry
-    }
+    // public void replyStudentEnquiries(Enquiry enquiry, String reply) {
+    //     // Implementation to reply to a student enquiry
+    // }
 
     // View suggestions for a specific camp
     public void viewSuggestions(Camp camp) {
@@ -62,9 +62,9 @@ public class Staff extends User {
     }
 
     // Approve suggestions for a specific camp
-    public void approveSuggestions(Suggestion suggestion) {
-        // Implementation to approve a suggestion
-    }
+    // public void approveSuggestions(Suggestion suggestion) {
+    //     // Implementation to approve a suggestion
+    // }
 
     // Generate a list of students attending a specific camp
     public void generateList(Camp camp) {
