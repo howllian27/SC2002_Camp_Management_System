@@ -1,6 +1,8 @@
 package view;
+import controller.UserController;
 
 public class UserProfileView {
+
     public void displayUserProfile(User user) {
         // Display the profile of a user
         System.out.println("User Profile");
