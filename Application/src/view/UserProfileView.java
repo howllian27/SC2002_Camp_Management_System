@@ -1,4 +1,5 @@
 package view;
+import model.User;
 
 
 public class UserProfileView {
