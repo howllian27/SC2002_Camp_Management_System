@@ -1,12 +1,18 @@
 package controller;
 
 import model.Staff;
+
+import java.util.List;
+
 import database.CampDB;
 import database.EnquiryDB;
 import view.EnquiriesView;
 
 /**
  * Controller responsible for staff-related operations.
+ * @author Chan Hin Wai Howell
+ * @version 1.0
+ * @since 2023-10-28
  */
 public class StaffController {
 
