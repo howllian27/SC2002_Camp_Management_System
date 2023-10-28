@@ -5,11 +5,7 @@ import java.util.Scanner;
 public class LoginView {
     public void displayLogin() {
         // Code to display the login page
-        System.out.println("  ____  ____  _____\n"
-                         + " / ___||  _ \\| ____|\n"
-                         + "| |    | | | |  _|\n"
-                         + "| |___ | |_| | |___\n"
-                         + " \\____||____/|_____|\n");
+
         System.out.println("Welcome to CAMs");
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter your user ID: ");
