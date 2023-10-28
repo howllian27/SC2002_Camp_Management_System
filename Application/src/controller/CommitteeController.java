@@ -37,7 +37,7 @@ public class CommitteeController {
     public void viewAndReplyToEnquiries(String userID, int campID) {
         List<Enquiry> enquiries = enquiryDB.getEnquiries(campID);
         enquiriesView.displayEnquiries(enquiries);
-        // For simplicity, let's assume we have a replyText here
+        // Putting replyTest here for simplicity first
         String replyText = "sampleReply";
         enquiryDB.updateEnquiryReply(enquiryID, replyText);
     }
