@@ -2,6 +2,7 @@ package view;
 
 import java.util.List;
 
+
 public class CampListView {
     public void displayCamps(List<Camp> camps) {
         
