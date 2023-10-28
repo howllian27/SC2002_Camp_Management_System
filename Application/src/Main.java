@@ -2,8 +2,6 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
-    private static final HashMap<User> users = new HashMap()<>();
-    private static final HashMap<Camp> camps = new HashMap<>();
     private static User currentUser = null;
 
     public static void main(String[] args) {
