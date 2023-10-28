@@ -25,9 +25,7 @@ public class LoginView {
     }
     
     public void displayPasswordChangeSuccess() {
-        System.out.println("Please enter you new password:");
-        Scanner scanner = new Scanner(System.in);
-        String password = scanner.nextLine();
+        
         System.out.println("Password Change Successful");
         
     }
