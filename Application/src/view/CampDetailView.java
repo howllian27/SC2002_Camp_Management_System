@@ -1,5 +1,5 @@
 package view;
-import controller.CampController;
+
 
 public class CampDetailView {
     public void displayCampDetails(Camp camp) {

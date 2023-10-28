@@ -1,8 +1,7 @@
 package view;
 
 import java.util.List;
-import controller.CampController;
-import controller.CommitteeController;
+
 
 public class CampListView {
     public void displayCamps(List<Camp> camps) {
