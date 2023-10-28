@@ -1,9 +1,9 @@
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
-    private static final ArrayList<User> users = new ArrayList<>();
-    private static final ArrayList<Camp> camps = new ArrayList<>();
+    private static final HashMap<User> users = new HashMap()<>();
+    private static final HashMap<Camp> camps = new HashMap<>();
     private static User currentUser = null;
 
     public static void main(String[] args) {
