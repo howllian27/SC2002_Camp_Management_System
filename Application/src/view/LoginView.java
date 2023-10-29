@@ -44,4 +44,12 @@ public class LoginView {
         System.out.println("Password Change Successful");
         
     }
+
+    /**
+     * Displays a message indicating that the password change was unsuccessful.
+     */
+    public void displayPasswordChangeError() {
+        System.out.println("Password Change Failed. Please try again.");
+        
+    }
 }

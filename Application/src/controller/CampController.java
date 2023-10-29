@@ -4,6 +4,8 @@ import database.CampDB;
 import model.Camp;
 import view.CampListView;
 import view.CampDetailView;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * The CampController class is responsible for handling camp-related operations.
@@ -32,6 +34,27 @@ public class CampController {
         // Assuming CampDB's getAllCamps() returns a List<Camp>
         campListView.displayCamps(campDB.getAllCamps());
     }
+
+    /**
+     * Retrieves and displays a list of camps based on the user type.
+     * 
+     * @param userType The type of the user (e.g., "user", "student").
+     */
+    public void viewCampsForUserType(String userType) {
+        List<Camp> allCamps = campDB.getAllCamps();
+        List<Camp> filteredCamps;
+
+        if ("student".equalsIgnoreCase(userType)) {
+            filteredCamps = allCamps.stream()
+                                    .filter(Camp::isVisible)
+                                    .collect(Collectors.toList());
+        } else {
+            filteredCamps = allCamps;
+        }
+
+        campListView.displayCamps(filteredCamps);
+    }
+
 
     /**
      * Retrieves and displays details of a specific camp.

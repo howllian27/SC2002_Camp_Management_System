@@ -50,8 +50,7 @@ public class UserController {
         if (isUpdated) {
             loginView.displayPasswordChangeSuccess();
         } else {
-            // Handle error or display a message indicating the password change failed.
-            // This can be done using another method in the LoginView or using a general error view.
+            loginView.displayPasswordChangeError();
         }
     }
 }
