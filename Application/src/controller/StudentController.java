@@ -2,6 +2,7 @@ package controller;
 
 import database.CampDB;
 import database.EnquiryDB;
+import model.Camp;
 import model.Student;
 import view.UserProfileView;
 import view.EnquiriesView;
@@ -37,9 +38,20 @@ public class StudentController {
      * @param role The role (e.g., attendee or camp committee) the student is registering for.
      */
     public void registerForCamp(String userID, String campID, String role) {
-        // Placeholder implementation. Actual implementation would involve adding the student to the camp's registration list in the database.
-        // For now, we'll assume there's a method in CampDB to handle this.
-        campDB.registerStudentForCamp(userID, campID, role);
+        // Retrieve the student and camp from the database
+        Student student = (Student) UserDB.getUser(userID);
+        Camp camp = campDB.getCamp(campID);
+
+        // Register the student for the camp
+        student.registeredCamps.add(campID);
+        if (role.equals("campCommittee")) {
+            camp.campCommitteeSlots--;
+        } else {
+            camp.totalSlots--;
+        }
+
+        // Update the camp in the database
+        campDB.updateCamp(campID, camp);
     }
 
     /**
@@ -49,9 +61,16 @@ public class StudentController {
      * @param campID The ID of the camp to be withdrawn from.
      */
     public void withdrawFromCamp(String userID, String campID) {
-        // Placeholder implementation. Actual implementation would involve removing the student from the camp's registration list in the database.
-        // For now, we'll assume there's a method in CampDB to handle this.
-        campDB.withdrawStudentFromCamp(userID, campID);
+        // Retrieve the student and camp from the database
+        Student student = (Student) UserDB.getUser(userID);
+        Camp camp = campDB.getCamp(campID);
+
+        // Withdraw the student from the camp
+        student.registeredCamps.remove(campID);
+        camp.totalSlots++;
+
+        // Update the camp in the database
+        campDB.updateCamp(campID, camp);
     }
 
     /**
@@ -62,8 +81,13 @@ public class StudentController {
      * @param enquiryText The text content of the enquiry.
      */
     public void submitEnquiry(String userID, String campID, String enquiryText) {
-        // Placeholder implementation. Actual implementation would involve adding the enquiry to the enquiries database.
-        // For now, we'll assume there's a method in EnquiryDB to handle this.
-        enquiryDB.addEnquiry(userID, campID, enquiryText);
+        // Create a new enquiry
+        Enquiry enquiry = new Enquiry(userID, campID, enquiryText);
+
+        // Add the enquiry to the database
+        enquiryDB.addEnquiry(enquiry);
+
+        // Display the enquiry
+        enquiriesView.displayEnquiries(new Enquiry[]{enquiry});
     }
 }

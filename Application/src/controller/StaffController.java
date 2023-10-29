@@ -1,10 +1,16 @@
 package controller;
 
+import java.util.List;
+
 import database.CampDB;
 import database.EnquiryDB;
 import model.Staff;
+import model.Student;
+import model.Camp;
+import model.Enquiry;
 import view.ReportView;
 import view.EnquiriesView;
+import view.PerformanceReport;
 import view.SuggestionsView;
 
 /**
@@ -73,9 +79,11 @@ public class StaffController {
      * @param campID The ID of the camp for which enquiries are to be viewed.
      */
     public void viewEnquiries(String campID) {
-        // Placeholder implementation. Actual implementation would involve fetching and displaying the enquiries from the database.
-        // For now, we'll assume there's a method in EnquiryDB to handle this and a method in EnquiriesView to display them.
-        enquiriesView.displayEnquiries(enquiryDB.getEnquiries(campID));
+        // Retrieve enquiries related to the camp from the database
+        Enquiry[] enquiries = enquiryDB.getEnquiries(campID);
+
+        // Display the enquiries
+        enquiriesView.displayEnquiries(enquiries);
     }
 
     /**
@@ -85,8 +93,71 @@ public class StaffController {
      * @param replyText The text content of the reply.
      */
     public void replyToEnquiry(String enquiryID, String replyText) {
-        // Placeholder implementation. Actual implementation would involve updating the enquiry with the reply in the database.
-        // For now, we'll assume there's a method in EnquiryDB to handle this.
+        // Update the reply to the enquiry in the database
         enquiryDB.updateEnquiryReply(enquiryID, replyText);
+    }
+
+    /**
+     * Allows staff to view suggestions.
+     * 
+     * @param campID The ID of the camp for which suggestions are to be viewed.
+     */
+    public void viewSuggestion(String campID) {
+        SuggestionsView suggestionsView = new SuggestionsView();
+        // Assuming getSuggestions is a method in SuggestionDB that retrieves suggestions for a specific camp.
+        suggestionsView.displaySuggestions(suggestionDB.getSuggestions(campID));
+    }
+
+    /**
+     * Allows staff to approve a suggestion.
+     * 
+     * @param suggestionID The ID of the suggestion to be approved.
+     */
+    public void approveSuggestion(String suggestionID) {
+        // Logic to approve a specific suggestion.
+        // This might involve updating the suggestion's status in the database.
+        suggestionDB.approveSuggestion(suggestionID);
+        System.out.println("Suggestion approved successfully!");
+    }
+
+    /**
+        * Allows staff to generate a report.
+        * @param campID The ID of the camp for which the report is to be generated.
+        * @param filterType The type of report to be generated.
+     */
+    public void generateStudentReport(String campID, String filterType) {
+        ReportView reportView = new ReportView();
+        
+        // Fetch the camp details and display them.
+        Camp campDetails = campDB.getCamp(campID);
+        reportView.displayCampDetails(campDetails);
+        
+        // Fetch the list of students based on the filterType.
+        List<Student> students;
+        if ("attendee".equals(filterType)) {
+            students = campDB.getAttendeesForCamp(campID);
+        } else if ("campCommittee".equals(filterType)) {
+            students = campDB.getCommitteeMembersForCamp(campID);
+        } else {
+            students = campDB.getAllStudentsForCamp(campID);
+        }
+        
+        // Display the roles of the participants.
+        reportView.displayRoleParticipants(students);
+    }
+
+    /**
+     * Allows staff to generate a performance report for camp committee members.
+     * 
+     * @param campID The ID of the camp for which the performance report is to be generated.
+     */
+    public void generateCommitteePerformanceReport(String campID) {
+        PerformanceReport performanceReport = new PerformanceReport();
+        
+        // Fetch the performance data for the camp committee members.
+        String committeePerformanceData = campDB.getCommitteePerformanceForCamp(campID);
+        
+        // Display the performance report.
+        performanceReport.displayReport(committeePerformanceData);
     }
 }
