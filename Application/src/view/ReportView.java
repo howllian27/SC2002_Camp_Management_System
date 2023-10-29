@@ -1,6 +1,10 @@
 package view;
 
 import java.util.List;
+
+import database.StudentDB;
+import model.Camp;
+import model.Student;
 /**
  * The ReportView class is responsible for displaying various types of reports and information.
  * It provides methods to display camp details, a list of students, and roles of student participants.
@@ -32,7 +36,7 @@ public class ReportView {
     /**
      * Displays the roles of student participants.
      */
-    public void displayRoleParticipants() {
+    public void displayRoleParticipants(List<Student> students) {
         System.out.println("Displaying the roles of participants");
         System.out.println(roles);
     }
