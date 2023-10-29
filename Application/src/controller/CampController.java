@@ -59,7 +59,6 @@ public class CampController {
         Camp camp = campDB.getCamp(campID);
 
         // Toggle the visibility of the camp
-        // Placeholder: Assuming Camp model has a boolean attribute 'isVisible'
         camp.isVisible = !camp.isVisible;
 
         // Update the camp in the database

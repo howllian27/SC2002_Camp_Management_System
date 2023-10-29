@@ -1,8 +1,10 @@
 package controller;
 
-import database.EnquiryDB;
-import view.EnquiriesView;
-import view.SuggestionsView;
+import java.util.List;
+
+import database.*;
+import model.*;
+import view.*;
 
 /**
  * The CommitteeController class is responsible for handling operations related to camp committee members.
@@ -32,9 +34,11 @@ public class CommitteeController {
      * @param suggestionText The text content of the suggestion.
      */
     public void submitSuggestion(String committeeID, String campID, String suggestionText) {
-        // Placeholder implementation. Actual implementation would involve adding the suggestion to a database or list.
-        // For now, we'll assume there's a method in SuggestionsView to handle this.
-        suggestionsView.promptForSuggestions(committeeID, campID, suggestionText);
+        Suggestion suggestion = new Suggestion(committeeID, campID, suggestionText);
+        suggestionDB.addSuggestion(suggestion);
+        // Add a point for the committee member for submitting a suggestion.
+        CampCommittee committeeMember = (CampCommittee) userDB.getUser(committeeID);
+        committeeMember.addPoint();
     }
 
     /**
@@ -48,5 +52,61 @@ public class CommitteeController {
         // For now, we'll assume there's a method in EnquiryDB to handle this and a method in EnquiriesView to display the reply.
         enquiryDB.updateEnquiryReply(enquiryID, replyText);
         enquiriesView.displayEnquiries(enquiryDB.getEnquiriesByCommitteeID(enquiryID));
+    }
+
+    /**
+     * Allows committee members to view their suggestions.
+     * 
+     * @param committeeID The ID of the committee member.
+     */
+    public void viewSuggestions(String committeeID) {
+        SuggestionsView suggestionsView = new SuggestionsView();
+        List<Suggestion> suggestions = suggestionDB.getSuggestionsByCommittee(committeeID);
+        suggestionsView.displaySuggestions(suggestions);
+    }
+
+    /**
+     * Allows committee members to edit their suggestions.
+     * 
+     * @param suggestionID The ID of the suggestion.
+     * @param updatedText The updated suggestion text.
+     */
+    public void editSuggestion(String suggestionID, String updatedText) {
+        suggestionDB.updateSuggestion(suggestionID, updatedText);
+    }
+
+    /**
+     * Allows committee members to delete their suggestions.
+     * 
+     * @param suggestionID The ID of the suggestion.
+     */
+    public void deleteSuggestion(String suggestionID) {
+        suggestionDB.deleteSuggestion(suggestionID);
+    }
+
+    /**
+     * Allows committee members to generate a report of students attending the camp.
+     * 
+     * @param campID The ID of the camp.
+     * @param filterType The type of filter (attendee, camp committee, etc.).
+     */
+    public void generateStudentReport(String campID, String filterType) {
+        ReportView reportView = new ReportView();
+        // Fetch the camp details and display them.
+        Camp campDetails = campDB.getCamp(campID);
+        reportView.displayCampDetails(campDetails);
+        
+        // Fetch the list of students based on the filterType.
+        List<Student> students;
+        if ("attendee".equals(filterType)) {
+            students = campDB.getAttendeesForCamp(campID);
+        } else if ("campCommittee".equals(filterType)) {
+            students = campDB.getCommitteeMembersForCamp(campID);
+        } else {
+            students = campDB.getAllStudentsForCamp(campID);
+        }
+        
+        // Display the roles of the participants.
+        reportView.displayRoleParticipants(students);
     }
 }
