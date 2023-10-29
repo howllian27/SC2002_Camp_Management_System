@@ -1,4 +1,4 @@
-package data;
+package database;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -15,12 +15,12 @@ public class CampDB {
         private int totalSlots;
         private int campCommitteeSlots = 10; // max 10
         private boolean isOpenToWholeNTU;
-        private Staff staffInCharge;
-        private HashMap<String, Student> attendees;
-        private HashMap<String, Student> campCommittee;
+        private StaffDB staffInCharge;
+        private HashMap<String, StudentDB> attendees;
+        private HashMap<String, StudentDB> campCommittee;
 
         public Camp(String campName, Date startDate, Date endDate, Date registrationClosingDate,
-                    String location, String description, int totalSlots, Staff staffInCharge) {
+                    String location, String description, int totalSlots, StaffDB staffInCharge) {
             this.campName = campName;
             this.startDate = startDate;
             this.endDate = endDate;
@@ -33,7 +33,7 @@ public class CampDB {
             this.campCommittee = new HashMap<>();
         }
 
-        public boolean registerStudent(Student student) {
+        public boolean registerStudent(StudentDB student) {
             if(attendees.size() < totalSlots && !attendees.containsKey(student.getStudentID())) {
                 attendees.put(student.getStudentID(), student);
                 return true;
@@ -41,7 +41,7 @@ public class CampDB {
             return false;
         }
 
-        public boolean addCommitteeMember(Student student) {
+        public boolean addCommitteeMember(StudentDB student) {
             if(campCommittee.size() < campCommitteeSlots && !campCommittee.containsKey(student.getStudentID())) {
                 campCommittee.put(student.getStudentID(), student);
                 return true;

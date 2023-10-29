@@ -22,9 +22,9 @@ public class ReportView {
      *
      * @param students A list of Student objects representing the students to be displayed.
      */
-    public void displayStudents(List<Student> students) {
+    public void displayStudents(List<StudentDB> students) {
         System.out.println("Displaying a list of students:");
-        for (Student student : students) {
+        for (StudentDB student : students) {
             System.out.println(student); // Implement a suitable toString() method in the Student class
         }
     }

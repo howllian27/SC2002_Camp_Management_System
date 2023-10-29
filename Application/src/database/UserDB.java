@@ -5,7 +5,7 @@
 
 */
 
-package data;
+package database;
 
 import java.io.Console;
 import java.util.HashMap;

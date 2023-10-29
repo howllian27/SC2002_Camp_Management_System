@@ -97,7 +97,7 @@ public class CommitteeController {
         reportView.displayCampDetails(campDetails);
         
         // Fetch the list of students based on the filterType.
-        List<Student> students;
+        List<StudentDB> students;
         if ("attendee".equals(filterType)) {
             students = campDB.getAttendeesForCamp(campID);
         } else if ("campCommittee".equals(filterType)) {

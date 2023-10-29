@@ -34,9 +34,9 @@ public class Main {
                         System.out.println("Invalid choice. Try again.");
                 }
             } else {
-                if (currentUser instanceof Student) {
+                if (currentUser instanceof StudentDB) {
                     studentMenu(scanner);
-                } else if (currentUser instanceof Staff) {
+                } else if (currentUser instanceof StaffDB) {
                     staffMenu(scanner);
                 } else {
                     System.out.println("Unknown user type. Logging out.");

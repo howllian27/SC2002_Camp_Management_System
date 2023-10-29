@@ -1,10 +1,10 @@
-package data;
+package database;
 
-public class Student extends UserDB {
+public class StudentDB extends UserDB {
 
     private String studentID; 
 
-    public Student(String name, String email, String facultyInfo, String studentID) {
+    public StudentDB(String name, String email, String facultyInfo, String studentID) {
         super(name, email, facultyInfo);
         this.studentID = studentID;
     }
