@@ -1,3 +1,5 @@
+package model;
+
 public enum Faculty {
     SCSE, //School of Computer Science and Engineering
     ADM, //School of Art, Design and Media
