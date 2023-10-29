@@ -1,6 +1,7 @@
 package view;
 
 import java.util.List;
+import model.Camp;
 
 /**
  * The CampListView class is responsible for displaying a list of available camps.
