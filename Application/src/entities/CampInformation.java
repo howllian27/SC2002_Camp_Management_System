@@ -17,7 +17,7 @@ public class CampInformation {
     public int committeeSlots;
     public String description;
     public Staff inCharge;
-    public boolean visibility;
+    public boolean isVisible;
     private final int MAXCOMMITTEESLOTS = 10;
 
     /***

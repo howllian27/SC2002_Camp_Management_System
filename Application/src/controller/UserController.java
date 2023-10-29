@@ -1,30 +1,34 @@
 package controller;
 
-import view.LoginView;
-import model.User;
 import database.UserDB;
+import model.User;
+import view.LoginView;
 
 /**
- * Controller responsible for user-related operations.
+ * The UserController class is responsible for handling user-related operations.
+ * It provides methods for user login and password change functionalities.
+ * This class interacts with the UserDB for database operations and uses LoginView for displaying relevant messages.
  * @author Chan Hin Wai Howell
  * @version 1.0
  * @since 2023-10-28
  */
 public class UserController {
 
-    private LoginView loginView = new LoginView();
+    /** The UserDB object for interacting with the user database. */
     private UserDB userDB = new UserDB();
 
-    /**
-     * Handles the user login process.
-     */
-    public void loginUser() {
-        loginView.displayLogin();
-        // Get user input from view (for simplicity, let's assume we have it here)
-        String userID = "sampleID"; // Replace with actual input
-        String password = "samplePassword"; // Replace with actual input
+    /** The LoginView object for displaying user-related messages. */
+    private LoginView loginView = new LoginView();
 
-        // Validate user credentials
+    /**
+     * Validates user credentials against the database.
+     * If the credentials are valid, it displays a successful login message.
+     * Otherwise, it displays an error message.
+     * 
+     * @param userID The user's ID.
+     * @param password The user's password.
+     */
+    public void loginUser(String userID, String password) {
         User user = userDB.getUser(userID);
         if (user != null && user.getPassword().equals(password)) {
             loginView.displayLoginSuccess();
@@ -35,12 +39,19 @@ public class UserController {
 
     /**
      * Allows a user to change their password.
+     * If the password is successfully updated in the database, it displays a success message.
+     * Otherwise, it handles the error or displays a failure message.
+     * 
      * @param userID The user's ID.
-     * @param newPassword The new password.
+     * @param newPassword The new password to be set for the user.
      */
     public void changePassword(String userID, String newPassword) {
-        userDB.updatePassword(userID, newPassword);
-        // Display success message
-        loginView.displayPasswordChangeSuccess();
+        boolean isUpdated = userDB.updatePassword(userID, newPassword);
+        if (isUpdated) {
+            loginView.displayPasswordChangeSuccess();
+        } else {
+            // Handle error or display a message indicating the password change failed.
+            // This can be done using another method in the LoginView or using a general error view.
+        }
     }
 }

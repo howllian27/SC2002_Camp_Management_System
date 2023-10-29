@@ -1,57 +1,52 @@
 package controller;
 
-import model.CampCommittee;
-
-import java.util.List;
-
-import database.CampDB;
 import database.EnquiryDB;
 import view.EnquiriesView;
-import view.LoginView;
+import view.SuggestionsView;
 
 /**
- * Controller responsible for camp committee member-related operations.
+ * The CommitteeController class is responsible for handling operations related to camp committee members.
+ * It provides methods for committee members to submit suggestions, reply to enquiries, and view their own suggestions.
+ * This class interacts with the EnquiryDB for database operations and uses EnquiriesView and SuggestionsView for displaying relevant committee information.
+ * 
  * @author Chan Hin Wai Howell
  * @version 1.0
  * @since 2023-10-28
  */
 public class CommitteeController {
 
-    private CampDB campDB = new CampDB();
+    /** The EnquiryDB object for interacting with the enquiries database. */
     private EnquiryDB enquiryDB = new EnquiryDB();
+
+    /** The EnquiriesView object for displaying and replying to student enquiries. */
     private EnquiriesView enquiriesView = new EnquiriesView();
 
+    /** The SuggestionsView object for submitting and viewing camp committee suggestions. */
+    private SuggestionsView suggestionsView = new SuggestionsView();
+
     /**
-     * Allows a camp committee member to submit a suggestion for a camp.
-     * @param userID The committee member's ID.
-     * @param campID The ID of the camp to suggest changes for.
-     * @param suggestionText The text of the suggestion.
+     * Allows committee members to submit suggestions for a specific camp.
+     * 
+     * @param committeeID The ID of the committee member submitting the suggestion.
+     * @param campID The ID of the camp for which the suggestion is being made.
+     * @param suggestionText The text content of the suggestion.
      */
-    public void submitSuggestion(String userID, int campID, String suggestionText) {
-        CampCommittee committeeMember = (CampCommittee) campDB.getUser(userID);
-        committeeMember.submitSuggestion(campID, suggestionText);
+    public void submitSuggestion(String committeeID, String campID, String suggestionText) {
+        // Placeholder implementation. Actual implementation would involve adding the suggestion to a database or list.
+        // For now, we'll assume there's a method in SuggestionsView to handle this.
+        suggestionsView.promptForSuggestions(committeeID, campID, suggestionText);
     }
 
     /**
-     * Allows a camp committee member to view and reply to enquiries for a camp.
-     * @param userID The committee member's ID.
-     * @param campID The ID of the camp to view enquiries for.
+     * Allows committee members to reply to an enquiry related to a camp they oversee.
+     * 
+     * @param enquiryID The ID of the enquiry to which the reply is to be made.
+     * @param replyText The text content of the reply.
      */
-    public void viewAndReplyToEnquiries(String userID, int campID) {
-        List<Enquiry> enquiries = enquiryDB.getEnquiries(campID);
-        enquiriesView.displayEnquiries(enquiries);
-        // Putting replyTest here for simplicity first
-        String replyText = "sampleReply";
+    public void replyToEnquiry(String enquiryID, String replyText) {
+        // Placeholder implementation. Actual implementation would involve updating the enquiry with the reply.
+        // For now, we'll assume there's a method in EnquiryDB to handle this and a method in EnquiriesView to display the reply.
         enquiryDB.updateEnquiryReply(enquiryID, replyText);
-    }
-
-    /**
-     * Allows a camp committee member to generate a report for a camp.
-     * @param userID The committee member's ID.
-     * @param campID The ID of the camp to generate a report for.
-     */
-    public void generateReport(String userID, int campID) {
-        CampCommittee committeeMember = (CampCommittee) campDB.getUser(userID);
-        committeeMember.generateReport(campID);
+        enquiriesView.displayEnquiries(enquiryDB.getEnquiriesByCommitteeID(enquiryID));
     }
 }
