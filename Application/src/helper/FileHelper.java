@@ -9,16 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Helper responsible for reading txt file.
+ * Helper responsible for reading & writing txt file.
  * @author Lee Ern Qi Eunice
- * @version 1.0
+ * @version 2.0
  * @since 2023-10-29
  */
 
 public class FileHelper {
 
     /**
-     * Reads student/staff txt file returns list of string [name email faculty]
+     * Reads student/staff txt file
      * @param filepath The filepath of student/staff txt file
      * @return List<String>, list of string [name email faculty]
      */
@@ -32,7 +32,6 @@ public class FileHelper {
             String line;
 
             while ((line = br.readLine()) != null) {
-                System.out.println(line);
                 lines.add(line);
             }
         } catch (IOException e) {
@@ -40,6 +39,11 @@ public class FileHelper {
         }
         return lines;
     }
+
+    /**
+     * Writes txt file 
+     * @param ReportList The List of information to be generated in report
+     */
 
     public void writeFile(List<String> ReportList){
         try(FileWriter fw = new FileWriter("Report.txt");
@@ -56,5 +60,3 @@ public class FileHelper {
 
     }
 }
-
-
