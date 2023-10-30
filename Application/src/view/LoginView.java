@@ -36,6 +36,17 @@ public class LoginView {
         System.out.println("Login Failed. Please try again.");
         
     }
+    public void changeUserPassword(){
+                System.out.println("\n+------------------------------------------------------------+");
+                System.out.println("|                                                             |");
+                System.out.println("|                 PASSWORD CHANGE PORTAL                      |");
+                System.out.println("|                                                             |");
+                System.out.println("|    Please re-enter your current password to proceed.        |");
+                System.out.println("|                                                             |");
+                System.out.println("|       To return to the main menu, simply enter '0'.         |");
+                System.out.println("|                                                             |");
+                System.out.println("+------------------------------------------------------------+\n");
+    }
     
     /**
      * Displays a message indicating that the password change was successful.
