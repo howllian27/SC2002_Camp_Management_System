@@ -36,6 +36,10 @@ public class LoginView {
         System.out.println("Login Failed. Please try again.");
         
     }
+
+    /**
+     * Displays a message indicating that you can change the password.
+     */
     public void changeUserPassword(){
                 System.out.println("\n+------------------------------------------------------------+");
                 System.out.println("|                                                             |");
