@@ -18,7 +18,14 @@ public class CampDetailView {
      * @param camp The Camp object containing the camp's information.
      */
     public void displayCampDetails(Camp camp) {
-        
+                System.out.println("\n+------------------------------------------------------------+");
+                System.out.println("|                                                             |");
+                System.out.println("|                    CAMP DETAILS PORTAL                      |");
+                System.out.println("|                                                             |");
+                System.out.println("|                                                             |");
+                System.out.println("|        To return to the main menu, simply enter '0'.        |");
+                System.out.println("|                                                             |");
+                System.out.println("+------------------------------------------------------------+\n");
         System.out.println("Camp Details");
         System.out.println("Camp Name: " + camp.getName());
         System.out.println("Dates: " + Arrays.toString(camp.getDates()));
