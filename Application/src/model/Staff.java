@@ -3,15 +3,32 @@ package model;
 import java.util.HashSet;
 import java.util.Set;
 
+/***
+ * The `Staff` class represents a staff user in the system, including the camps that
+ * they have created.
+ *
+ * @author Shun Jie
+ * @version 1.0
+ */
 public class Staff extends User {
-    private Set<Camp> createdCamps;
+    private final Set<Camp> createdCamps;
 
+    /***
+     * Constructs a new `Staff` class with the given user ID and faculty.
+     * @param userID The staff's user ID.
+     * @param faculty The faculty to which the staff belongs to.
+     */
     Staff(String userID, Faculty faculty) {
         super(userID, faculty);
         createdCamps = new HashSet<Camp>();
     }
 
-
+    /***
+     * Constructs a new `Staff` class with the given user ID, password and faculty.
+     * @param userID The staff's user ID.
+     * @param password The password of the staff.
+     * @param faculty The faculty to which the staff belongs to.
+     */
     Staff(String userID, String password, Faculty faculty) {
         super(userID, password, faculty);
         createdCamps = new HashSet<Camp>();

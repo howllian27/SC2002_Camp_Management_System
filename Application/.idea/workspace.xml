@@ -4,22 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="439d4a4b-d932-45f6-99fa-e63e7d78377b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GroupAssignment.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SC2002 Assignment 2023S1.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Camp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CampInformation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Faculty.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Staff.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Student.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
-    </list>
+    <list default="true" id="439d4a4b-d932-45f6-99fa-e63e7d78377b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,7 +20,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
@@ -53,9 +38,10 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/Ruin9999/Documents/SC2002/Lab/GroupAssignment",
-    "onboarding.tips.debug.path": "C:/Users/Ruin9999/Documents/SC2006/Lab/GroupAssignment/src/Main.java"
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/Ruin9999/Documents/SC2002/Lab/Lab4",
+    "onboarding.tips.debug.path": "C:/Users/Ruin9999/Documents/SC2006/Lab/GroupAssignment/src/Main.java",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

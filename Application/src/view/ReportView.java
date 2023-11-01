@@ -8,12 +8,14 @@ import model.Student;
 /**
  * The ReportView class is responsible for displaying various types of reports and information.
  * It provides methods to display camp details, a list of students, and roles of student participants.
+ *
+ * @author Cheng Lin
+ * @version 1.0
  */
 public class ReportView {
     
     /**
      * Displays the details of a camp.
-     *
      * @param camp The Camp object containing the camp's information.
      */
     public void displayCampDetails(Camp camp) {
@@ -23,7 +25,6 @@ public class ReportView {
 
     /**
      * Displays a list of students.
-     *
      * @param students A list of Student objects representing the students to be displayed.
      */
     public void displayStudents(List<StudentDB> students) {

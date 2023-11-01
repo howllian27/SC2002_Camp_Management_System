@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Scanner;
+import model.User;
 
 public class Main {
     private static User currentUser = null;

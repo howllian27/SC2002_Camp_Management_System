@@ -4,6 +4,9 @@ import java.util.List;
 /**
  * The SuggestionsView class is responsible for managing and displaying suggestions and user interactions.
  * It provides methods to display a list of suggestions and prompt users for their own suggestions.
+ *
+ * @author Cheng Lin
+ * @version 10.0
  */
 
 public class SuggestionsView {

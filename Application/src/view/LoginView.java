@@ -4,9 +4,13 @@ import java.util.Scanner;
 /**
  * The LoginView class is responsible for displaying login-related pages and messages.
  * It provides methods to display the login page, login success message, login error message, and password change success message.
+ *
+ * @author Cheng lin
+ * @version 1.0
  */
 
 public class LoginView {
+
     /**
      * Displays the login page and prompts the user to enter their user ID and password.
      */
@@ -57,7 +61,6 @@ public class LoginView {
      */
     public void displayPasswordChangeSuccess() {
         System.out.println("Password Change Successful");
-        
     }
 
     /**
@@ -65,6 +68,5 @@ public class LoginView {
      */
     public void displayPasswordChangeError() {
         System.out.println("Password Change Failed. Please try again.");
-        
     }
 }

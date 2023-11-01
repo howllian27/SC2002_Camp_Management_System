@@ -5,7 +5,7 @@ import java.util.Objects;
 /***
  * The `User` class represents a user in the system with a unique user ID, password and faculty.
  *
- * @author Ruin9999
+ * @author Shun Jie
  * @version 1.0
  */
 public class User {

@@ -7,7 +7,7 @@ import java.util.Set;
  * The `Student` class represents a student user in the system, including their
  * registration status for various camps and committee memberships.
  *
- * @author Ruin9999
+ * @author Shun Jie
  * @version 1.0
  */
 public class Student extends User {

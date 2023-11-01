@@ -4,9 +4,13 @@ import java.util.List;
 /**
  * The EnquiriesView class is responsible for managing student inquiries and staff interactions.
  * It provides methods to display a list of student enquiries and prompt students for inquiries if any.
+ *
+ * @author Cheng lin
+ * @version 1.0
  */
 
 public class EnquiriesView {
+
     /**
      * Displays a list of student inquiries for staff to view.
      *
@@ -19,6 +23,7 @@ public class EnquiriesView {
             System.out.println(enquiry);
         }
     }
+
     /**
      * Prompts student to enter an enquiry.
      */

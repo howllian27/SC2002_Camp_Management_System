@@ -8,7 +8,7 @@ import java.util.Set;
  * The `Camp` class represents a camping event, providing information
  * about the camp, its attendees and the committee members.
  *
- * @author Ruin9999
+ * @author Shun Jie
  * @version 1.0
  */
 public class Camp {
@@ -36,7 +36,7 @@ public class Camp {
     public void setCommitteeSlots(int committeeSlots) { this.campInformation.committeeSlots = committeeSlots; }
     public void setDescription(String description) { this.campInformation.description = description; }
     public void setInCharge(Staff inCharge) { this.campInformation.inCharge = inCharge; }
-    public void setVisibility(boolean visibility) { this.campInformation.visibility = visibility; }
+    public void setVisibility(boolean visibility) { this.campInformation.isVisible = visibility; }
 
     //Getters
     public String getName() { return this.campInformation.campName; }
@@ -45,10 +45,11 @@ public class Camp {
     public Faculty getFaculty() { return this.campInformation.faculty; }
     public String getLocation() { return this.campInformation.location; }
     public int getTotalSlots() { return this.campInformation.totalSlots; }
+    public int getRemainingSlots() { return this.campInformation.totalSlots - this.attendees.size(); }
     public int getCommitteeSlots() { return this.campInformation.committeeSlots; }
     public String getDescription() { return this.campInformation.description; }
     public Staff getInCharge() { return this.campInformation.inCharge; }
-    public boolean getVisibility() { return this.campInformation.visibility; }
+    public boolean getVisibility() { return this.campInformation.isVisible; }
 
     /***
      * Returns the set of attendees for this camp.

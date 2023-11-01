@@ -11,14 +11,6 @@ import java.io.Console;
 import java.util.HashMap;
 import java.util.Scanner;
 
-enum UserType {
-    STUDENT,
-    STAFF,
-    CAMPCOORDINATOR, /*Not sure, may remove */
-    // Not a Valid User
-    UNKNOWN
-}
-
 public class UserDB {
 
     protected String userID; // userID will be obtained from email

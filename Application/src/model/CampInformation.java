@@ -6,7 +6,7 @@ import java.util.Date;
  * The `CampInformation` class represents information about a camp, including details
  * such as its name, dates, registration information, location and more.
  *
- * @author Ruin9999
+ * @author Shun Jie
  * @version 1.0
  */
 public class CampInformation {
@@ -46,7 +46,7 @@ public class CampInformation {
         this.committeeSlots = Math.min(committeeSlots, MAXCOMMITTEESLOTS);
         this.description = description;
         this.inCharge = inCharge;
-        this.visibility = visibility;
+        this.isVisible = visibility;
     }
 
 
