@@ -111,6 +111,7 @@ public class Main {
     }
 
     private static void staffMenu(Scanner scanner) {
+        
         while (true) {
             System.out.println("Staff Menu:");
             System.out.println("1. Change Password");
@@ -129,6 +130,7 @@ public class Main {
             switch (choice) {
                 case 1:
                     // Change password
+                    changeUserPassword()
                     break;
                 case 2:
                     // Create a new camp
