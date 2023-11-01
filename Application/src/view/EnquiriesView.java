@@ -17,8 +17,15 @@ public class EnquiriesView {
      * @param enquiries A list of strings containing student inquiries.
      */
     public void displayEnquiries(List<String> enquiries) {
-        
-        System.out.println("Displaying student inquiries:");
+                System.out.println("\n+------------------------------------------------------------+");
+                System.out.println("|                                                             |");
+                System.out.println("|                       ENQUIRIES PORTAL                      |");
+                System.out.println("|                                                             |");
+                System.out.println("|                                                             |");
+                System.out.println("|        To return to the main menu, simply enter '0'.        |");
+                System.out.println("|                                                             |");
+                System.out.println("+------------------------------------------------------------+\n");
+        System.out.println("Displaying student enquiries:");
         for (String enquiry : enquiries) {
             System.out.println(enquiry);
         }
