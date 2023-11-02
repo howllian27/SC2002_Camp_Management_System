@@ -12,13 +12,21 @@ import view.LoginView;
  * @version 1.0
  * @since 2023-10-28
  */
-public class UserController {
+public class UserController implements BaseController{
+    private UserDB userDB;
+    private LoginView loginView;
 
-    /** The UserDB object for interacting with the user database. */
-    private UserDB userDB = new UserDB();
+    // Constructor
+    public UserController() {
+        setMasterVariables();
+    }
 
-    /** The LoginView object for displaying user-related messages. */
-    private LoginView loginView = new LoginView();
+    // Set master variables
+    @Override
+    public void setMasterVariables() {
+        this.userDB = new UserDB(); // Assuming UserDB is a class that handles user data.
+        this.loginView = new LoginView(); // Assuming LoginView is a class for displaying login-related UI.
+    }
 
     /**
      * Validates user credentials against the database.

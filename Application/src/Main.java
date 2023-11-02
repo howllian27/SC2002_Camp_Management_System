@@ -1,6 +1,26 @@
 import java.util.HashMap;
 import java.util.Scanner;
+
+import controller.CampController;
+import controller.CommitteeController;
+import controller.StaffController;
+import controller.StudentController;
+import controller.UserController;
+
+import database.CampDB;
+import database.UserDB;
+import database.UserType;
+
+import helper.FileHelper;
+
+import model.Camp;
+import model.CampInformation;
+import model.Faculty;
+import model.Staff;
+import model.Student;
 import model.User;
+
+
 
 public class Main {
     private static User currentUser = null;
@@ -91,6 +111,7 @@ public class Main {
     }
 
     private static void staffMenu(Scanner scanner) {
+        
         while (true) {
             System.out.println("Staff Menu:");
             System.out.println("1. Change Password");
@@ -109,6 +130,7 @@ public class Main {
             switch (choice) {
                 case 1:
                     // Change password
+                    changeUserPassword()
                     break;
                 case 2:
                     // Create a new camp

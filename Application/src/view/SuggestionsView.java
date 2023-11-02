@@ -17,6 +17,14 @@ public class SuggestionsView {
      * @param suggestions A list of strings containing suggestions to be displayed.
      */
     public void displaySuggestions(List<String> suggestions) {
+                System.out.println("\n+------------------------------------------------------------+");
+                System.out.println("|                                                             |");
+                System.out.println("|                       SUGGESTIONS PORTAL                    |");
+                System.out.println("|                                                             |");
+                System.out.println("|                                                             |");
+                System.out.println("|        To return to the main menu, simply enter '0'.        |");
+                System.out.println("|                                                             |");
+                System.out.println("+------------------------------------------------------------+\n");
         System.out.println("Displaying suggestions:");
         for (String suggestion : suggestions) {
             System.out.println(suggestion);

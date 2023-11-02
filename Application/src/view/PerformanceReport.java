@@ -15,6 +15,14 @@ public class PerformanceReport {
      * @param report A string containing the performance report to be displayed.
      */
     public void displayReport(String report) {
+                System.out.println("\n+------------------------------------------------------------+");
+                System.out.println("|                                                             |");
+                System.out.println("|                       PERFORMANCE REPORT                    |");
+                System.out.println("|                                                             |");
+                System.out.println("|                                                             |");
+                System.out.println("|        To return to the main menu, simply enter '0'.        |");
+                System.out.println("|                                                             |");
+                System.out.println("+------------------------------------------------------------+\n");
         System.out.println("Displaying performance report:");
         System.out.println(report);
     }

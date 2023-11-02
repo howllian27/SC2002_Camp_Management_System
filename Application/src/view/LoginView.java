@@ -16,7 +16,14 @@ public class LoginView {
      */
     public void displayLogin() {
         // Display the login page
-
+                System.out.println("\n+------------------------------------------------------------+");
+                System.out.println("|                                                             |");
+                System.out.println("|                         LOGIN PORTAL                        |");
+                System.out.println("|                                                             |");
+                System.out.println("|   Please enter your current userID and password to proceed. |");
+                System.out.println("|                                                             |");
+                System.out.println("|                                                             |");
+                System.out.println("+------------------------------------------------------------+\n");
         System.out.println("Welcome to CAMs");
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter your user ID: ");
