@@ -47,24 +47,16 @@ public class User {
         this.faculty = faculty;
     }
 
-    public String getID() { return this.userID; }
-    public Faculty getFaculty() { return this.faculty; }
-
-    /**
-     * Authenticates the user by comparing the provided password with the stored password.
-     *
-     * @param password The password to be authenticated.
-     * @return `true` if the provided password matches the stored password, `false` otherwise.
-     */
-    public boolean authenticate(String password) {
-        return Objects.equals(this.password, password);
+    public Boolean setPassword(String password) {
+        if (password.isEmpty()) {
+            return false;
+        }
+        this.password = password;
+        return true;
     }
 
-    /**
-     * Changes the user's password to the provided value.
-     *
-     * @param password The new password to be set for the user.
-     */
-    public void changePassword(String password) { this.password = password; }
+    public String getID() { return this.userID; }
+    public Faculty getFaculty() { return this.faculty; }
+    public String getPassword() { return this.password; }
 
 }
