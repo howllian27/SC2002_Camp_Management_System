@@ -1,43 +1,34 @@
-/*
-    A hashset of user
-*/
-
 package database;
 
 import model.User;
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserDB {
-    
-    public HashSet<User> users = new HashSet<>(); 
 
-    public boolean addUser(User user) 
-    {
-        return users.add(user); 
+    private final Map<String, User> users = new HashMap<>(); 
+
+    public boolean addUser(User user) {
+        if (user == null || users.containsKey(user.getID())) {
+            return false;
+        }
+        users.put(user.getID(), user);
+        return true;
     }
 
-    public boolean removeUser(User user) {
-        return users.remove(user);
+    public boolean removeUser(String userID) {
+        return users.remove(userID) != null;
     }
 
     public User getUser(String userID) {
-        for (User user : users) {
-            if (user.getID().equals(userID)) { // user.getID from SJ Package
-                return user;
-            }
-        }
-        System.out.println("User not found");
-        return null;  
+        return users.get(userID);
     }
     
-    public boolean updatePassword(String userID, String newPassword)
-    {
-        for (User user : users) {
-            if (user.getID().equals(userID)) 
-            {
-                user.setPassword(newPassword);
-                return true;
-            }
+    public boolean updatePassword(String userID, String newPassword) {
+        User user = getUser(userID);
+        if (user != null) {
+            user.setPassword(newPassword);
+            return true;
         }
         return false;
     }

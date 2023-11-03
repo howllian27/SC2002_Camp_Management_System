@@ -1,84 +1,82 @@
 package database;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-
+import java.util.HashMap;
+import java.util.Map;
 import model.Camp;
 import model.Student;
 
-/***
- *
- * @author Shun Jie
- * @version 1.1
- */
 public class CampDB {
 
-    private final HashSet<Camp> campDatabase;
+    private final Map<String, Camp> campDatabase;
 
     public CampDB() {
-        this.campDatabase = new HashSet<>();
+        this.campDatabase = new HashMap<>();
     }
 
-    public HashSet<Camp> getAllCamps() {
-        return campDatabase;
+    public Map<String, Camp> getAllCamps() {
+        return new HashMap<>(campDatabase);
     }
 
     public Camp getCamp(String campID) {
-        for (Camp camp : campDatabase) {
-            if (camp.getName().equals(campID)) {
-                return camp;
-            }
-        }
-        return null;
+        return campDatabase.get(campID);
     }
 
-    public boolean addCamp(Camp camp) {
-        return campDatabase.add(camp);
-    }
-
-    public void updateCamp(String campID, Camp updatedDetails) {
-        Camp existingCamp = getCamp(campID);
-        if (existingCamp != null) {
-            campDatabase.remove(existingCamp);
-            campDatabase.add(updatedDetails);
-        }
-    }
-
-    public boolean deleteCamp(String campID) {
-        Camp existingCamp = getCamp(campID);
-        if (existingCamp != null) {
-            return campDatabase.remove(existingCamp);
+    public boolean addCamp(String campID, Camp camp) {
+        if (!campDatabase.containsKey(campID)) {
+            campDatabase.put(campID, camp);
+            return true;
         }
         return false;
     }
+
+    public boolean updateCamp(String campID, Camp updatedDetails) {
+        if (campDatabase.containsKey(campID)) {
+            campDatabase.put(campID, updatedDetails);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean deleteCamp(String campID) {
+        return campDatabase.remove(campID) != null;
+    }
     
-    public Set<Student> getAttendeesForCamp(String campID) {
+    public Map<String, Student> getAttendeesForCamp(String campID) {
         Camp camp = getCamp(campID);
         if (camp != null) {
-            return camp.getAttendees();
+            Map<String, Student> attendeesMap = new HashMap<>();
+            for (Student student : camp.getAttendees()) {
+                attendeesMap.put(student.getId(), student);
+            }
+            return attendeesMap;
         }
-        return null;
+        return new HashMap<>();
     }
 
-    public Set<Student> getCommitteeMembersForCamp(String campID) {
+    public Map<String, Student> getCommitteeMembersForCamp(String campID) {
         Camp camp = getCamp(campID);
         if (camp != null) {
-            return camp.getCommittee();
+            Map<String, Student> committeeMap = new HashMap<>();
+            for (Student student : camp.getCommittee()) {
+                committeeMap.put(student.getId(), student);
+            }
+            return committeeMap;
         }
-        return null;
+        return new HashMap<>();
     }
 
-    public Set<Student> getAllStudentsForCamp(String campID) {
+    public Map<String, Student> getAllStudentsForCamp(String campID) {
         Camp camp = getCamp(campID);
         if (camp != null) {
-            Set<Student> allStudents = new HashSet<>();
-            allStudents.addAll(camp.getAttendees());
-            allStudents.addAll(camp.getCommittee());
+            Map<String, Student> allStudents = new HashMap<>();
+            for (Student student : camp.getAttendees()) {
+                allStudents.put(student.getId(), student);
+            }
+            for (Student student : camp.getCommittee()) {
+                allStudents.put(student.getId(), student);
+            }
             return allStudents;
         }
-        return null;
+        return new HashMap<>();
     }
-
-
 }
