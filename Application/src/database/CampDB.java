@@ -46,7 +46,7 @@ public class CampDB {
         if (camp != null) {
             Map<String, Student> attendeesMap = new HashMap<>();
             for (Student student : camp.getAttendees()) {
-                attendeesMap.put(student.getId(), student);
+                attendeesMap.put(student.getID(), student);
             }
             return attendeesMap;
         }
@@ -58,7 +58,7 @@ public class CampDB {
         if (camp != null) {
             Map<String, Student> committeeMap = new HashMap<>();
             for (Student student : camp.getCommittee()) {
-                committeeMap.put(student.getId(), student);
+                committeeMap.put(student.getID(), student);
             }
             return committeeMap;
         }
@@ -70,10 +70,10 @@ public class CampDB {
         if (camp != null) {
             Map<String, Student> allStudents = new HashMap<>();
             for (Student student : camp.getAttendees()) {
-                allStudents.put(student.getId(), student);
+                allStudents.put(student.getID(), student);
             }
             for (Student student : camp.getCommittee()) {
-                allStudents.put(student.getId(), student);
+                allStudents.put(student.getID(), student);
             }
             return allStudents;
         }
