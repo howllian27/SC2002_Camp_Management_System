@@ -51,9 +51,16 @@ public class CampOperationsController implements BaseController {
             System.out.println("Camp does not exist.");
             return;
         }
-        Camp camp = campDB.getCamp(campID);
-        camp.setCampInformation(updatedDetails);
-        campDB.updateCamp(campID, updatedDetails);
+        Camp updatedCamp = campDB.getCamp(campID);
+        updatedCamp.setName(updatedDetails.campName);
+        updatedCamp.setDates(updatedDetails.dates);
+        updatedCamp.setClosingDate(updatedDetails.registrationClosingDate);
+        updatedCamp.setFaculty(updatedDetails.faculty);
+        updatedCamp.setLocation(updatedDetails.location);
+        updatedCamp.setCommitteeSlots(updatedDetails.committeeSlots);
+        updatedCamp.setDescription(updatedDetails.description);
+        updatedCamp.setInCharge(updatedDetails.inCharge);
+        campDB.updateCamp(campID, updatedCamp);
     }
 
     /** 
