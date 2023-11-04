@@ -1,5 +1,6 @@
 package model;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,8 +12,8 @@ import java.util.Set;
  * @version 1.0
  */
 public class Student extends User {
-    private final Set<Camp> previouslyRegisteredCamps;
-    private final Set<Camp> registeredCamps; //Camps where student is a member
+    private final HashMap<String, Camp> previouslyRegisteredCamps;
+    private final HashMap<String, Camp> registeredCamps; //Camps where student is a member
     private Camp registeredCommitteeCamp;
 
     /***
@@ -22,8 +23,8 @@ public class Student extends User {
      */
     Student(String userID, Faculty faculty) {
         super(userID, faculty);
-        previouslyRegisteredCamps = new HashSet<Camp>();
-        registeredCamps = new HashSet<Camp>();
+        previouslyRegisteredCamps = new HashMap<String, Camp>();
+        registeredCamps = new HashMap<String, Camp>();
     }
 
     /***
@@ -34,14 +35,14 @@ public class Student extends User {
      */
     Student(String userID, String password, Faculty faculty) {
         super(userID, password, faculty);
-        previouslyRegisteredCamps = new HashSet<Camp>();
-        registeredCamps = new HashSet<Camp>();
+        previouslyRegisteredCamps = new HashMap<String, Camp>();
+        registeredCamps = new HashMap<String, Camp>();
     }
 
     //Getters
     public Camp getRegisteredCommitteeCamp() { return this.registeredCommitteeCamp; }
-    public Set<Camp> getRegisteredCamps() { return this.registeredCamps; }
-    public Set<Camp> getPreviouslyRegisteredCamps() { return this.previouslyRegisteredCamps; }
+    public HashMap<String, Camp> getRegisteredCamps() { return this.registeredCamps; }
+    public HashMap<String, Camp> getPreviouslyRegisteredCamps() { return this.previouslyRegisteredCamps; }
 
     //Methods
 
@@ -49,11 +50,11 @@ public class Student extends User {
      * Adds a camp to the set of camps where the student is registered, simultaneously marking
      * it as previously registered.
      * @param camp The camp to be added.
-     * @return `true` if the camp is added successfully, `false` if its already registered.
+     * @return `true` if the camp is added successfully, `false` if it is already registered.
      */
-    public boolean addCamp(Camp camp) {
-        if(registeredCamps.add(camp)) {
-            previouslyRegisteredCamps.add(camp);
+    public boolean addCamp(String campId, Camp camp) {
+        if(registeredCamps.put(campId, camp) == null) {
+            previouslyRegisteredCamps.put(campId, camp);
             return true;
         }
         return false;
@@ -72,11 +73,11 @@ public class Student extends User {
 
     /***
      * Removes a camp from the set of camps where the student is registered.
-     * @param camp The camp to be removed.
+     * @param campId The campId to be removed.
      * @return `true` if the camp is removed successfully, `false` if it's not found in the registered camps.
      */
-    public boolean removeCamp(Camp camp) {
-        return registeredCamps.remove(camp);
+    public boolean removeCamp(String campId) {
+        return registeredCamps.remove(campId) != null;
     }
 
     /***
