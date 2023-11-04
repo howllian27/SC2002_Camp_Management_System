@@ -1,6 +1,7 @@
 package controller;
 
 import database.CampDB;
+import model.Camp;
 import model.CampInformation;
 import view.CampListView;
 import view.CampDetailView;
@@ -15,25 +16,39 @@ public class CampOperationsController implements BaseController {
     private CampListView campListView;
     private CampDetailView campDetailView;
 
+    // Constructor
     public CampOperationsController() {
         setMasterVariables();
     }
 
+    //
     @Override
     public void setMasterVariables() {
         this.campDB = new CampDB();
         this.campListView = new CampListView();
         this.campDetailView = new CampDetailView();
+    }
 
+    /** 
+    * Create a new camp
+    * @param campInformation The camp information to be created.
+    */ 
+    
     public void createCamp(CampInformation campInformation) {
-        if (campInformation.isValid()) {
-            campDB.addCamp(campInformation);
-            campListView.displayCamps(campInformation);
-        } else {
-            System.out.println("Invalid camp details.");
+        Camp camp = new Camp(); // Assuming Camp constructor takes CampInformation
+        if (camp.isValid()) {
+            boolean success = campDB.addCamp(camp.getCampID(), camp);
+            if (success) {
+                campListView.displayCamps(camp);
+            }
         }
     }
 
+    /** 
+    * Edit a camp
+    * @param campID The camp ID to be edited.
+    * @param updatedDetails The updated details of the camp.
+    */ 
     public void editCamp(String campID, CampInformation updatedDetails) {
         if (!campDB.exists(campID)) {
             System.out.println("Camp does not exist.");
@@ -48,6 +63,10 @@ public class CampOperationsController implements BaseController {
         }
     }
 
+    /** 
+    * Edit a camp
+    * @param campID The camp ID to be edited.
+    */ 
     public void deleteCamp(String campID) {
         if (!campDB.exists(campID)) {
             campDetailView.displayCampNotFound(campID);
@@ -58,6 +77,10 @@ public class CampOperationsController implements BaseController {
         campListView.displayDeletionSuccess(campID);
     }
 
+    /** 
+    * View all camp
+    * @param userType The user type to be viewed.
+    */ 
     public void viewCampsForUserType(Object userType) {
         var camps = campDB.getCampsForUserType(userType);
         if (camps.isEmpty()) {
@@ -67,6 +90,10 @@ public class CampOperationsController implements BaseController {
         }
     }
 
+    /** 
+    * View camp details
+    * @param campID The camp ID to be viewed.
+    */ 
     public void viewCampDetails(String campID) {
         var camp = campDB.getCampDetails(campID);
         if (camp == null) {
@@ -76,6 +103,10 @@ public class CampOperationsController implements BaseController {
         }
     }
 
+    /** 
+    * Toggle camp visibility
+    * @param campID The camp ID to be viewed.
+    */ 
     public void toggleCampVisibility(String campID) {
         var camp = campDB.getCamp(campID);
         if (camp == null) {
