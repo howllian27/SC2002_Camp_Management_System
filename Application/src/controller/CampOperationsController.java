@@ -11,6 +11,9 @@ import view.CampDetailView;
 /**
  * The CampOperationsController class is responsible for handling operations related to camp information.
  * It interacts with the CampDB for database operations and uses CampListView and CampDetailView for displaying relevant information.
+ * @author Chan Hin Wai Howell
+ * @version 1.0
+ * @since 2023-10-28
  */
 public class CampOperationsController implements BaseController {
 

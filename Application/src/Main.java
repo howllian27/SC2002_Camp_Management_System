@@ -1,10 +1,10 @@
 import java.util.HashMap;
 import java.util.Scanner;
 
-import controller.CampController;
-import controller.CommitteeController;
-import controller.StaffController;
-import controller.StudentController;
+import controller.CampOperationsController;
+import controller.EnquiryController;
+import controller.StudentCampInteractionController;
+import controller.SuggestionController;
 import controller.UserController;
 
 import database.CampDB;
