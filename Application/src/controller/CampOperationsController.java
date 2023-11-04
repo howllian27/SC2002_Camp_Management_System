@@ -51,8 +51,9 @@ public class CampOperationsController implements BaseController {
             System.out.println("Camp does not exist.");
             return;
         }
-
-       campDB.updateCamp(campID, updatedDetails);
+        Camp camp = campDB.getCamp(campID);
+        camp.setCampInformation(updatedDetails);
+        campDB.updateCamp(campID, updatedDetails);
     }
 
     /** 
@@ -60,13 +61,13 @@ public class CampOperationsController implements BaseController {
     * @param campID The camp ID to be edited.
     */ 
     public void deleteCamp(String campID) {
-        if (!campDB.exists(campID)) {
-            campDetailView.displayCampNotFound(campID);
+        if (campDB.getCamp(campID) != null) {
+            System.out.println("Camp does not exist.");
             return;
         }
 
         campDB.deleteCamp(campID);
-        campListView.displayDeletionSuccess(campID);
+        System.out.println("Camp successfully deleted!");
     }
 
     /** 

@@ -39,6 +39,7 @@ public class Camp {
     public void setVisibility(boolean visibility) { this.campInformation.isVisible = visibility; }
 
     //Getters
+    public CampInformation getCampInformation() { return this.campInformation; }
     public String getName() { return this.campInformation.campName; }
     public Date[] getDates() { return this.campInformation.dates; }
     public Date getClosingDate() { return this.campInformation.registrationClosingDate; }

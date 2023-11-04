@@ -35,9 +35,17 @@ public class CampDB {
         return false;
     }
 
-    public boolean updateCamp(String campID, CampInformation updatedDetails) {
+    public CampInformation getCampDetails(String campID) {
+        Camp camp = campDatabase.get(campID);
+        if (camp != null) {
+            return camp.getCampInformation();
+        }
+        return null;
+    }
+
+    public boolean updateCamp(String campID, Camp updatedCamp) {
         if (campDatabase.containsKey(campID)) {
-            campDatabase.put(campID, updatedDetails);
+            campDatabase.put(campID, updatedCamp);
             return true;
         }
         return false;
