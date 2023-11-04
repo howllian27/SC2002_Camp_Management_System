@@ -30,7 +30,7 @@ public class ReportController implements BaseController{
         List<String> ReportList;
         CampInformation campDetails = CampDB.getCampDetails(CampID);
         String cdetails = "CampInformation{" +
-                "campName='" + campDetails.campName + '\' +
+                "campName='" + campDetails.campName + '\'' +
                 ", dates=" + Arrays.toString(campDetails.dates) +
                 ", registrationClosingDate=" + campDetails.registrationClosingDate +
                 ", faculty=" + campDetails.faculty +
@@ -39,10 +39,11 @@ public class ReportController implements BaseController{
                 ", committeeSlots=" + campDetails.committeeSlots +
                 ", description='" + campDetails.description + '\'' +
                 ", inCharge=" + campDetails.inCharge +
-                '\n'};
+                '\n';
 
         StringBuilder concatenatedUserIDs = new StringBuilder();
         Map<String, User> CampStudents = new HashMap<>();
+
 
         switch (filterType) {
             case "Attendees":
@@ -65,7 +66,7 @@ public class ReportController implements BaseController{
 
         ReportList.add(cdetails + concatenatedUserIDs);
         fileHelper.writeFile(ReportList, filename);
-        
+    }  
         
 public void generateCommitteePerformanceReport(String campID){}
     }
