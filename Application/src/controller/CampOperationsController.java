@@ -33,14 +33,11 @@ public class CampOperationsController implements BaseController {
     * Create a new camp
     * @param campInformation The camp information to be created.
     */ 
-    
     public void createCamp(CampInformation campInformation) {
         Camp camp = new Camp(campInformation); // Assuming Camp constructor takes CampInformation
-        if (camp.isValid()) {
-            boolean success = campDB.addCamp(camp.getCampID(), camp);
-            if (success) {
-                campListView.displayCamps(camp);
-            }
+        boolean success = campDB.addCamp(camp.getName(), camp);
+        if (success) {
+            campDetailView.displayCampDetails(camp);
         }
     }
 
@@ -50,17 +47,12 @@ public class CampOperationsController implements BaseController {
     * @param updatedDetails The updated details of the camp.
     */ 
     public void editCamp(String campID, CampInformation updatedDetails) {
-        if (!campDB.exists(campID)) {
+        if (campDB.getCamp(campID) == null) {
             System.out.println("Camp does not exist.");
             return;
         }
 
-        if (updatedDetails.isValid()) {
-            campDB.updateCamp(campID, updatedDetails);
-            campDetailView.displayEditSuccess(updatedDetails);
-        } else {
-            campDetailView.displayEditError("Invalid updated details.");
-        }
+       campDB.updateCamp(campID, updatedDetails);
     }
 
     /** 

@@ -18,7 +18,12 @@ public class CampDB {
     }
 
     public Camp getCamp(String campID) {
-        return campDatabase.get(campID);
+        Camp camp = campDatabase.get(campID);
+        if (camp != null){
+            return camp;
+        } else {
+            return null;
+        }
     }
 
     public boolean addCamp(String campID, Camp camp) {
