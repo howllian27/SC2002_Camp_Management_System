@@ -35,7 +35,7 @@ public class CampOperationsController implements BaseController {
     */ 
     
     public void createCamp(CampInformation campInformation) {
-        Camp camp = new Camp(); // Assuming Camp constructor takes CampInformation
+        Camp camp = new Camp(campInformation); // Assuming Camp constructor takes CampInformation
         if (camp.isValid()) {
             boolean success = campDB.addCamp(camp.getCampID(), camp);
             if (success) {

@@ -20,7 +20,7 @@ public class Camp {
      * Constructs a new `Camp` object with the provided camp information.
      * @param campInformation The information associated with the camp.
      */
-    Camp(CampInformation campInformation) {
+    public Camp(CampInformation campInformation) {
         this.campInformation =  campInformation;
         this.attendees = new HashSet<Student>();
         this.committee = new HashSet<Student>();
