@@ -3,6 +3,7 @@ package database;
 import java.util.HashMap;
 import java.util.Map;
 import model.Camp;
+import model.CampInformation;
 import model.Student;
 
 public class CampDB {
@@ -34,7 +35,7 @@ public class CampDB {
         return false;
     }
 
-    public boolean updateCamp(String campID, Camp updatedDetails) {
+    public boolean updateCamp(String campID, CampInformation updatedDetails) {
         if (campDatabase.containsKey(campID)) {
             campDatabase.put(campID, updatedDetails);
             return true;
