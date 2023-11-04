@@ -8,10 +8,10 @@ import model.Student;
 
 public class CampDB {
 
-    private final Map<String, Camp> campDatabase;
+    private static Map<String, Camp> campDatabase;
 
     public CampDB() {
-        this.campDatabase = new HashMap<>();
+        CampDB.campDatabase = new HashMap<>();
     }
 
     public Map<String, Camp> getAllCamps() {
@@ -35,7 +35,7 @@ public class CampDB {
         return false;
     }
 
-    public CampInformation getCampDetails(String campID) {
+    public static CampInformation getCampDetails(String campID) {
         Camp camp = campDatabase.get(campID);
         if (camp != null) {
             return camp.getCampInformation();

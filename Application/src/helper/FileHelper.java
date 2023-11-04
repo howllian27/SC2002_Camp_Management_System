@@ -45,8 +45,8 @@ public class FileHelper {
      * @param ReportList The List of information to be generated in report
      */
 
-    public void writeFile(List<String> ReportList){
-        try(FileWriter fw = new FileWriter("Report.txt");
+    public void writeFile(List<String> ReportList, String filename){
+        try(FileWriter fw = new FileWriter(filename);
             BufferedWriter bw = new BufferedWriter(fw)){
 
             for (int i = 0; i < ReportList.size(); i++){
