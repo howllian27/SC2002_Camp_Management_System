@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class UserDB {
 
-    private final Map<String, User> users = new HashMap<>(); 
+    private static Map<String, User> users = new HashMap<>(); 
 
     public boolean addUser(User user) {
         if (user == null || users.containsKey(user.getID())) {

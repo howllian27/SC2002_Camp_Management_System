@@ -2,8 +2,9 @@ package controller;
 
 import helper.FileHelper;
 import model.CampInformation;
-import model.User;
+import model.Student;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +28,7 @@ public class ReportController implements BaseController{
     }
 
     public void generateStudentReport(String CampID, String filterType, String filename){
-        List<String> ReportList;
+        List<String> ReportList = new ArrayList<>();
         CampInformation campDetails = CampDB.getCampDetails(CampID);
         String cdetails = "CampInformation{" +
                 "campName='" + campDetails.campName + '\'' +
@@ -42,7 +43,7 @@ public class ReportController implements BaseController{
                 '\n';
 
         StringBuilder concatenatedUserIDs = new StringBuilder();
-        Map<String, User> CampStudents = new HashMap<>();
+        Map<String, Student> CampStudents = new HashMap<>();
 
 
         switch (filterType) {
@@ -57,11 +58,11 @@ public class ReportController implements BaseController{
                 break;
         }
 
-        for (User user : CampStudents.values()) {
+        for (Student student : CampStudents.values()) {
             if (concatenatedUserIDs.length() > 0) {
                 concatenatedUserIDs.append(", ");
             }
-            concatenatedUserIDs.append(user.getID());
+            concatenatedUserIDs.append(student.getID());
         }
 
         ReportList.add(cdetails + concatenatedUserIDs);
