@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import database.CampDB;
 import model.Camp;
 import model.CampInformation;
@@ -81,10 +83,9 @@ public class CampOperationsController implements BaseController {
     * View all camp
     * @param userType The user type to be viewed.
     */ 
-    public void viewCampsForUserType(Object userType) {
-        var camps = campDB.getCampsForUserType(userType);
+    public void viewCampsForUserType(Object userType, List<Camp> camps) {
         if (camps.isEmpty()) {
-            campListView.displayNoCampsFound();
+            System.out.println("Camp does not exist.");
         } else {
             campListView.displayCamps(camps);
         }
@@ -95,9 +96,9 @@ public class CampOperationsController implements BaseController {
     * @param campID The camp ID to be viewed.
     */ 
     public void viewCampDetails(String campID) {
-        var camp = campDB.getCampDetails(campID);
+        Camp camp = campDB.getCamp(campID);
         if (camp == null) {
-            campDetailView.displayCampNotFound(campID);
+            System.out.println("Camp does not exist.");
         } else {
             campDetailView.displayCampDetails(camp);
         }
@@ -110,12 +111,12 @@ public class CampOperationsController implements BaseController {
     public void toggleCampVisibility(String campID) {
         var camp = campDB.getCamp(campID);
         if (camp == null) {
-            campDetailView.displayCampNotFound(campID);
+            System.out.println("Camp does not exist.");
             return;
         }
 
-        camp.setVisible(!camp.isVisible());
+        camp.setVisibility(true);
         campDB.updateCamp(campID, camp);
-        campDetailView.displayVisibilityToggled(camp);
+        System.out.println("Camp visibility toggled!");
     }
 }

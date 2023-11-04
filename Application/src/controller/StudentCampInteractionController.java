@@ -4,7 +4,6 @@ import database.CampDB;
 import database.UserDB;
 import model.Camp;
 import model.Student;
-import view.CampListView;
 
 /**
  * The StudentCampInteractionController class is responsible for managing student interactions with camps.
@@ -17,7 +16,6 @@ public class StudentCampInteractionController implements BaseController {
 
     private CampDB campDB;
     private UserDB userDB;
-    private CampListView campListView;
 
     public StudentCampInteractionController() {
         setMasterVariables();
@@ -27,7 +25,6 @@ public class StudentCampInteractionController implements BaseController {
     public void setMasterVariables() {
         this.campDB = new CampDB();
         this.userDB = new UserDB();
-        this.campListView = new CampListView();
     }
 
     /**
@@ -42,9 +39,7 @@ public class StudentCampInteractionController implements BaseController {
         Camp camp = campDB.getCamp(campID);
         if (student != null && camp != null) {
             // Logic to register the student for the camp
-            campListView.displayCamps(camp);
-        } else {
-            
+            System.out.println("You are registered!");
         }
     }
 
@@ -59,9 +54,7 @@ public class StudentCampInteractionController implements BaseController {
         Camp camp = campDB.getCamp(campID);
         if (student != null && camp != null) {
             // Logic to withdraw the student from the camp
-            campListView.displayWithdrawalSuccess();
-        } else {
-            campListView.displayWithdrawalError();
+            System.out.println("You have withdrawn!");
         }
     }
 }
