@@ -6,9 +6,9 @@ public class Enquiry {
     private String enquiry;
     private String response;
 
-    Enquiry(Camp camp, Student student, String enquiry) {
+    Enquiry(Camp camp, String userID, String enquiry) {
         this.camp = camp;
-        this.student = student;
+        this.student = userID;
         this.enquiry = enquiry;
     }
 
