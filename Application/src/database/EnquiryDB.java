@@ -7,8 +7,8 @@ import java.util.UUID;
 
 public class EnquiryDB {
 
-    private final HashMap<String, HashMap<String, Enquiry>> campEnquiries;
-    private final HashMap<String, Enquiry> allEnquiries;
+    private static HashMap<String, HashMap<String, Enquiry>> campEnquiries;
+    private static HashMap<String, Enquiry> allEnquiries;
 
     public EnquiryDB() {
         this.campEnquiries = new HashMap<>();
