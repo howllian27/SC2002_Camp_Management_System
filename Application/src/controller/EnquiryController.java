@@ -33,9 +33,10 @@ public class EnquiryController implements BaseController {
      * @param enquiryText The text of the enquiry.
      */
     public void submitEnquiry(String userID, String campID, String enquiryText) {
-        Enquiry enquiry = new Enquiry(campID, userID, enquiryText);
+        Camp camp = campDB.getCamp(campID);
+        Enquiry enquiry = new Enquiry(camp, userID, enquiryText);
         enquiryDB.addEnquiry(enquiry);
-        enquiriesView.displayEnquirySubmissionSuccess();
+        System.out.println("Enquiry submitted successfully.");
     }
 
     /**
