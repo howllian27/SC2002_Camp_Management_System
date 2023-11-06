@@ -1,6 +1,11 @@
 package controller;
 
 import database.EnquiryDB;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import database.CampDB;
 import database.UserDB;
 import model.Camp;
@@ -60,8 +65,16 @@ public class EnquiryController implements BaseController {
      * @param campID The ID of the camp.
      */
     public void viewEnquiries(String campID) {
-        var enquiries = enquiryDB.getEnquiries(campID);
-        enquiriesView.displayEnquiries(enquiries);
+        HashMap<String, Enquiry> enquiriesMap = enquiryDB.getEnquiries(campID);
+        List<String> enquiriesList = new ArrayList<>();
+
+        for (Enquiry enquiry : enquiriesMap.values()) {
+            // Assuming Enquiry has a method to get a formatted string representation of the enquiry
+            String enquiryDetails = enquiry.toString(); // Replace with actual method to get details if different
+            enquiriesList.add(enquiryDetails);
+        }
+
+        enquiriesView.displayEnquiries(enquiriesList);
     }
 
     /**
@@ -72,6 +85,6 @@ public class EnquiryController implements BaseController {
      */
     public void replyToEnquiry(String enquiryID, String replyText) {
         enquiryDB.updateEnquiryReply(enquiryID, replyText);
-        enquiriesView.displayReplySuccess();
+        System.out.println("Reply sent successfully.");
     }
 }
