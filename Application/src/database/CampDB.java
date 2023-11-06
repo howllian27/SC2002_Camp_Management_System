@@ -18,7 +18,7 @@ public class CampDB {
         return new HashMap<>(campDatabase);
     }
 
-    public static Camp getCamp(String campID) {
+    public Camp getCamp(String campID) {
         Camp camp = campDatabase.get(campID);
         if (camp != null){
             return camp;
@@ -35,7 +35,7 @@ public class CampDB {
         return false;
     }
 
-    public static CampInformation getCampDetails(String campID) {
+    public CampInformation getCampDetails(String campID) {
         Camp camp = campDatabase.get(campID);
         if (camp != null) {
             return camp.getCampInformation();
@@ -67,7 +67,7 @@ public class CampDB {
         return new HashMap<>();
     }
 
-    public static Map<String, Student> getCommitteeMembersForCamp(String campID) {
+    public Map<String, Student> getCommitteeMembersForCamp(String campID) {
         Camp camp = getCamp(campID);
         if (camp != null) {
             Map<String, Student> committeeMap = new HashMap<>();
@@ -79,7 +79,7 @@ public class CampDB {
         return new HashMap<>();
     }
 
-    public static Map<String, Student> getAllStudentsForCamp(String campID) {
+    public Map<String, Student> getAllStudentsForCamp(String campID) {
         Camp camp = getCamp(campID);
         if (camp != null) {
             Map<String, Student> allStudents = new HashMap<>();
