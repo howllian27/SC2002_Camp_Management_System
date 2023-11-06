@@ -2,8 +2,11 @@ package controller;
 
 import database.EnquiryDB;
 import database.CampDB;
+import database.UserDB;
 import model.Camp;
 import model.Enquiry;
+import model.Student;
+import model.User;
 import view.EnquiriesView;
 
 /**
@@ -17,6 +20,7 @@ public class EnquiryController implements BaseController {
     private EnquiryDB enquiryDB;
     private EnquiriesView enquiriesView;
     private CampDB campDB;
+    private UserDB userDB;
 
     public EnquiryController() {
         setMasterVariables();
@@ -38,9 +42,16 @@ public class EnquiryController implements BaseController {
      */
     public void submitEnquiry(String userID, String campID, String enquiryText) {
         Camp camp = campDB.getCamp(campID);
-        Enquiry enquiry = new Enquiry(camp, userID, enquiryText);
-        enquiryDB.addEnquiry(enquiry);
-        System.out.println("Enquiry submitted successfully.");
+        User user = userDB.getUser(userID);
+
+        if (user instanceof Student) {
+            Student student = (Student) user; // Safe downcast after checking with instanceof
+            Enquiry enquiry = new Enquiry(camp, student, enquiryText);
+            enquiryDB.addEnquiry(enquiry);
+            System.out.println("Enquiry submitted successfully.");
+        } else {
+            System.out.println("The user with ID " + userID + " is not a student.");
+        }
     }
 
     /**
