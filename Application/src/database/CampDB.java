@@ -55,7 +55,7 @@ public class CampDB {
         return campDatabase.remove(campID) != null;
     }
     
-    public static Map<String, Student> getAttendeesForCamp(String campID) {
+    public Map<String, Student> getAttendeesForCamp(String campID) {
         Camp camp = getCamp(campID);
         if (camp != null) {
             Map<String, Student> attendeesMap = new HashMap<>();
