@@ -8,7 +8,7 @@ import model.Student;
 
 public class CampDB {
 
-    private static Map<String, Camp> campDatabase;
+    private Map<String, Camp> campDatabase;
 
     public CampDB() {
         CampDB.campDatabase = new HashMap<>();
