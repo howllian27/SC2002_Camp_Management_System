@@ -1,6 +1,6 @@
 package view;
 import model.Camp;
-import model.CampInformation;
+
 
 import java.util.Arrays;
 
