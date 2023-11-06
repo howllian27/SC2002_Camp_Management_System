@@ -11,7 +11,7 @@ public class CampDB {
     private Map<String, Camp> campDatabase;
 
     public CampDB() {
-        CampDB.campDatabase = new HashMap<>();
+        campDatabase = new HashMap<>();
     }
 
     public Map<String, Camp> getAllCamps() {
