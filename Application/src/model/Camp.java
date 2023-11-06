@@ -1,8 +1,7 @@
 package model;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
 
 /**
  * The `Camp` class represents a camping event, providing information
@@ -13,8 +12,8 @@ import java.util.Set;
  */
 public class Camp {
     private final CampInformation campInformation;
-    private final Set<Student> attendees;
-    private final Set<Student> committee;
+    private final HashMap<String, Student> attendees;
+    private final HashMap<String, Student> committee;
 
     /***
      * Constructs a new `Camp` object with the provided camp information.
@@ -22,8 +21,8 @@ public class Camp {
      */
     public Camp(CampInformation campInformation) {
         this.campInformation =  campInformation;
-        this.attendees = new HashSet<Student>();
-        this.committee = new HashSet<Student>();
+        this.attendees = new HashMap<>();
+        this.committee = new HashMap<>();
     }
 
     //Setters
@@ -36,7 +35,7 @@ public class Camp {
     public void setCommitteeSlots(int committeeSlots) { this.campInformation.committeeSlots = committeeSlots; }
     public void setDescription(String description) { this.campInformation.description = description; }
     public void setInCharge(Staff inCharge) { this.campInformation.inCharge = inCharge; }
-    public void setVisibility(boolean visibility) { this.campInformation.isVisible = visibility; }
+    public void setVisibislity(boolean visibility) { this.campInformation.isVisible = visibility; }
 
     //Getters
     public CampInformation getCampInformation() { return this.campInformation; }
@@ -56,13 +55,13 @@ public class Camp {
      * Returns the set of attendees for this camp.
      * @return A set of students who are attendees for the camp.
      */
-    public Set<Student> getAttendees() { return attendees; }
+    public HashMap<String, Student> getAttendees() { return attendees; }
 
     /***
      * Returns the set of committee members for the camp
      * @return A set of students who are committee members for the camp.
      */
-    public Set<Student> getCommittee() { return committee; }
+    public HashMap<String, Student> getCommittee() { return committee; }
 
     //Methods
 
@@ -71,9 +70,10 @@ public class Camp {
      * @param student The student to be added as an attendee
      * @return `true` if the student is added successfully, `false` if the student is already an attendee.
      */
-    public boolean addAttendee(Student student) {
+    public boolean addAttendee(String studentId, Student student) {
         if(attendees.size() >= campInformation.totalSlots) return false;
-        return attendees.add(student);
+        attendees.put(studentId, student);
+        return true;
     }
 
     /***
@@ -81,26 +81,31 @@ public class Camp {
      * @param student The student to be added as a committee member
      * @return `true` if the student was added successfully, `false`if the student was already a committee member.
      */
-    public boolean addCommitteeMember(Student student) {
+    public boolean addCommitteeMember(String studentId, Student student) {
         if(committee.size() >= campInformation.committeeSlots) return false;
-        return committee.add(student);
+        committee.put(studentId, student);
+        return true;
     }
 
     /***
      * Removes a student from the list of attendees for this camp.
-     * @param student The student to be removed from the camp attendees.
+     * @param studentId The id of the students to be removed from the camp attendees.
      * @return `true` if the student was removed successfully, `false` if the student was not already an attendee.
      */
-    public boolean removeAttendee(Student student) {
-        return attendees.remove(student);
+    public boolean removeAttendee(String studentId) {
+        if(attendees.get(studentId) == null) return false;
+        attendees.remove(studentId);
+        return true;
     }
 
     /***
      * Removes a student from the list of committee members for the camp.
-     * @param student The student to be removed from the committee members.
+     * @param studentId The id of the student to be removed from the committee members.
      * @return `true` if the student was removed successfully, `false` if the student was not already a committee member.
      */
-    public boolean removeCommitteeMember(Student student) {
-        return committee.remove(student);
+    public boolean removeCommitteeMember(String studentId) {
+        if(committee.get(studentId) == null) return false;
+        committee.remove(studentId);
+        return true;
     }
 }
