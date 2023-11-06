@@ -1,6 +1,8 @@
 package controller;
 
 import database.EnquiryDB;
+import database.CampDB;
+import model.Camp;
 import model.Enquiry;
 import view.EnquiriesView;
 
@@ -14,6 +16,7 @@ public class EnquiryController implements BaseController {
 
     private EnquiryDB enquiryDB;
     private EnquiriesView enquiriesView;
+    private CampDB campDB;
 
     public EnquiryController() {
         setMasterVariables();
@@ -21,6 +24,7 @@ public class EnquiryController implements BaseController {
 
     @Override
     public void setMasterVariables() {
+        this.campDB = new CampDB();
         this.enquiryDB = new EnquiryDB();
         this.enquiriesView = new EnquiriesView();
     }
