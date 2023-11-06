@@ -8,7 +8,7 @@ package view;
  * @version 1.0
  */
 
-public class PerformanceReport {
+public class PerformanceReportView {
 
     /**
      * Displays a performance report to the user.

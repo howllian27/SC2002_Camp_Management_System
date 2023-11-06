@@ -18,7 +18,7 @@ public class Staff extends User {
      * @param userID The staff's user ID.
      * @param faculty The faculty to which the staff belongs to.
      */
-    Staff(String userID, Faculty faculty) {
+    public Staff(String userID, Faculty faculty) {
         super(userID, faculty);
         createdCamps = new HashSet<Camp>();
     }
@@ -29,7 +29,7 @@ public class Staff extends User {
      * @param password The password of the staff.
      * @param faculty The faculty to which the staff belongs to.
      */
-    Staff(String userID, String password, Faculty faculty) {
+    public Staff(String userID, String password, Faculty faculty) {
         super(userID, password, faculty);
         createdCamps = new HashSet<Camp>();
     }

@@ -20,7 +20,7 @@ public class Student extends User {
      * @param userID The user ID of the student.
      * @param faculty The faculty to which the student belongs.
      */
-    Student(String userID, Faculty faculty) {
+    public Student(String userID, Faculty faculty) {
         super(userID, faculty);
         previouslyRegisteredCamps = new HashMap<String, Camp>();
         registeredCamps = new HashMap<String, Camp>();
