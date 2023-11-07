@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Scanner;
 import model.Camp;
 import model.CampInformation;
+import model.Suggestions;
 
 /**
  * The SuggestionsView class is responsible for managing and displaying suggestions and user interactions.
@@ -42,20 +43,13 @@ public class SuggestionsView {
     public void promptForSuggestions() {
         System.out.println("Please enter your suggestions:");
     }
-
+    /**
+     * Displays camp details and suggested changes, and allows the staff member to approve or reject the changes.
+     *
+     * @param camp The Camp object containing the camp's information.
+     * @param suggestions A list of strings containing suggestions to be displayed.
+     */
     public void viewAndApproveSuggestions(){
-        
-        // Display the current camp details
-        System.out.println("Current Camp Details:");
-        for (Map.Entry<String, String> entry : CampDetailView.entrySet()) {
-            System.out.println(entry.getKey() + ": " + entry.getValue());
-        }
-
-        // Display the suggested changes
-        System.out.println("\nSuggested Changes:");
-        for (Map.Entry<String, String> entry : suggestions.entrySet()) {
-            System.out.println(entry.getKey() + ": " + entry.getValue());
-        }
 
         // Prompt the staff member for approval
         Scanner scanner = new Scanner(System.in);
@@ -64,7 +58,7 @@ public class SuggestionsView {
 
         if (decision.equals("yes")) {
             // Update the camp details with the suggested changes
-            campDetails.putAll(suggestions);
+            Camp.putAll(suggestions);
             System.out.println("Camp details have been updated.");
         } else if (decision.equals("no")) {
             System.out.println("Changes have been rejected.");
