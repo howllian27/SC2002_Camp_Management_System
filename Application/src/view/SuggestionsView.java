@@ -3,6 +3,9 @@ package view;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import model.Camp;
+import model.CampInformation;
+
 /**
  * The SuggestionsView class is responsible for managing and displaying suggestions and user interactions.
  * It provides methods to display a list of suggestions and prompt users for their own suggestions.
@@ -44,7 +47,7 @@ public class SuggestionsView {
         
         // Display the current camp details
         System.out.println("Current Camp Details:");
-        for (Map.Entry<String, String> entry : campInformation.entrySet()) {
+        for (Map.Entry<String, String> entry : CampDetailView.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
 
