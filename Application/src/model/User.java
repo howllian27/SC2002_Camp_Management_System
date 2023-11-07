@@ -15,9 +15,8 @@ public class User {
      * Constructs a new `User` object with default values.
      * The default user ID is "default," and the default faculty is "SCHOOL."
      */
-    User() {
+    public User() {
         this.userID = "default";
-        this.password = password;
         this.faculty = Faculty.SCHOOL;
     }
 
@@ -27,7 +26,7 @@ public class User {
      * @param userID   The user ID of the user.
      * @param faculty  The faculty to which the user belongs.
      */
-    User(String userID, Faculty faculty) {
+    public User(String userID, Faculty faculty) {
         this.userID = userID;
         this.faculty = faculty;
     }
@@ -39,22 +38,17 @@ public class User {
      * @param password The user's password.
      * @param faculty  The faculty to which the user belongs.
      */
-    User(String userID, String password, Faculty faculty) {
+    public User(String userID, String password, Faculty faculty) {
         this.userID = userID;
         this.password = password;
         this.faculty = faculty;
     }
 
-    public Boolean setPassword(String password) {
-        if (password.isEmpty()) {
-            return false;
-        }
-        this.password = password;
-        return true;
-    }
-
+    //Getter
     public String getID() { return this.userID; }
     public Faculty getFaculty() { return this.faculty; }
     public String getPassword() { return this.password; }
 
+    //Setter
+    public void setPassword(String password) { this.password = password; }
 }

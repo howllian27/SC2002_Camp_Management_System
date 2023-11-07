@@ -1,10 +1,6 @@
 package helper;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,10 +21,12 @@ public class FileHelper {
 
     public List<String> readFile(String filepath) {
         List<String> lines = new ArrayList<>();
+        // Construct the absolute path based on the working directory and the relative path
+        String absolutePath = System.getProperty("user.dir") + File.separator + filepath;
 
-        try (FileReader fr = new FileReader(filepath);
+        try (FileReader fr = new FileReader(absolutePath);
              BufferedReader br = new BufferedReader(fr)) {
-            
+
             String line;
 
             while ((line = br.readLine()) != null) {
