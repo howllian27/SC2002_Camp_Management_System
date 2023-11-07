@@ -1,6 +1,8 @@
 package view;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 /**
  * The SuggestionsView class is responsible for managing and displaying suggestions and user interactions.
  * It provides methods to display a list of suggestions and prompt users for their own suggestions.
@@ -36,5 +38,35 @@ public class SuggestionsView {
      */
     public void promptForSuggestions() {
         System.out.println("Please enter your suggestions:");
+    }
+
+    public void viewAndApproveSuggestions(){
+        
+        // Display the current camp details
+        System.out.println("Current Camp Details:");
+        for (Map.Entry<String, String> entry : campInformation.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+
+        // Display the suggested changes
+        System.out.println("\nSuggested Changes:");
+        for (Map.Entry<String, String> entry : suggestions.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+
+        // Prompt the staff member for approval
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("\nDo you approve these changes? (yes/no): ");
+        String decision = scanner.nextLine().trim().toLowerCase();
+
+        if (decision.equals("yes")) {
+            // Update the camp details with the suggested changes
+            campDetails.putAll(suggestions);
+            System.out.println("Camp details have been updated.");
+        } else if (decision.equals("no")) {
+            System.out.println("Changes have been rejected.");
+        } else {
+            System.out.println("Invalid input. Please enter 'yes' or 'no'.");
+        }
     }
 }
