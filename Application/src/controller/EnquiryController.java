@@ -47,7 +47,7 @@ public class EnquiryController implements BaseController {
      */
     public void submitEnquiry(String userID, String campID, String enquiryText) {
         Camp camp = campDB.getCamp(campID);
-        User user = userDB.getUser(userID);
+        User user = userDB.getUser(userID, true);
 
         if (user instanceof Student) {
             Student student = (Student) user; // Safe downcast after checking with instanceof

@@ -35,7 +35,7 @@ public class Camp {
     public void setCommitteeSlots(int committeeSlots) { this.campInformation.committeeSlots = committeeSlots; }
     public void setDescription(String description) { this.campInformation.description = description; }
     public void setInCharge(Staff inCharge) { this.campInformation.inCharge = inCharge; }
-    public void setVisibislity(boolean visibility) { this.campInformation.isVisible = visibility; }
+    public void setVisibility(boolean visibility) { this.campInformation.isVisible = visibility; }
 
     //Getters
     public CampInformation getCampInformation() { return this.campInformation; }
