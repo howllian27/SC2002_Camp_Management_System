@@ -69,8 +69,7 @@ public class EnquiryController implements BaseController {
         List<String> enquiriesList = new ArrayList<>();
 
         for (Enquiry enquiry : enquiriesMap.values()) {
-            // Assuming Enquiry has a method to get a formatted string representation of the enquiry
-            String enquiryDetails = enquiry.toString(); // Replace with actual method to get details if different
+            String enquiryDetails = enquiry.toString();
             enquiriesList.add(enquiryDetails);
         }
 
