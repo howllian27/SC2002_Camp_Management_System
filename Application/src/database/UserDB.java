@@ -1,3 +1,4 @@
+
 package database;
 
 import helper.FileHelper;
@@ -9,36 +10,49 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-public class UserDB {
-
-    // initialize users according to studets and staff list.txt
+public class UserDB
+{
     private final Map<String, User> stringStudentMap;
     private final Map<String, User> staffUserMap;
+    private final FileHelper fileHelper;
+
+    private static final String STUDENT_FILE_PATH = "Application/src/database/data/student_list.txt";
+    private static final String STAFF_FILE_PATH = "Application/src/database/data/staff_list.txt";
 
     public UserDB() {
         stringStudentMap = new HashMap<>();
         staffUserMap = new HashMap<>();
+        fileHelper = new FileHelper();
+        populateUserMap(true);  // Populate the student map
+        populateUserMap(false); // Populate the staff map
     }
 
     public void populateUserMap(boolean isStudent) {
-        FileHelper fileHelper = new FileHelper();
-        String path = "Application/src/database/data/staff_list.txt";
+        String path = isStudent ? STUDENT_FILE_PATH : STAFF_FILE_PATH;
         List<String> listOfTxtLines = fileHelper.readFile(path);
 
         // Initialize the user map based on whether it's a student or staff
         Map<String, User> userMap = isStudent ? stringStudentMap : staffUserMap;
 
-        for (int i = 1; i < listOfTxtLines.size(); i++) { // Start from index 1 to skip the header row
-            String[] parts = listOfTxtLines.get(i).split(" ");
-            String email = parts[1];
-            String faculty = parts[2];
-            String[] emailParts = email.split("@");
-            String userId = emailParts[0];
-            User user = isStudent ? new Student(userId, getFacultyEnum(faculty)) : new Staff(userId, getFacultyEnum(faculty));
+        for (String line : listOfTxtLines) {
+            String[] parts = line.split(","); // Assuming CSV format
+            if (parts.length < 3) continue; // Skip if not enough parts
+
+            String userId = parts[0].trim();
+            String email = parts[1].trim();
+            Faculty faculty = getFacultyEnum(parts[2].trim());
+
+            User user;
+            if (isStudent) {
+                // Assuming Student has a constructor Student(String id, String email, Faculty faculty)
+                user = new Student(userId, email, faculty);
+            } else {
+                // Assuming Staff has a constructor Staff(String id, String email, Faculty faculty)
+                user = new Staff(userId, email, faculty);
+            }
+
             userMap.put(userId, user);
         }
-
         // For debugging, you can print the populated user map
         prettyPrintUserMap(userMap);
     }

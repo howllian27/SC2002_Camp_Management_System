@@ -54,15 +54,11 @@ public class CampDB {
     public boolean deleteCamp(String campID) {
         return campDatabase.remove(campID) != null;
     }
-    
+
     public Map<String, Student> getAttendeesForCamp(String campID) {
         Camp camp = getCamp(campID);
         if (camp != null) {
-            Map<String, Student> attendeesMap = new HashMap<>();
-            for (Student student : camp.getAttendees()) {
-                attendeesMap.put(student.getID(), student);
-            }
-            return attendeesMap;
+            return new HashMap<>(camp.getAttendees());
         }
         return new HashMap<>();
     }
@@ -70,11 +66,7 @@ public class CampDB {
     public Map<String, Student> getCommitteeMembersForCamp(String campID) {
         Camp camp = getCamp(campID);
         if (camp != null) {
-            Map<String, Student> committeeMap = new HashMap<>();
-            for (Student student : camp.getCommittee()) {
-                committeeMap.put(student.getID(), student);
-            }
-            return committeeMap;
+            return new HashMap<>(camp.getCommittee());
         }
         return new HashMap<>();
     }
@@ -82,13 +74,8 @@ public class CampDB {
     public Map<String, Student> getAllStudentsForCamp(String campID) {
         Camp camp = getCamp(campID);
         if (camp != null) {
-            Map<String, Student> allStudents = new HashMap<>();
-            for (Student student : camp.getAttendees()) {
-                allStudents.put(student.getID(), student);
-            }
-            for (Student student : camp.getCommittee()) {
-                allStudents.put(student.getID(), student);
-            }
+            Map<String, Student> allStudents = new HashMap<>(camp.getAttendees());
+            allStudents.putAll(camp.getCommittee());
             return allStudents;
         }
         return new HashMap<>();
