@@ -63,10 +63,10 @@ public class UserDB
             User user;
             if (isStudent) {
                 // Assuming Student has a constructor Student(String id, String email, Faculty faculty)
-                user = new Student(userId, email, faculty, name);
+                user = new Student(userId, "password", faculty, name);
             } else {
                 // Assuming Staff has a constructor Staff(String id, String email, Faculty faculty)
-                user = new Staff(userId, email, faculty);
+                user = new Staff(userId, "password", faculty, name);
             }
 
             userMap.put(userId, user);

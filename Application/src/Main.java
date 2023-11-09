@@ -47,7 +47,7 @@ public class Main {
                         String password = scanner.nextLine();
                         System.out.print("Are you a student? (Y/N): ");
                         String isStudent = scanner.nextLine();
-                        boolean isStudentBool;
+                        boolean isStudentBool = true;
                         
                         if (isStudent == "Y" || isStudent == "y"){
                             isStudentBool = true;
@@ -55,15 +55,20 @@ public class Main {
                         else if (isStudent == "N" || isStudent == "n"){
                             isStudentBool = false;
                         }
-                        else{
-                            System.out.println("Invalid input. Try again.");
-                            break;
-                        }
+                        // else{
+                        //     System.out.println("Invalid input. Try again.");
+                        //     break;
+                        // }
                         
-                        userDB.populateUserMap(isStudentBool);
                         User currentUser = userController.loginUser(userID, password, isStudentBool);
                         if (currentUser == null) {
                             System.out.println("Invalid credentials. Try again.");
+                        } else {
+                            if (isStudentBool) {
+                                studentMenu();
+                            } else {
+                                staffMenu();
+                            }
                         }
                         break;
                     case 2:
@@ -86,7 +91,7 @@ public class Main {
         }
     }
 
-    private static void studentMenu(Scanner scanner) {
+    private static void studentMenu() {
         while (true) {
             System.out.println("Student Menu:");
             System.out.println("1. View Available Camps");
@@ -98,6 +103,7 @@ public class Main {
             System.out.println("7. Change Password");
             System.out.println("8. Logout");
             System.out.print("Enter choice: ");
+            Scanner scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
             scanner.nextLine();  // Consume newline
     
@@ -129,7 +135,7 @@ public class Main {
         }
     }
 
-    private static void staffMenu(Scanner scanner) {
+    private static void staffMenu() {
         
         while (true) {
             System.out.println("Staff Menu:");
@@ -143,6 +149,7 @@ public class Main {
             System.out.println("8. Generate Reports");
             System.out.println("9. Logout");
             System.out.print("Enter choice: ");
+            Scanner scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
             scanner.nextLine();  // Consume newline
     

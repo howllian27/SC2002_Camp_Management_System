@@ -38,6 +38,7 @@ public class UserController implements BaseController{
      */
     public User loginUser(String userID, String password, boolean isStudent) {
         User user = userDB.getUser(userID, isStudent);
+    
         if (user != null && user.getPassword().equals(password)) {
             loginView.displayLoginSuccess();
             return user;
