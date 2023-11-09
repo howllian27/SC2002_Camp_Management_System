@@ -42,7 +42,9 @@ public class Main {
                         String userID = scanner.nextLine();
                         System.out.print("Enter Password: ");
                         String password = scanner.nextLine();
-                        currentUser = authenticate(userID, password);
+                        System.out.print("Are you a student? (Y/N): ");
+                        String isStudent = scanner.nextLine();
+                        
                         if (currentUser == null) {
                             System.out.println("Invalid credentials. Try again.");
                         }
@@ -55,14 +57,14 @@ public class Main {
                         System.out.println("Invalid choice. Try again.");
                 }
             } else {
-                if (currentUser instanceof StudentDB) {
-                    studentMenu(scanner);
-                } else if (currentUser instanceof StaffDB) {
-                    staffMenu(scanner);
-                } else {
-                    System.out.println("Unknown user type. Logging out.");
-                    currentUser = null;
-                }
+                // if (currentUser instanceof StudentDB) {
+                //     studentMenu(scanner);
+                // } else if (currentUser instanceof StaffDB) {
+                //     staffMenu(scanner);
+                // } else {
+                //     System.out.println("Unknown user type. Logging out.");
+                //     currentUser = null;
+                // }
             }
         }
     }
@@ -130,7 +132,7 @@ public class Main {
             switch (choice) {
                 case 1:
                     // Change password
-                    changeUserPassword()
+                    // changeUserPassword()
                     break;
                 case 2:
                     // Create a new camp
@@ -160,15 +162,5 @@ public class Main {
                     System.out.println("Invalid choice. Try again.");
             }
         }
-    }
-
-    private static User authenticate(String userID, String password) {
-        for (User user : users) {
-            // if (user.getID().equals(userID) && user.authenticate(password)) {
-            //     return user;
-            // }
-            return user;
-        }
-        return currentUser;
     }
 }
