@@ -10,6 +10,7 @@ public class User {
     private final String userID;
     private final Faculty faculty;
     private String password = "password";
+    private final String name;
 
     /**
      * Constructs a new `User` object with default values.
@@ -18,6 +19,7 @@ public class User {
     public User() {
         this.userID = "default";
         this.faculty = Faculty.SCHOOL;
+        this.name = "";
     }
 
     /**
@@ -26,9 +28,10 @@ public class User {
      * @param userID   The user ID of the user.
      * @param faculty  The faculty to which the user belongs.
      */
-    public User(String userID, Faculty faculty) {
+    public User(String userID, Faculty faculty, String name) {
         this.userID = userID;
         this.faculty = faculty;
+        this.name = name;
     }
 
     /**
@@ -38,10 +41,11 @@ public class User {
      * @param password The user's password.
      * @param faculty  The faculty to which the user belongs.
      */
-    public User(String userID, String password, Faculty faculty) {
+    public User(String userID, String password, Faculty faculty, String name) {
         this.userID = userID;
         this.password = password;
         this.faculty = faculty;
+        this.name = name;
     }
 
     //Getter

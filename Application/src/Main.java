@@ -25,6 +25,9 @@ import model.User;
 public class Main {
     private static User currentUser = null;
 
+    static UserDB userDB = UserDB.getInstance();
+    static UserController userController = new UserController();
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -44,7 +47,21 @@ public class Main {
                         String password = scanner.nextLine();
                         System.out.print("Are you a student? (Y/N): ");
                         String isStudent = scanner.nextLine();
+                        boolean isStudentBool;
                         
+                        if (isStudent == "Y" || isStudent == "y"){
+                            isStudentBool = true;
+                        }
+                        else if (isStudent == "N" || isStudent == "n"){
+                            isStudentBool = false;
+                        }
+                        else{
+                            System.out.println("Invalid input. Try again.");
+                            break;
+                        }
+                        
+                        userDB.populateUserMap(isStudentBool);
+                        User currentUser = userController.loginUser(userID, password, isStudentBool);
                         if (currentUser == null) {
                             System.out.println("Invalid credentials. Try again.");
                         }

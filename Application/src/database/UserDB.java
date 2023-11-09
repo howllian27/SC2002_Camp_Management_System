@@ -52,17 +52,18 @@ public class UserDB
         Map<String, User> userMap = isStudent ? stringStudentMap : staffUserMap;
 
         for (String line : listOfTxtLines) {
-            String[] parts = line.split(","); // Assuming CSV format
+            String[] parts = line.split(" ");
             if (parts.length < 3) continue; // Skip if not enough parts
 
-            String userId = parts[0].trim();
-            String email = parts[1].trim();
-            Faculty faculty = getFacultyEnum(parts[2].trim());
+            String name = parts[0];
+            String email = parts[1];
+            Faculty faculty = getFacultyEnum(parts[2]);
+            String userId = parts[1].split("@")[0];
 
             User user;
             if (isStudent) {
                 // Assuming Student has a constructor Student(String id, String email, Faculty faculty)
-                user = new Student(userId, email, faculty);
+                user = new Student(userId, email, faculty, name);
             } else {
                 // Assuming Staff has a constructor Staff(String id, String email, Faculty faculty)
                 user = new Staff(userId, email, faculty);

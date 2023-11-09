@@ -20,8 +20,8 @@ public class Student extends User {
      * @param userID The user ID of the student.
      * @param faculty The faculty to which the student belongs.
      */
-    public Student(String userID, Faculty faculty) {
-        super(userID, faculty);
+    public Student(String userID, Faculty faculty, String name) {
+        super(userID, faculty, name);
         previouslyRegisteredCamps = new HashMap<String, Camp>();
         registeredCamps = new HashMap<String, Camp>();
     }
@@ -32,8 +32,8 @@ public class Student extends User {
      * @param password The password of the student.
      * @param faculty The faculty to which the student belongs.
      */
-    public Student(String userID, String password, Faculty faculty) {
-        super(userID, password, faculty);
+    public Student(String userID, String password, Faculty faculty, String name) {
+        super(userID, password, faculty, name);
         previouslyRegisteredCamps = new HashMap<String, Camp>();
         registeredCamps = new HashMap<String, Camp>();
     }
