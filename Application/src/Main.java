@@ -19,6 +19,7 @@ import model.Faculty;
 import model.Staff;
 import model.Student;
 import model.User;
+import view.CreateCampView;
 
 
 
@@ -26,7 +27,9 @@ public class Main {
     private static User currentUser = null;
 
     static UserDB userDB = UserDB.getInstance();
+    static CampDB campDB = CampDB.getInstance();
     static UserController userController = new UserController();
+    static CreateCampView createCampView = new CreateCampView();
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -68,9 +71,9 @@ public class Main {
                             System.out.println("Invalid credentials. Try again.");
                         } else {
                             if (isStudentBool) {
-                                studentMenu();
+                                studentMenu(userID, currentUser);
                             } else {
-                                staffMenu();
+                                staffMenu(userID, currentUser);
                             }
                         }
                         break;
@@ -94,7 +97,7 @@ public class Main {
         }
     }
 
-    private static void studentMenu() {
+    private static void studentMenu(String userID, User user) {
         while (true) {
             System.out.println("Student Menu:");
             System.out.println("1. View Available Camps");
@@ -116,6 +119,7 @@ public class Main {
                     break;
                 case 2:
                     // Register for a camp
+                    
                     break;
                 case 3:
                     // Submit enquiry for a camp
@@ -130,7 +134,10 @@ public class Main {
                     // Withdraw from a camp
                     break;
                 case 7:
-                    // Change password
+                    System.out.println("Please enter your new password:");
+                    String newPassword = scanner.nextLine();
+                    userController.changePassword(userID, newPassword);
+                    System.out.println(user.getPassword());
                     break;
                 default:
                     System.out.println("Invalid choice. Try again.");
@@ -138,7 +145,7 @@ public class Main {
         }
     }
 
-    private static void staffMenu() {
+    private static void staffMenu(String userID, User user) {
         
         while (true) {
             System.out.println("Staff Menu:");
@@ -158,17 +165,21 @@ public class Main {
     
             switch (choice) {
                 case 1:
-                    // Change password
-                    // changeUserPassword()
+                    System.out.println("Please enter your new password:");
+                    String newPassword = scanner.nextLine();
+                    userController.changePassword(userID, newPassword);
+                    System.out.println(user.getPassword());
                     break;
                 case 2:
                     // Create a new camp
+                    CampInformation campInformation = createCampView.creatingCamp(currentUser);
                     break;
                 case 3:
                     // Edit an existing camp
                     break;
                 case 4:
                     // View all camps
+                    campDB.
                     break;
                 case 5:
                     // View registered students for a camp

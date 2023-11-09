@@ -86,7 +86,7 @@ public class CampOperationsController implements BaseController {
     * View all camp
     * @param userType The user type to be viewed.
     */ 
-    public void viewCampsForUserType(Object userType, List<Camp> camps) {
+    public void viewCampsForUserType(Object userType) {
         if (camps.isEmpty()) {
             System.out.println("Camp does not exist.");
         } else {

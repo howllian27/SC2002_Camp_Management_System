@@ -35,7 +35,7 @@ public class CampInformation {
      * @param inCharge The staff member in charge of the camp.
      * @param visibility A boolean indicating if the camp is visible to students.
      */
-    CampInformation(String campName, Date[] dates, Date registrationClosingDate, Faculty faculty,
+    public CampInformation(String campName, Date[] dates, Date registrationClosingDate, Faculty faculty,
                     String location, int totalSlots, int committeeSlots, String description, Staff inCharge, boolean visibility) {
         this.campName = campName;
         this.dates = dates;

@@ -14,6 +14,7 @@ public class Student extends User {
     private final HashMap<String, Camp> previouslyRegisteredCamps;
     private final HashMap<String, Camp> registeredCamps; //Camps where student is a member
     private Camp registeredCommitteeCamp;
+    private boolean isCampCommitteeMember = false;
 
     /***
      * Constructs a new `Student` object with the given user ID and faculty.
