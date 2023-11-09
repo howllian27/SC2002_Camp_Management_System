@@ -36,12 +36,14 @@ public class UserController implements BaseController{
      * @param userID The user's ID.
      * @param password The user's password.
      */
-    public void loginUser(String userID, String password, boolean isStudent) {
+    public User loginUser(String userID, String password, boolean isStudent) {
         User user = userDB.getUser(userID, isStudent);
         if (user != null && user.getPassword().equals(password)) {
             loginView.displayLoginSuccess();
+            return user;
         } else {
             loginView.displayLoginError();
+            return null;
         }
     }
 
