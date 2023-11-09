@@ -49,16 +49,19 @@ public class Main {
                         String isStudent = scanner.nextLine();
                         boolean isStudentBool = true;
                         
-                        if (isStudent == "Y" || isStudent == "y"){
+                        if (isStudent.equals("Y") || isStudent.equals("y")){
                             isStudentBool = true;
                         }
-                        else if (isStudent == "N" || isStudent == "n"){
+                        else if (isStudent.equals("N") || isStudent.equals("n")){
                             isStudentBool = false;
                         }
+
                         // else{
                         //     System.out.println("Invalid input. Try again.");
                         //     break;
                         // }
+
+                        System.out.println(isStudentBool);
                         
                         User currentUser = userController.loginUser(userID, password, isStudentBool);
                         if (currentUser == null) {

@@ -51,25 +51,30 @@ public class UserDB
         // Initialize the user map based on whether it's a student or staff
         Map<String, User> userMap = isStudent ? stringStudentMap : staffUserMap;
 
+        int counter = 0;
+
         for (String line : listOfTxtLines) {
-            String[] parts = line.split(" ");
-            if (parts.length < 3) continue; // Skip if not enough parts
+            if (counter > 0){
+                String[] parts = line.split(" ");
+                if (parts.length < 3) continue; // Skip if not enough parts
 
-            String name = parts[0];
-            String email = parts[1];
-            Faculty faculty = getFacultyEnum(parts[2]);
-            String userId = parts[1].split("@")[0];
+                String name = parts[0];
+                String email = parts[1];
+                Faculty faculty = getFacultyEnum(parts[2]);
+                String userId = parts[1].split("@")[0];
 
-            User user;
-            if (isStudent) {
-                // Assuming Student has a constructor Student(String id, String email, Faculty faculty)
-                user = new Student(userId, "password", faculty, name);
-            } else {
-                // Assuming Staff has a constructor Staff(String id, String email, Faculty faculty)
-                user = new Staff(userId, "password", faculty, name);
+                User user;
+                if (isStudent) {
+                    // Assuming Student has a constructor Student(String id, String email, Faculty faculty)
+                    user = new Student(userId, "password", faculty, name);
+                } else {
+                    // Assuming Staff has a constructor Staff(String id, String email, Faculty faculty)
+                    user = new Staff(userId, "password", faculty, name);
+                }
+
+                userMap.put(userId, user);
             }
-
-            userMap.put(userId, user);
+            counter++;
         }
         // For debugging, you can print the populated user map
         prettyPrintUserMap(userMap);
