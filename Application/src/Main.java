@@ -119,7 +119,6 @@ public class Main {
                     break;
                 case 2:
                     // Register for a camp
-                    
                     break;
                 case 3:
                     // Submit enquiry for a camp
@@ -176,10 +175,11 @@ public class Main {
                     break;
                 case 3:
                     // Edit an existing camp
+                    System.out.println("Which camp would you like to edit?");
+
                     break;
                 case 4:
                     // View all camps
-                    campDB.
                     break;
                 case 5:
                     // View registered students for a camp
