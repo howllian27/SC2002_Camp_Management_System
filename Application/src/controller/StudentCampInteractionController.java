@@ -14,8 +14,8 @@ import model.Student;
  */
 public class StudentCampInteractionController implements BaseController {
 
-    private CampDB campDB;
-    private UserDB userDB;
+    CampDB campDB;
+    UserDB userDB;
 
     public StudentCampInteractionController() {
         setMasterVariables();
@@ -23,8 +23,8 @@ public class StudentCampInteractionController implements BaseController {
 
     @Override
     public void setMasterVariables() {
-        this.campDB = new CampDB();
-        this.userDB = new UserDB();
+        this.campDB = CampDB.getInstance();
+        this.userDB = UserDB.getInstance();
     }
 
     /**
@@ -35,7 +35,7 @@ public class StudentCampInteractionController implements BaseController {
      * @param role The role of the student in the camp.
      */
     public void registerForCamp(String userID, String campID, String role) {
-        Student student = (Student) userDB.getUser(userID);
+        Student student = (Student) userDB.getUser(userID, true);
         Camp camp = campDB.getCamp(campID);
         if (student != null && camp != null) {
             // Logic to register the student for the camp
@@ -50,7 +50,7 @@ public class StudentCampInteractionController implements BaseController {
      * @param campID The ID of the camp.
      */
     public void withdrawFromCamp(String userID, String campID) {
-        Student student = (Student) userDB.getUser(userID);
+        Student student = (Student) userDB.getUser(userID, true);
         Camp camp = campDB.getCamp(campID);
         if (student != null && camp != null) {
             // Logic to withdraw the student from the camp

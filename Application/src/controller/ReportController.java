@@ -17,6 +17,7 @@ import database.UserDB;
 public class ReportController implements BaseController{
 
     private FileHelper fileHelper;
+    CampDB campDB;
 
     public ReportController(){
         setMasterVariables();
@@ -25,11 +26,12 @@ public class ReportController implements BaseController{
     @Override
     public void setMasterVariables(){
         this.fileHelper = new FileHelper();
+        this.campDB = CampDB.getInstance();
     }
 
     public void generateStudentReport(String CampID, String filterType, String filename){
         List<String> ReportList = new ArrayList<>();
-        CampInformation campDetails = CampDB.getCampDetails(CampID);
+        CampInformation campDetails = campDB.getCampDetails(CampID);
         String cdetails = "CampInformation{" +
                 "campName='" + campDetails.campName + '\'' +
                 ", dates=" + Arrays.toString(campDetails.dates) +
@@ -48,13 +50,13 @@ public class ReportController implements BaseController{
 
         switch (filterType) {
             case "Attendees":
-                CampStudents = CampDB.getAttendeesForCamp(CampID);
+                CampStudents = campDB.getAttendeesForCamp(CampID);
                 break;
             case "Camp committee":
-                CampStudents = CampDB.getCommitteeMembersForCamp(CampID);
+                CampStudents = campDB.getCommitteeMembersForCamp(CampID);
                 break;
             case "All students":
-                CampStudents = CampDB.getAllStudentsForCamp(CampID);
+                CampStudents = campDB.getAllStudentsForCamp(CampID);
                 break;
         }
 
@@ -70,6 +72,6 @@ public class ReportController implements BaseController{
     }  
         
 public void generateCommitteePerformanceReport(String campID){}
-    }
+}
     
 

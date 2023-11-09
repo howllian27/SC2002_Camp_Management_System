@@ -10,8 +10,25 @@ public class CampDB {
 
     private Map<String, Camp> campDatabase;
 
-    public CampDB() {
+    // Static variable reference of userDB
+    // of type CampDB
+    private static CampDB campDB = null;
+    
+
+    // Constructor
+    // Here we will be creating private constructor
+    // restricted to this class itself
+    private CampDB() {
         campDatabase = new HashMap<>();
+    }
+
+    // Static method to create instance of Singleton(CampDB) class
+    public static synchronized CampDB getInstance()
+    {
+        if (campDB == null)
+            campDB = new CampDB();
+ 
+        return campDB;
     }
 
     public Map<String, Camp> getAllCamps() {

@@ -17,7 +17,7 @@ import view.CampDetailView;
  */
 public class CampOperationsController implements BaseController {
 
-    private CampDB campDB;
+    CampDB campDB;
     private CampListView campListView;
     private CampDetailView campDetailView;
 
@@ -28,8 +28,8 @@ public class CampOperationsController implements BaseController {
 
     //
     @Override
-    public void setMasterVariables() {
-        this.campDB = new CampDB();
+    public void setMasterVariables() {   
+        this.campDB = CampDB.getInstance();
         this.campListView = new CampListView();
         this.campDetailView = new CampDetailView();
     }

@@ -19,12 +19,29 @@ public class UserDB
     private static final String STUDENT_FILE_PATH = "Application/src/database/data/student_list.txt";
     private static final String STAFF_FILE_PATH = "Application/src/database/data/staff_list.txt";
 
-    public UserDB() {
+    // Static variable reference of userDB
+    // of type UserDB
+    private static UserDB userDB = null;
+    
+
+    // Constructor
+    // Here we will be creating private constructor
+    // restricted to this class itself
+    private UserDB() {
         stringStudentMap = new HashMap<>();
         staffUserMap = new HashMap<>();
         fileHelper = new FileHelper();
         populateUserMap(true);  // Populate the student map
         populateUserMap(false); // Populate the staff map
+    }
+
+    // Static method to create instance of Singleton(UserDB) class
+    public static synchronized UserDB getInstance()
+    {
+        if (userDB == null)
+            userDB = new UserDB();
+ 
+        return userDB;
     }
 
     public void populateUserMap(boolean isStudent) {

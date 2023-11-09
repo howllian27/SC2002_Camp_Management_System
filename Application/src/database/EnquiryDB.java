@@ -9,9 +9,26 @@ public class EnquiryDB {
     private  HashMap<String, HashMap<String, Enquiry>> campEnquiries;
     private  HashMap<String, Enquiry> allEnquiries;
 
-    public EnquiryDB() {
+    // Static variable reference of userDB
+    // of type EnquiryDB
+    private static EnquiryDB enquiryDB = null;
+
+
+    // Constructor
+    // Here we will be creating private constructor
+    // restricted to this class itself
+    private EnquiryDB() {
         this.campEnquiries = new HashMap<>();
         this.allEnquiries = new HashMap<>();
+    }
+
+    // Static method to create instance of Singleton(CampDB) class
+    public static synchronized EnquiryDB getInstance()
+    {
+        if (enquiryDB == null)
+            enquiryDB = new EnquiryDB();
+     
+        return enquiryDB;
     }
 
     public HashMap<String, Enquiry> getEnquiries(String campID) {
