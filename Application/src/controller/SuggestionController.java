@@ -13,7 +13,7 @@ import view.SuggestionsView;
 */
 public class SuggestionController implements BaseController {
 
-    private SuggestionDB suggestionDB;
+    SuggestionDB suggestionDB;
     private SuggestionsView suggestionsView;
 
     public SuggestionController() {
@@ -22,7 +22,7 @@ public class SuggestionController implements BaseController {
 
     @Override
     public void setMasterVariables() {
-        this.suggestionDB = new SuggestionDB(); // Assuming SuggestionDB is a class that handles suggestion data.
+        this.suggestionDB = SuggestionDB.getInstance(); // Assuming SuggestionDB is a class that handles suggestion data.
         this.suggestionsView = new SuggestionsView(); // Assuming SuggestionsView is a class for displaying suggestions.
     }
 

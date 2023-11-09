@@ -13,7 +13,7 @@ import view.LoginView;
  * @since 2023-10-28
  */
 public class UserController implements BaseController{
-    private UserDB userDB;
+    UserDB userDB;
     private LoginView loginView;
 
     // Constructor
@@ -24,7 +24,7 @@ public class UserController implements BaseController{
     // Set master variables
     @Override
     public void setMasterVariables() {
-        this.userDB = new UserDB(); // Assuming UserDB is a class that handles user data.
+        this.userDB = UserDB.getInstance(); // Assuming UserDB is a class that handles user data.
         this.loginView = new LoginView(); // Assuming LoginView is a class for displaying login-related UI.
     }
 

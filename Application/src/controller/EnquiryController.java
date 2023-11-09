@@ -22,10 +22,10 @@ import view.EnquiriesView;
  */
 public class EnquiryController implements BaseController {
 
-    private EnquiryDB enquiryDB;
+    EnquiryDB enquiryDB;
     private EnquiriesView enquiriesView;
-    private CampDB campDB;
-    private UserDB userDB;
+    CampDB campDB;
+    UserDB userDB;
 
     public EnquiryController() {
         setMasterVariables();
@@ -33,8 +33,8 @@ public class EnquiryController implements BaseController {
 
     @Override
     public void setMasterVariables() {
-        this.campDB = new CampDB();
-        this.enquiryDB = new EnquiryDB();
+        this.campDB = CampDB.getInstance();
+        this.enquiryDB = EnquiryDB.getInstance();
         this.enquiriesView = new EnquiriesView();
     }
 
