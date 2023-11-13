@@ -1,19 +1,40 @@
 package database;
 
+import model.Suggestion;
+import java.util.HashMap;
+
 public class SuggestionDB {
     private static SuggestionDB suggestionDB = null;
+    private HashMap<String, Suggestion> suggestions;
 
-    // Constructor
-    // Here we will be creating private constructor
-    // restricted to this class itself
-    private SuggestionDB(){}
+    private SuggestionDB() {
+        suggestions = new HashMap<>();
+    }
 
-    // Static method to create instance of Singleton(CampDB) class
-    public static synchronized SuggestionDB getInstance()
-    {
+    public static synchronized SuggestionDB getInstance() {
         if (suggestionDB == null)
             suggestionDB = new SuggestionDB();
          
         return suggestionDB;
+    }
+
+    public Suggestion getSuggestion(String campId, String studentId) {
+        return suggestions.get(campId + "-" + studentId);
+    }
+
+    public void addSuggestion(Suggestion suggestion) {
+        String key = suggestion.getCampId() + "-" + suggestion.getStudentId();
+        suggestions.put(key, suggestion);
+    }
+
+    public void updateSuggestion(String campId, String studentId, Suggestion updatedSuggestion) {
+        String key = campId + "-" + studentId;
+        if (suggestions.containsKey(key)) {
+            suggestions.put(key, updatedSuggestion);
+        }
+    }
+
+    public void removeSuggestion(String campId, String studentId) {
+        suggestions.remove(campId + "-" + studentId);
     }
 }
