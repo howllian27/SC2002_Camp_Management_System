@@ -52,6 +52,7 @@ public class User {
     public String getID() { return this.userID; }
     public Faculty getFaculty() { return this.faculty; }
     public String getPassword() { return this.password; }
+    public String getName() { return this.name; }
 
     //Setter
     public void setPassword(String password) { this.password = password; }

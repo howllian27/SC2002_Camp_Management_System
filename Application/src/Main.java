@@ -178,7 +178,7 @@ public class Main {
                     break;
                 case 2:
                     // Create a new camp
-                    CampInformation campInformation = createCampView.creatingCamp(currentUser);
+                    CampInformation campInformation = createCampView.creatingCamp(user);
                     break;
                 case 3:
                     // Edit an existing camp
