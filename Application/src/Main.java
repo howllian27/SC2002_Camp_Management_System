@@ -130,7 +130,7 @@ public class Main {
                 case 2:
                     // Register for a camp
                     campOperationsController.viewCampsForUserType(userType);
-                    System.out.println("Type the number of the camp you would like to register for!");
+                    System.out.println("Type the name of the camp you would like to register for!");
                     String selectedCampID = scanner.nextLine(); 
                     System.out.println("Would you like to register as a participant or a committee member?");
                     System.out.println("1. Participant");
