@@ -32,7 +32,10 @@ public class CampListView {
         System.out.println();
         int count = 1;
         for (Camp camp : camps) {
-            System.out.println(count + "." + "Camp Name: " + camp.getName());
+            System.out.println(count + ". " + "Camp Name: " + camp.getName());
+            System.out.println("    " + "Total Slots: " + camp.getTotalSlots());
+            System.out.println("    " + "Remaining Slots: " + camp.getRemainingSlots());
+            System.out.println("    " + "Remaining Committee Slots: " + camp.getCommitteeSlots());
             count++;
         }
     }
@@ -50,14 +53,14 @@ public class CampListView {
             System.out.println();
             int count = 1;
             for (Camp camp : camps){
-                System.out.println(count + "." + "Camp Name: " + camp.getName()); 
-                System.out.println("  " + "Dates: " + Arrays.toString(camp.getDates()));
-                System.out.println("  " + "Registration closing date: " + camp.getClosingDate());
-                System.out.println("  " + "Location: " + camp.getLocation());
-                System.out.println("  " + "Total Slots: " + camp.getTotalSlots());
-                System.out.println("  " + "Remaining Slots: " + camp.getRemainingSlots());
-                System.out.println("  " + "Description: " + camp.getDescription());
-                System.out.println("  " + "Staff In Charge: " + camp.getInCharge().getName());
+                System.out.println(count + ". " + "Camp Name: " + camp.getName()); 
+                System.out.println("    " + "Dates: " + Arrays.toString(camp.getDates()));
+                System.out.println("    " + "Registration closing date: " + camp.getClosingDate());
+                System.out.println("    " + "Location: " + camp.getLocation());
+                System.out.println("    " + "Total Slots: " + camp.getTotalSlots());
+                System.out.println("    " + "Remaining Slots: " + camp.getRemainingSlots());
+                System.out.println("    " + "Description: " + camp.getDescription());
+                System.out.println("    " + "Staff In Charge: " + camp.getInCharge().getName());
             }   
                 
     }

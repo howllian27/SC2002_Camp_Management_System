@@ -43,13 +43,12 @@ public class StudentCampInteractionController implements BaseController {
             if (role.equals("committee")) {
                 student.setCampCommitteeMember();
                 student.addCommitteeCamp(camp);
+                camp.addAttendee(userID, student);
                 camp.addCommitteeMember(userID, student);
                 camp.getCampInformation().committeeSlots--;
-                camp.getCampInformation().totalSlots--;
             } else {
                 student.addCamp(campID, camp);
                 camp.addAttendee(userID, student);
-                camp.getCampInformation().totalSlots--;
             }
             System.out.println("You are registered!");
         }
