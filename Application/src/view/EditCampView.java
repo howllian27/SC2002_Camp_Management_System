@@ -1,13 +1,17 @@
 package view;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Scanner;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import model.Camp;
 
 public class EditCampView {
     
     public Camp editCampInfoView(Camp camp){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         System.out.println("\n+------------------------------------------------------------+");
         System.out.println("|                                                             |");
         System.out.println("|                 Camp Information Edit Portal                |");
@@ -44,17 +48,76 @@ public class EditCampView {
             
             switch(choice){
                 case 1: 
-                    System.out.print("Enter New Camp Name: ");
+                    System.out.print("Enter new camp name: ");
                     String newCampName = scanner.nextLine();
                     camp.setName(newCampName);
                     break;
                 case 2:
+                    System.out.print("Which Date do you want to edit");
+                    System.out.print("1. Start Date ");
+                    System.out.print("2. End Date ");
+                    int datechoice = scanner.nextInt();
+                    switch(datechoice){
+                        case 1: 
+                            System.out.print("Enter new start date (dd-mm-yyyy) ");
+                            String  newStartDateString = scanner.nextLine();
+                            Date newStartDate = null;
+
+                            try {
+                                newStartDate = dateFormat.parse(newStartDateString);
+                            } catch (ParseException e) {
+                                e.printStackTrace(); // Handle the exception as needed
+                            }
+
+                            Date dates_Start[] = {newStartDate, camp.getDates()[1]};
+                            camp.setDates(dates_Start);
+                            break; 
+                        case 2: 
+                            System.out.print("Enter new end date (dd-mm-yyyy) ");
+                            String  newEndDateString = scanner.nextLine();
+                            Date newEndDate = null;
+                            
+                            try {
+                                newEndDate = dateFormat.parse(newEndDateString);
+                            } catch (ParseException e) {
+                                e.printStackTrace(); // Handle the exception as needed
+                            }
+
+                            Date dates_End[] = {camp.getDates()[1], newEndDate};
+                            camp.setDates(dates_End);
+                            break;
+                    }
                 case 3:
+                    System.out.print("Enter new registration closing date (dd-mm-yyyy) ");
+                    String newRegClosingDateString = scanner.nextLine();
+                    Date newRegistrationClosingDate = null;
+                    try {
+                        newRegistrationClosingDate = dateFormat.parse(newRegClosingDateString);
+                    } catch (ParseException e) {
+                        e.printStackTrace(); // Handle the exception as needed
+                    }
+                    camp.setClosingDate(newRegistrationClosingDate);
+                    break;
                 case 4:
+                    System.out.print("Enter new camp location: ");
+                    String newCampLocation = scanner.nextLine();
+                    camp.setLocation(newCampLocation);
+                    break;
                 case 5:
+                    System.out.print("Enter new number of total slots: ");
+                    int newTotalSlots = scanner.nextInt();
+                    camp.setTotalSlots(newTotalSlots);
+                    break;
                 case 6:
+                    System.out.print("Enter new number of committee slots: ");
+                    int newCommitteeSlots = scanner.nextInt();
+                    camp.setCommitteeSlots(newCommitteeSlots);
+                    break;
                 case 7:
-                case 8:
+                    System.out.print("Enter new Description: ");
+                    String newDescription = scanner.nextLine();
+                    camp.setDescription(newDescription);
+                    break;
                 case 9:
                     break;
                 default:
