@@ -8,6 +8,7 @@ import model.Camp;
 import model.CampInformation;
 import view.CampListView;
 import view.CampDetailView;
+import view.EditCampView;
 
 /**
  * The CampOperationsController class is responsible for handling operations related to camp information.
@@ -21,6 +22,7 @@ public class CampOperationsController implements BaseController {
     CampDB campDB;
     private CampListView campListView;
     private CampDetailView campDetailView;
+    private EditCampView editCampView;
 
     // Constructor
     public CampOperationsController() {
@@ -33,6 +35,7 @@ public class CampOperationsController implements BaseController {
         this.campDB = CampDB.getInstance();
         this.campListView = new CampListView();
         this.campDetailView = new CampDetailView();
+        this.editCampView = new EditCampView();
     }
 
     /** 
@@ -52,21 +55,18 @@ public class CampOperationsController implements BaseController {
     * @param campID The camp ID to be edited.
     * @param updatedDetails The updated details of the camp.
     */ 
-    public void editCamp(String campID, CampInformation updatedDetails) {
+    public void editCamp(String campID) {
         if (campDB.getCamp(campID) == null) {
             System.out.println("Camp does not exist.");
             return;
         }
         Camp updatedCamp = campDB.getCamp(campID);
-        updatedCamp.setName(updatedDetails.campName);
-        updatedCamp.setDates(updatedDetails.dates);
-        updatedCamp.setClosingDate(updatedDetails.registrationClosingDate);
-        updatedCamp.setFaculty(updatedDetails.faculty);
-        updatedCamp.setLocation(updatedDetails.location);
-        updatedCamp.setCommitteeSlots(updatedDetails.committeeSlots);
-        updatedCamp.setDescription(updatedDetails.description);
-        updatedCamp.setInCharge(updatedDetails.inCharge);
-        campDB.updateCamp(campID, updatedCamp);
+        updatedCamp = editCampView.editCampInfoView(updatedCamp);
+        campDB.updateCamp(updatedCamp.getName(), updatedCamp);
+
+        if (!updatedCamp.getName().equals(campID)){
+            campDB.deleteCamp(campID);
+        }
     }
 
     /** 

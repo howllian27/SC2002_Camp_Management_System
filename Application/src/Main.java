@@ -183,7 +183,9 @@ public class Main {
                 case 3:
                     // Edit an existing camp
                     System.out.println("Which camp would you like to edit?");
-
+                    String campToEdit = scanner.nextLine();
+                    campOperationsController.editCamp(campToEdit);
+                    
                     break;
                 case 4:
                     // View all camps
