@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -7,6 +8,7 @@ import java.util.stream.Collectors;
 import database.CampDB;
 import model.Camp;
 import model.CampInformation;
+import model.Student;
 import view.CampListView;
 import view.CampDetailView;
 import view.EditCampView;
@@ -137,5 +139,18 @@ public class CampOperationsController implements BaseController {
         camp.setVisibility(true);
         campDB.updateCamp(campID, camp);
         System.out.println("Camp visibility toggled!");
+    }
+
+    /** 
+     * View registered students
+    */
+    public void viewRegisteredStudents(String campID){
+        Camp camp = campDB.getCamp(campID);
+        HashMap<String, Student> attendees = camp.getAttendees();
+
+        for (Map.Entry<String, Student> set :
+             attendees.entrySet()){
+                System.out.println(set.getValue().getName());
+        }
     }
 }

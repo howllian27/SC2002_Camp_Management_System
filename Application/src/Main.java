@@ -215,6 +215,11 @@ public class Main {
                     break;
                 case 5:
                     // View registered students for a camp
+                    campOperationsController.viewCampsForUserType(userType);
+                    System.out.println("Select a camp to view registered students for:");
+                    String campToView = scanner.nextLine();
+
+                    campOperationsController.viewRegisteredStudents(campToView);
                     break;
                 case 6:
                     // View camp detail suggestions
