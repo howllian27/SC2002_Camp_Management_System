@@ -111,11 +111,12 @@ public class Main {
             System.out.println("1. View Available Camps");
             System.out.println("2. Register for Camp");
             System.out.println("3. Submit Enquiry for a Camp");
-            System.out.println("4. View Registered Camps");
-            System.out.println("5. View Enquiry Replies");
-            System.out.println("6. Withdraw from a Camp");
-            System.out.println("7. Change Password");
-            System.out.println("8. Logout");
+            System.out.println("4. Submit Suggestion for a Camp");
+            System.out.println("5. View Registered Camps");
+            System.out.println("6. View Enquiry Replies");
+            System.out.println("7. Withdraw from a Camp");
+            System.out.println("8. Change Password");
+            System.out.println("9. Logout");
             System.out.print("Enter choice: ");
             Scanner scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
@@ -152,21 +153,24 @@ public class Main {
                     // Submit enquiry for a camp
                     break;
                 case 4:
-                    // View registered camps
+                    // Submit enquiry for a camp
                     break;
                 case 5:
-                    // View enquiry replies
+                    // View registered camps
                     break;
                 case 6:
-                    // Withdraw from a camp
+                    // View enquiry replies
                     break;
                 case 7:
+                    // Withdraw from a camp
+                    break;
+                case 8:
                     System.out.println("Please enter your new password:");
                     String newPassword = scanner.nextLine();
                     userController.changePassword(userID, newPassword);
                     System.out.println(user.getPassword());
                     break;
-                case 8:
+                case 9:
                     break;
                 default:
                     System.out.println("Invalid choice. Try again.");

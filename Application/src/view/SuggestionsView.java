@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Scanner;
 import model.Camp;
 import model.CampInformation;
-import model.Suggestions;
+import model.Suggestion;
 
 /**
  * The SuggestionsView class is responsible for managing and displaying suggestions and user interactions.
@@ -49,7 +49,7 @@ public class SuggestionsView {
      * @param camp The Camp object containing the camp's information.
      * @param suggestions A list of strings containing suggestions to be displayed.
      */
-    public void viewAndApproveSuggestions(){
+    public void viewAndApproveSuggestions(List<String> suggestions){
 
         // Prompt the staff member for approval
         Scanner scanner = new Scanner(System.in);
