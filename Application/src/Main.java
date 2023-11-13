@@ -6,6 +6,7 @@ import controller.EnquiryController;
 // import controller.StudentCampInteractionController;
 // import controller.SuggestionController;
 import controller.UserController;
+import controller.StudentCampInteractionController;
 
 import database.CampDB;
 import database.UserDB;
@@ -33,6 +34,7 @@ public class Main {
     // Initialise controllers
     static UserController userController = new UserController();
     static CampOperationsController campOperationsController = new CampOperationsController();
+    static StudentCampInteractionController studentCampInteractionController = new StudentCampInteractionController();
 
     // Initialise views
     static CreateCampView createCampView = new CreateCampView();
@@ -127,6 +129,24 @@ public class Main {
                     break;
                 case 2:
                     // Register for a camp
+                    campOperationsController.viewCampsForUserType(userType);
+                    System.out.println("Type the number of the camp you would like to register for!");
+                    String selectedCampID = scanner.nextLine(); 
+                    System.out.println("Would you like to register as a participant or a committee member?");
+                    System.out.println("1. Participant");
+                    System.out.println("2. Committee Member");
+                    int roleChoice = scanner.nextInt();
+                    if (roleChoice == 1){
+                        userType = "student";
+                    }
+                    else if (roleChoice == 2){
+                        userType = "committee";
+                    }
+                    else{
+                        System.out.println("Invalid choice. Try again.");
+                        break;
+                    }
+                    studentCampInteractionController.registerForCamp(userID, selectedCampID, userType);
                     break;
                 case 3:
                     // Submit enquiry for a camp

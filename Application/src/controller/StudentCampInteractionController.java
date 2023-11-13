@@ -39,6 +39,18 @@ public class StudentCampInteractionController implements BaseController {
         Camp camp = campDB.getCamp(campID);
         if (student != null && camp != null) {
             // Logic to register the student for the camp
+            student.addCamp(campID, camp);
+            if (role.equals("committee")) {
+                student.setCampCommitteeMember();
+                student.addCommitteeCamp(camp);
+                camp.addCommitteeMember(userID, student);
+                camp.getCampInformation().committeeSlots--;
+                camp.getCampInformation().totalSlots--;
+            } else {
+                student.addCamp(campID, camp);
+                camp.addAttendee(userID, student);
+                camp.getCampInformation().totalSlots--;
+            }
             System.out.println("You are registered!");
         }
     }

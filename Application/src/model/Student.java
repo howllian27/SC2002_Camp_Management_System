@@ -44,6 +44,9 @@ public class Student extends User {
     public HashMap<String, Camp> getRegisteredCamps() { return this.registeredCamps; }
     public HashMap<String, Camp> getPreviouslyRegisteredCamps() { return this.previouslyRegisteredCamps; }
 
+    // Setters
+    public void setCampCommitteeMember() { this.isCampCommitteeMember = true; }
+
     //Methods
 
     /***

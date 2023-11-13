@@ -101,7 +101,7 @@ public class CampOperationsController implements BaseController {
             Map<String, Camp> campMap = campDB.getAllCamps();
             camps = campMap.values().stream()
                               .filter(Camp::getVisibility) // Keep only camps where getVisibility is true
-                              .collect(Collectors.toList());
+                              .collect(Collectors.toList());          
         }        
         if (camps.isEmpty()) {
             System.out.println("Camp does not exist.");
