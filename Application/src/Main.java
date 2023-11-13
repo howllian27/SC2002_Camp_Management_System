@@ -166,6 +166,8 @@ public class Main {
                     userController.changePassword(userID, newPassword);
                     System.out.println(user.getPassword());
                     break;
+                case 8:
+                    break;
                 default:
                     System.out.println("Invalid choice. Try again.");
             }

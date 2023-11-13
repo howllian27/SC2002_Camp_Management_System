@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.HashMap;
+
 import database.CampDB;
 import database.UserDB;
 import model.Camp;
@@ -37,22 +39,27 @@ public class StudentCampInteractionController implements BaseController {
     public void registerForCamp(String userID, String campID, String role) {
         Student student = (Student) userDB.getUser(userID, true);
         Camp camp = campDB.getCamp(campID);
-        
-        if (student != null && camp != null) {
-            // Logic to register the student for the camp
-            student.addCamp(campID, camp);
-            if (role.equals("committee")) {
-                student.setCampCommitteeMember();
-                student.addCommitteeCamp(camp);
-                camp.addAttendee(userID, student);
-                camp.addCommitteeMember(userID, student);
-                camp.getCampInformation().committeeSlots--;
-            } else {
+        HashMap<String, Camp> previouslyRegisteredCamps = student.getPreviouslyRegisteredCamps();
+        if (!previouslyRegisteredCamps.containsKey(campID)){
+            if (student != null && camp != null) {
+                // Logic to register the student for the camp
                 student.addCamp(campID, camp);
-                camp.addAttendee(userID, student);
+                if (role.equals("committee")) {
+                    student.setCampCommitteeMember();
+                    student.addCommitteeCamp(camp);
+                    camp.addAttendee(userID, student);
+                    camp.addCommitteeMember(userID, student);
+                    camp.getCampInformation().committeeSlots--;
+                } else {
+                    student.addCamp(campID, camp);
+                    camp.addAttendee(userID, student);
+                }
+                System.out.println("You are registered!");
             }
-            System.out.println("You are registered!");
+        } else {
+            System.out.println("You are already registered!");
         }
+         
     }
 
     /**
