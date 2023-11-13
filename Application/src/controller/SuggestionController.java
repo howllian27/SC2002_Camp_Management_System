@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import database.SuggestionDB;
 import model.Suggestion;
 import view.SuggestionsView;
@@ -29,13 +31,13 @@ public class SuggestionController implements BaseController {
     public void submitSuggestion(String committeeID, String campID, String suggestionText) {
         Suggestion suggestion = new Suggestion(committeeID, campID, suggestionText, false);
         suggestionDB.addSuggestion(suggestion);
-        suggestionsView.displaySubmissionSuccess(suggestion);
+        System.out.println("Suggestion successfully submitted!");
     }
 
     public void viewSuggestions(String committeeID) {
-        var suggestions = suggestionDB.getSuggestionsByCommittee(committeeID);
+        List<String> suggestions = suggestionDB.getSuggestionsByCommittee(committeeID);
         if (suggestions.isEmpty()) {
-            suggestionsView.displayNoSuggestionsFound();
+            System.out.println("Suggestion not found!");
         } else {
             suggestionsView.displaySuggestions(suggestions);
         }
@@ -44,7 +46,7 @@ public class SuggestionController implements BaseController {
     public void editSuggestion(String suggestionID, String updatedText) {
         Suggestion suggestion = suggestionDB.getSuggestion(suggestionID);
         if (suggestion == null) {
-            suggestionsView.displaySuggestionNotFound(suggestionID);
+            System.out.println("Suggestion not found!");
             return;
         }
 
@@ -55,23 +57,23 @@ public class SuggestionController implements BaseController {
 
     public void deleteSuggestion(String suggestionID) {
         if (!suggestionDB.exists(suggestionID)) {
-            suggestionsView.displaySuggestionNotFound(suggestionID);
+            System.out.println("Suggestion not found!");
             return;
         }
 
         suggestionDB.removeSuggestion(suggestionID);
-        suggestionsView.displayDeletionSuccess(suggestionID);
+        System.out.println("Suggestion successfully deleted!");
     }
 
     public void approveSuggestion(String suggestionID) {
         Suggestion suggestion = suggestionDB.getSuggestion(suggestionID);
         if (suggestion == null) {
-            suggestionsView.displaySuggestionNotFound(suggestionID);
+            System.out.println("Suggestion not found!");
             return;
         }
 
         suggestion.setApproved(true);
         suggestionDB.updateSuggestion(suggestionID, suggestion);
-        suggestionsView.displayApprovalSuccess(suggestion);
+        System.out.println("Suggestion successfully approved!");
     }
 }
