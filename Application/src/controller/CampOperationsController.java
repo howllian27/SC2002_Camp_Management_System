@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.List;
+import java.util.Map;
 
 import database.CampDB;
 import model.Camp;
@@ -86,7 +87,14 @@ public class CampOperationsController implements BaseController {
     * View all camp
     * @param userType The user type to be viewed.
     */ 
-    public void viewCampsForUserType(Object userType) {
+    public void viewCampsForUserType(String userType) {
+        List<Camp> camps = null;
+        if (userType.equals("staff")) {
+            Map<String, Camp> campMap = campDB.getAllCamps();
+            camps = campMap.values().stream().toList();
+            campListView.displayCamps(camps);
+            return;
+        }
         if (camps.isEmpty()) {
             System.out.println("Camp does not exist.");
         } else {

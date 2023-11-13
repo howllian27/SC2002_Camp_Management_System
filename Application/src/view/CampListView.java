@@ -28,9 +28,9 @@ public class CampListView {
                 System.out.println("|                                                             |");
                 System.out.println("+------------------------------------------------------------+\n");
         System.out.println("List of Camps:");
+        System.out.println();
         for (Camp camp : camps) {
             System.out.println("Camp Name: " + camp.getName());
-            System.out.println();
         }
     }
 }

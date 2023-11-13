@@ -26,9 +26,15 @@ import view.CreateCampView;
 public class Main {
     private static User currentUser = null;
 
+    // Initialise databases
     static UserDB userDB = UserDB.getInstance();
     static CampDB campDB = CampDB.getInstance();
+
+    // Initialise controllers
     static UserController userController = new UserController();
+    static CampOperationsController campOperationsController = new CampOperationsController();
+
+    // Initialise views
     static CreateCampView createCampView = new CreateCampView();
 
     public static void main(String[] args) {
@@ -161,6 +167,7 @@ public class Main {
             Scanner scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
             scanner.nextLine();  // Consume newline
+            String userType = "staff";
     
             switch (choice) {
                 case 1:
@@ -180,6 +187,7 @@ public class Main {
                     break;
                 case 4:
                     // View all camps
+                    campOperationsController.viewCampsForUserType(userType);
                     break;
                 case 5:
                     // View registered students for a camp
