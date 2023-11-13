@@ -1,5 +1,6 @@
 package view;
 
+import java.util.Arrays;
 import java.util.List;
 import model.Camp;
 
@@ -32,5 +33,29 @@ public class CampListView {
         for (Camp camp : camps) {
             System.out.println("Camp Name: " + camp.getName());
         }
+    }
+
+    public void displayDetailedCamps(List<Camp> camps) {
+                System.out.println("\n+------------------------------------------------------------+");
+                System.out.println("|                                                             |");
+                System.out.println("|         LIST OF CAMPS (with details) YOU ARE IN             |");
+                System.out.println("|                                                             |");
+                System.out.println("|                                                             |");
+                System.out.println("|        To return to the main menu, simply enter '0'.        |");
+                System.out.println("|                                                             |");
+                System.out.println("+------------------------------------------------------------+\n");  
+            System.out.println("List of Camps:");
+            System.out.println();
+            for (Camp camp : camps){
+                System.out.println("Camp Name: " + camp.getName()); 
+                System.out.println("Dates: " + Arrays.toString(camp.getDates()));
+                System.out.println("Registration closing date: " + camp.getClosingDate());
+                System.out.println("Location: " + camp.getLocation());
+                System.out.println("Total Slots: " + camp.getTotalSlots());
+                System.out.println("Remaining Slots: " + camp.getRemainingSlots());
+                System.out.println("Description: " + camp.getDescription());
+                System.out.println("Staff In Charge: " + camp.getInCharge().getName());
+            }   
+                
     }
 }
