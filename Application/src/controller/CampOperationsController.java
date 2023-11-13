@@ -2,6 +2,7 @@ package controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import database.CampDB;
 import model.Camp;
@@ -62,10 +63,12 @@ public class CampOperationsController implements BaseController {
         }
         Camp updatedCamp = campDB.getCamp(campID);
         updatedCamp = editCampView.editCampInfoView(updatedCamp);
-        campDB.updateCamp(updatedCamp.getName(), updatedCamp);
 
         if (!updatedCamp.getName().equals(campID)){
             campDB.deleteCamp(campID);
+            campDB.addCamp(updatedCamp.getName(), updatedCamp);
+        } else {
+            campDB.updateCamp(campID, updatedCamp);
         }
     }
 
@@ -93,8 +96,13 @@ public class CampOperationsController implements BaseController {
             Map<String, Camp> campMap = campDB.getAllCamps();
             camps = campMap.values().stream().toList();
             campListView.displayCamps(camps);
-            return;
         }
+        if (userType.equals("student")) {
+            Map<String, Camp> campMap = campDB.getAllCamps();
+            camps = campMap.values().stream()
+                              .filter(Camp::getVisibility) // Keep only camps where getVisibility is true
+                              .collect(Collectors.toList());
+        }        
         if (camps.isEmpty()) {
             System.out.println("Camp does not exist.");
         } else {

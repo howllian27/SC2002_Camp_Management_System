@@ -3,9 +3,7 @@ package view;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import controller.CampOperationsController;
 import model.Camp;
-import model.CampInformation;
 
 public class EditCampView {
     

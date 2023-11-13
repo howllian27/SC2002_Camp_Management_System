@@ -117,11 +117,13 @@ public class Main {
             System.out.print("Enter choice: ");
             Scanner scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
-            scanner.nextLine();  // Consume newline
+            scanner.nextLine();
+            String userType = "student";
     
             switch (choice) {
                 case 1:
                     // Display available camps
+                    campOperationsController.viewCampsForUserType(userType);
                     break;
                 case 2:
                     // Register for a camp
