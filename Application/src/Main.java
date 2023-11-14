@@ -7,6 +7,7 @@ import controller.EnquiryController;
 // import controller.SuggestionController;
 import controller.UserController;
 import controller.StudentCampInteractionController;
+import controller.EnquiryController;
 
 import database.CampDB;
 import database.UserDB;
@@ -20,6 +21,7 @@ import model.Faculty;
 import model.Staff;
 import model.Student;
 import model.User;
+
 import view.CreateCampView;
 
 
@@ -35,6 +37,7 @@ public class Main {
     static UserController userController = new UserController();
     static CampOperationsController campOperationsController = new CampOperationsController();
     static StudentCampInteractionController studentCampInteractionController = new StudentCampInteractionController();
+    static EnquiryController enquiryController = new EnquiryController();
 
     // Initialise views
     static CreateCampView createCampView = new CreateCampView();
@@ -113,10 +116,11 @@ public class Main {
             System.out.println("3. Submit Enquiry for a Camp");
             System.out.println("4. Submit Suggestion for a Camp");
             System.out.println("5. View Registered Camps");
-            System.out.println("6. View Enquiry Replies");
-            System.out.println("7. Withdraw from a Camp");
-            System.out.println("8. Change Password");
-            System.out.println("9. Logout");
+            System.out.println("6. View Enquiries");
+            System.out.println("7. View Enquiry Replies");
+            System.out.println("8. Withdraw from a Camp");
+            System.out.println("9. Change Password");
+            System.out.println("10. Logout");
             System.out.print("Enter choice: ");
             Scanner scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
@@ -151,26 +155,37 @@ public class Main {
                     break;
                 case 3:
                     // Submit enquiry for a camp
+                    campOperationsController.viewCampsForUserType(userType);
+                    System.out.println("Type the name of the camp you would like to submit an enquiry for!");
+                    String campID = scanner.nextLine();
+                    System.out.println("Type the enquiry you would like to make!");
+                    String enquiry = scanner.nextLine();
+                    enquiryController.submitEnquiry(userID, campID, enquiry);
+
                     break;
                 case 4:
-                    // Submit enquiry for a camp
+                    // Submit suggestion for a camp
                     break;
                 case 5:
                     // View registered camps
                     break;
                 case 6:
-                    // View enquiry replies
+                    // View enquiries
+                    enquiryController.viewEnquiriesByStudent(userID);
                     break;
                 case 7:
-                    // Withdraw from a camp
+                    // View enquiry replies
                     break;
                 case 8:
+                    // Withdraw from a camp
+                    break;
+                case 9:
                     System.out.println("Please enter your new password:");
                     String newPassword = scanner.nextLine();
                     userController.changePassword(userID, newPassword);
                     System.out.println(user.getPassword());
                     break;
-                case 9:
+                case 10:
                     break;
                 default:
                     System.out.println("Invalid choice. Try again.");

@@ -1,8 +1,6 @@
 package model;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
 /***
  * The `Staff` class represents a staff user in the system, including the camps that

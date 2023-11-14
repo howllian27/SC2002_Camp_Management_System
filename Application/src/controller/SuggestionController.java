@@ -43,7 +43,7 @@ public class SuggestionController implements BaseController {
         }
     }
 
-    public void editSuggestion(String suggestionID, String updatedText) {
+    public void editSuggestion(String campID, String studentID String updatedText) {
         Suggestion suggestion = suggestionDB.getSuggestion(suggestionID);
         if (suggestion == null) {
             System.out.println("Suggestion not found!");
@@ -55,25 +55,25 @@ public class SuggestionController implements BaseController {
         suggestionsView.displayEditSuccess(suggestion);
     }
 
-    public void deleteSuggestion(String suggestionID) {
-        if (!suggestionDB.exists(suggestionID)) {
+    public void deleteSuggestion(String campID, String studentID) {
+        if (suggestionDB.getSuggestion(campID, studentID) != null) {
             System.out.println("Suggestion not found!");
             return;
         }
 
-        suggestionDB.removeSuggestion(suggestionID);
+        suggestionDB.removeSuggestion(campID, studentID);
         System.out.println("Suggestion successfully deleted!");
     }
 
-    public void approveSuggestion(String suggestionID) {
-        Suggestion suggestion = suggestionDB.getSuggestion(suggestionID);
+    public void approveSuggestion(String campID, String studentID) {
+        Suggestion suggestion = suggestionDB.getSuggestion(campID, studentID);
         if (suggestion == null) {
             System.out.println("Suggestion not found!");
             return;
         }
 
         suggestion.setApproved(true);
-        suggestionDB.updateSuggestion(suggestionID, suggestion);
+        suggestionDB.updateSuggestion(campID, studentID, suggestion);
         System.out.println("Suggestion successfully approved!");
     }
 }

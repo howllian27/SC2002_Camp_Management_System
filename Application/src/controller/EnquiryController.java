@@ -34,6 +34,7 @@ public class EnquiryController implements BaseController {
     @Override
     public void setMasterVariables() {
         this.campDB = CampDB.getInstance();
+        this.userDB = UserDB.getInstance();
         this.enquiryDB = EnquiryDB.getInstance();
         this.enquiriesView = new EnquiriesView();
     }
@@ -64,8 +65,24 @@ public class EnquiryController implements BaseController {
      *
      * @param campID The ID of the camp.
      */
-    public void viewEnquiries(String campID) {
+    public void viewEnquiriesByCamp(String campID) {
         HashMap<String, Enquiry> enquiriesMap = enquiryDB.getEnquiries(campID);
+        List<String> enquiriesList = new ArrayList<>();
+
+        for (Enquiry enquiry : enquiriesMap.values()) {
+            String enquiryDetails = enquiry.toString();
+            enquiriesList.add(enquiryDetails);
+        }
+
+        enquiriesView.displayEnquiries(enquiriesList);
+    }
+
+    /**
+     * Allows staff to view enquiries related to a student.
+     * @param studentID
+    */
+    public void viewEnquiriesByStudent(String studentID) {
+        HashMap<String, Enquiry> enquiriesMap = enquiryDB.getEnquiriesByStudent(studentID);
         List<String> enquiriesList = new ArrayList<>();
 
         for (Enquiry enquiry : enquiriesMap.values()) {
