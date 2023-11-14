@@ -186,6 +186,7 @@ public class Main {
                     System.out.println(user.getPassword());
                     break;
                 case 10:
+                    currentUser = null;
                     break;
                 default:
                     System.out.println("Invalid choice. Try again.");
