@@ -3,6 +3,7 @@ package controller;
 import java.util.List;
 
 import database.SuggestionDB;
+import model.CampInformation;
 import model.Suggestion;
 import view.SuggestionsView;
 
@@ -28,8 +29,8 @@ public class SuggestionController implements BaseController {
         this.suggestionsView = new SuggestionsView(); // Assuming SuggestionsView is a class for displaying suggestions.
     }
 
-    public void submitSuggestion(String committeeID, String campID, String suggestionText) {
-        Suggestion suggestion = new Suggestion(committeeID, campID, suggestionText, false);
+    public void submitSuggestion(String committeeID, String campID, CampInformation campInformation) {
+        Suggestion suggestion = new Suggestion(committeeID, campID, campInformation, false);
         suggestionDB.addSuggestion(suggestion);
         System.out.println("Suggestion successfully submitted!");
     }
