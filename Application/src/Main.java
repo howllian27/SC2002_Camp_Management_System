@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 import controller.CampOperationsController;
@@ -11,10 +13,11 @@ import controller.EnquiryController;
 
 import database.CampDB;
 import database.UserDB;
-
+import model.Camp;
 import model.CampInformation;
+import model.Student;
 import model.User;
-
+import view.CampListView;
 import view.CreateCampView;
 
 
@@ -34,6 +37,7 @@ public class Main {
 
     // Initialise views
     static CreateCampView createCampView = new CreateCampView();
+    static CampListView campListView = new CampListView();
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -119,7 +123,8 @@ public class Main {
             int choice = scanner.nextInt();
             scanner.nextLine();
             String userType = "student";
-    
+            Student student = new Student(userID, user.getFaculty(), userType);
+
             switch (choice) {
                 case 1:
                     // Display available camps
@@ -161,6 +166,10 @@ public class Main {
                     break;
                 case 5:
                     // View registered camps
+                    System.out.println("hashmap" + student.getRegisteredCamps());
+                    System.out.println("values" + student.getRegisteredCamps().values());
+                    List <Camp> camps = new ArrayList<Camp> (student.getRegisteredCamps().values());
+                    campListView.displayCamps(camps);
                     break;
                 case 6:
                     // View enquiries
@@ -171,6 +180,7 @@ public class Main {
                     break;
                 case 8:
                     // Withdraw from a camp
+                    
                     break;
                 case 9:
                     System.out.println("Please enter your new password:");

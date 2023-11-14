@@ -39,8 +39,8 @@ public class StudentCampInteractionController implements BaseController {
     public void registerForCamp(String userID, String campID, String role) {
         Student student = (Student) userDB.getUser(userID, true);
         Camp camp = campDB.getCamp(campID);
-        HashMap<String, Camp> previouslyRegisteredCamps = student.getPreviouslyRegisteredCamps();
-        if (!previouslyRegisteredCamps.containsKey(campID)){
+        HashMap<String, Camp> registeredCamps = student.getRegisteredCamps();
+        if (!registeredCamps.containsKey(campID)){
             if (student != null && camp != null) {
                 // Logic to register the student for the camp
                 student.addCamp(campID, camp);

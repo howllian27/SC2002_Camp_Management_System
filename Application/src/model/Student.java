@@ -56,7 +56,7 @@ public class Student extends User {
      * @return `true` if the camp is added successfully, `false` if it is already registered.
      */
     public boolean addCamp(String campId, Camp camp) {
-        if(registeredCamps.put(campId, camp) == null) {
+        if(registeredCamps.put(campId, camp) != null) {
             previouslyRegisteredCamps.put(campId, camp);
             return true;
         }
