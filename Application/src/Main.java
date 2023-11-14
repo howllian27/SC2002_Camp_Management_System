@@ -11,15 +11,8 @@ import controller.EnquiryController;
 
 import database.CampDB;
 import database.UserDB;
-import database.UserType;
 
-import helper.FileHelper;
-
-import model.Camp;
 import model.CampInformation;
-import model.Faculty;
-import model.Staff;
-import model.Student;
 import model.User;
 
 import view.CreateCampView;
