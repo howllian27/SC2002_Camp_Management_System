@@ -43,16 +43,16 @@ public class SuggestionController implements BaseController {
         }
     }
 
-    public void editSuggestion(String campID, String studentID String updatedText) {
-        Suggestion suggestion = suggestionDB.getSuggestion(suggestionID);
+    public void editSuggestion(String campID, String studentID, String updatedText) {
+        Suggestion suggestion = suggestionDB.getSuggestion(campID, studentID);
         if (suggestion == null) {
             System.out.println("Suggestion not found!");
             return;
         }
 
         suggestion.setSuggestionText(updatedText);
-        suggestionDB.updateSuggestion(suggestionID, suggestion);
-        suggestionsView.displayEditSuccess(suggestion);
+        suggestionDB.updateSuggestion(campID, studentID, suggestion);
+        System.out.println("Suggestion successfully updated!");
     }
 
     public void deleteSuggestion(String campID, String studentID) {
