@@ -173,31 +173,30 @@ public class Main {
                 case 6:
                     // View/Edit/Delete my enquiries
                     System.out.println("Please type the number of the action you would like to perform.");
-                    System.out.println("1. View my enquiries");
-                    System.out.println("2. Edit my enquiries");
-                    System.out.println("3. Delete my enquiries");
+                    System.out.println("View my enquiries:");
+                    enquiryController.viewEnquiriesByStudent(userID);
+                    System.out.println("1. Edit my enquiries");
+                    System.out.println("2. Delete my enquiries");
                     int enquiryChoice = scanner.nextInt();
 
                     switch (enquiryChoice) {
                         case 1:
-                            // View my enquiries
-                            enquiryController.viewEnquiriesByStudent(userID);
-                            break;
-                        case 2:
                             // Edit my enquiries
                             enquiryController.viewEnquiriesByStudent(userID);
                             System.out.println("Type the enquiry you would like to edit!");
-                            int enquiryToEdit = scanner.nextInt();
+                            int enquiryToEditIndex = scanner.nextInt();
+                            enquiryController.checkIfEnquiryReplied(enquiryToEditIndex, userID);
                             scanner.nextLine();
                             System.out.println("Type the new enquiry you would like to make!");
                             String newEnquiry = scanner.nextLine();
-                            enquiryController.editEnquiry(enquiryToEdit, newEnquiry, userID);
+                            enquiryController.editEnquiry(enquiryToEditIndex, newEnquiry, userID);
                             break;
-                        case 3:
+                        case 2:
                             // Delete my enquiries
                             enquiryController.viewEnquiriesByStudent(userID);
                             System.out.println("Type the number of the enquiry you would like to delete!");
                             int enquiryToDeleteIndex = scanner.nextInt();
+                            enquiryController.checkIfEnquiryReplied(enquiryToDeleteIndex, userID);
                             enquiryController.deleteEnquiry(enquiryToDeleteIndex, userID);
                             break;
                         default:
@@ -240,7 +239,7 @@ public class Main {
             System.out.println("3. Edit an Existing Camp");
             System.out.println("4. View All Camps");
             System.out.println("5. View Registered Students for a Camp");
-            System.out.println("6. View Enquiries for a Camp");
+            System.out.println("6. View/Reply to Enquiries for a Camp");
             System.out.println("7. View Camp Detail Suggestions");
             System.out.println("8. Accept/Reject Suggestions");
             System.out.println("9. Generate Reports");
@@ -282,7 +281,15 @@ public class Main {
                     break;
 
                 case 6:
-                    //View camp enquiries
+                    //View/Reply to camp enquiries
+                    campOperationsController.viewCampsForUserType(userType);
+                    System.out.println("Which camp would you like to view enquiries for?");
+                    String campToViewEnquiries = scanner.nextLine();
+                    enquiryController.viewEnquiriesByCamp(campToViewEnquiries);
+                    System.out.println("Type the number of the enquiry you wish to reply to.");
+                    int enquiryToReply = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("Type the new enquiry you would like to make!");
                     break;
                 case 7:
                     // View camp detail suggestions

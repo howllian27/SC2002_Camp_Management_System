@@ -83,16 +83,37 @@ public class EnquiryController implements BaseController {
      * @param enquiry The original enquiry object
      * @param replyText The response to the enquiry.
      */
-    public void replyToEnquiry(Enquiry enquiry, String replyText) {
-        Enquiry newEnquiry = new Enquiry(
-                enquiry.getCamp(),
-                enquiry.getStudent(),
-                replyText
-        );
-        EnquiryDB.getInstance().updateEnquiry(enquiry, newEnquiry);
-        System.out.println("Reply sent successfully.");
+    public void replyToEnquiry(int enquiryToReplyIndex, String replyText, String campID) {
+        List<Enquiry> enquiries = enquiryDB.getEnquiries(campID);
+        Enquiry enquiryToReply = null;
+        
+        int count = 1;
+        for (Enquiry enquiry : enquiries) {
+            if(enquiry.getResponse() != null) System.out.println("Response : " + enquiry.getResponse() + "\n");
+            
+            if (enquiryToReplyIndex == count) {
+                enquiryToReply = enquiry;
+            }
+
+            count++;
+        }
+
+        if (enquiryToReply == null) {
+            System.out.println("Invalid enquiry index.");
+            return;
+        } else {
+            enquiryToReply.setResponse(replyText);
+            System.out.println("Enquiry replied successfully.");
+        }
     }
 
+    /**
+     * Allows students to edit their enquiries.
+     * 
+     * @param enquiryToEditIndex The index of the enquiry to edit.
+     * @param newEnquiryText The new enquiry text.
+     * @param userID The ID of the user.
+    */
     public void editEnquiry(int enquiryToEditIndex, String newEnquiryText, String userID) {
         List<Enquiry> enquiries = enquiryDB.getEnquiriesByStudent(userID);
         Enquiry enquiryToEdit = null;
@@ -123,27 +144,47 @@ public class EnquiryController implements BaseController {
         }
     }
 
+    /**
+     * Allows students to delete their enquiries.
+     * 
+     * @param enquiryToDeleteIndex
+     * @param userID
+    */
     public void deleteEnquiry(int enquiryToDeleteIndex, String userID) {
         List<Enquiry> enquiries = enquiryDB.getEnquiriesByStudent(userID);
-        Enquiry enquiryToEdit = null;
+        Enquiry enquiryToDelete = null;
         
         int count = 1;
         for (Enquiry enquiry : enquiries) {
             if(enquiry.getResponse() != null) System.out.println("Response : " + enquiry.getResponse() + "\n");
             
             if (enquiryToDeleteIndex == count) {
-                enquiryToEdit = enquiry;
+                enquiryToDelete = enquiry;
             }
 
             count++;
         }
 
-        if (enquiryToEdit == null) {
+        if (enquiryToDelete == null) {
             System.out.println("Invalid enquiry index.");
             return;
         } else {
-            EnquiryDB.getInstance().removeEnquiry(enquiryToEdit);
+            EnquiryDB.getInstance().removeEnquiry(enquiryToDelete);
             System.out.println("Enquiry deleted successfully.");
+        }
+    }
+
+    public void checkIfEnquiryReplied(int enquiryReplyIndex, String userID){
+        List<Enquiry> enquiries = enquiryDB.getEnquiriesByStudent(userID);
+        int count = 1;
+
+        for(Enquiry enquiry : enquiries){
+            if (count == enquiryReplyIndex){
+                if(enquiry.getResponse() != null){
+                    System.out.println("Enquiry has already been replied to! \n");
+                    System.out.println("Response : " + enquiry.getResponse());
+                }
+            }
         }
     }
 }
