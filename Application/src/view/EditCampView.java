@@ -118,6 +118,11 @@ public class EditCampView {
                     String newDescription = scanner.nextLine();
                     camp.setDescription(newDescription);
                     break;
+                case 8:
+                    System.out.println("Change Visibility to?");
+                    boolean newVisibility = scanner.nextBoolean();
+                    camp.setVisibility(newVisibility);
+                    break;
                 case 9:
                     break;
                 default:
