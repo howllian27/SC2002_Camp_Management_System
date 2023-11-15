@@ -1,5 +1,9 @@
 package controller;
 
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import database.CampDB;
@@ -18,6 +22,8 @@ public class StudentCampInteractionController implements BaseController {
 
     CampDB campDB;
     UserDB userDB;
+
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
     public StudentCampInteractionController() {
         setMasterVariables();
@@ -39,25 +45,41 @@ public class StudentCampInteractionController implements BaseController {
     public void registerForCamp(String userID, String campID, String role) {
         Student student = (Student) userDB.getUser(userID, true);
         Camp camp = campDB.getCamp(campID);
-        HashMap<String, Camp> registeredCamps = student.getRegisteredCamps();
-        if (!registeredCamps.containsKey(campID)){
-            if (student != null && camp != null) {
-                // Logic to register the student for the camp
-                student.addCamp(campID, camp);
-                if (role.equals("committee")) {
-                    student.setCampCommitteeMember();
-                    student.addCommitteeCamp(camp);
-                    camp.addAttendee(userID, student);
-                    camp.addCommitteeMember(userID, student);
-                    camp.getCampInformation().committeeSlots--;
-                } else {
+        // Get the current date
+        String currentDateStr = dateFormat.format(Calendar.getInstance().getTime());
+        Date newCurrentDate = null;
+        try{
+            newCurrentDate = dateFormat.parse(currentDateStr);
+        } catch(ParseException e){
+            e.printStackTrace();
+        }
+
+        Date campStartDate = camp.getCampInformation().registrationClosingDate;
+
+        // Check if newCurrentDate is before campStartDate
+        if (newCurrentDate.before(campStartDate)) {
+            HashMap<String, Camp> registeredCamps = student.getRegisteredCamps();
+            if (!registeredCamps.containsKey(campID)){
+                if (student != null && camp != null) {
+                    // Logic to register the student for the camp
                     student.addCamp(campID, camp);
-                    camp.addAttendee(userID, student);
+                    if (role.equals("committee") && student.getCampCommitteeMemberStatus() == false) {
+                        student.setCampCommitteeMember();
+                        student.addCommitteeCamp(camp);
+                        camp.addAttendee(userID, student);
+                        camp.addCommitteeMember(userID, student);
+                        camp.getCampInformation().committeeSlots--;
+                    } else {
+                        student.addCamp(campID, camp);
+                        camp.addAttendee(userID, student);
+                    }
+                    System.out.println("You are registered!");
                 }
-                System.out.println("You are registered!");
+            } else {
+                System.out.println("You are already registered!");
             }
         } else {
-            System.out.println("You are already registered!");
+            System.out.println("The camp's registration deadline has passed!");
         }
          
     }
@@ -81,10 +103,6 @@ public class StudentCampInteractionController implements BaseController {
                 camp.removeAttendee(userID);
                 camp.removeCommitteeMember(userID);
                 camp.getCampInformation().committeeSlots++;
-
-                if (role){
-                    student.removeCommitteeCamp();
-                }
             
                 System.out.println("You have withdrawn!");
             }
