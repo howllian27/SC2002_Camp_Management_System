@@ -166,9 +166,8 @@ public class Main {
                     break;
                 case 5:
                     // View registered camps
-                    System.out.println("hashmap" + student.getRegisteredCamps());
-                    System.out.println("values" + student.getRegisteredCamps().values());
-                    List <Camp> camps = new ArrayList<Camp> (student.getRegisteredCamps().values());
+                    HashMap<String, Camp> registeredCamps = student.getRegisteredCamps();
+                    List <Camp> camps = new ArrayList<Camp> (registeredCamps.values());
                     campListView.displayCamps(camps);
                     break;
                 case 6:
@@ -190,7 +189,7 @@ public class Main {
                     break;
                 case 10:
                     currentUser = null;
-                    break;
+                    return;
                 default:
                     System.out.println("Invalid choice. Try again.");
             }
