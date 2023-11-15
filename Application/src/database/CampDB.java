@@ -8,7 +8,7 @@ import model.Student;
 
 public class CampDB {
 
-    private Map<String, Camp> campDatabase;
+    private HashMap<String, Camp> campDatabase;
 
     // Static variable reference of userDB
     // of type CampDB
