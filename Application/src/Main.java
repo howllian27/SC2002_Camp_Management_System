@@ -123,7 +123,7 @@ public class Main {
             int choice = scanner.nextInt();
             scanner.nextLine();
             String userType = "student";
-            Student student = new Student(userID, user.getFaculty(), userType);
+            Student student = (Student) userDB.getUser(userID, true);
 
             switch (choice) {
                 case 1:
