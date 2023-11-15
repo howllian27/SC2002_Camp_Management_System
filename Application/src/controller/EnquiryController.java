@@ -122,4 +122,28 @@ public class EnquiryController implements BaseController {
             System.out.println("Enquiry edited successfully.");
         }
     }
+
+    public void deleteEnquiry(int enquiryToDeleteIndex, String userID) {
+        List<Enquiry> enquiries = enquiryDB.getEnquiriesByStudent(userID);
+        Enquiry enquiryToEdit = null;
+        
+        int count = 1;
+        for (Enquiry enquiry : enquiries) {
+            if(enquiry.getResponse() != null) System.out.println("Response : " + enquiry.getResponse() + "\n");
+            
+            if (enquiryToDeleteIndex == count) {
+                enquiryToEdit = enquiry;
+            }
+
+            count++;
+        }
+
+        if (enquiryToEdit == null) {
+            System.out.println("Invalid enquiry index.");
+            return;
+        } else {
+            EnquiryDB.getInstance().removeEnquiry(enquiryToEdit);
+            System.out.println("Enquiry deleted successfully.");
+        }
+    }
 }

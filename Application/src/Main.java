@@ -196,9 +196,9 @@ public class Main {
                         case 3:
                             // Delete my enquiries
                             enquiryController.viewEnquiriesByStudent(userID);
-                            System.out.println("Type the enquiry you would like to delete!");
-                            String enquiryToDelete = scanner.nextLine();
-                            // enquiryController.deleteEnquiry(userID, enquiryToDelete);
+                            System.out.println("Type the number of the enquiry you would like to delete!");
+                            int enquiryToDeleteIndex = scanner.nextInt();
+                            enquiryController.deleteEnquiry(enquiryToDeleteIndex, userID);
                             break;
                         default:
                             System.out.println("Invalid choice. Try again.");
