@@ -179,8 +179,10 @@ public class Main {
                     break;
                 case 8:
                     // Withdraw from a camp
-
-                    
+                    campOperationsController.viewCampsForUserType(userType);
+                    System.out.println("Type the name of the camp you would like to withdraw from.");
+                    String withdrawCampID = scanner.nextLine(); 
+                    studentCampInteractionController.withdrawFromCamp(userID, withdrawCampID);
                     break;
                 case 9:
                     System.out.println("Please enter your new password:");
