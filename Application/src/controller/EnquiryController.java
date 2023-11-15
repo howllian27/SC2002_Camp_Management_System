@@ -84,12 +84,16 @@ public class EnquiryController implements BaseController {
      * @param replyText The response to the enquiry.
      */
     public void replyToEnquiry(int enquiryToReplyIndex, String replyText, String campID) {
-        List<Enquiry> enquiries = enquiryDB.getEnquiries(campID);
+        List<Enquiry> enquiries = enquiryDB.getEnquiriesByCamp(campID);
         Enquiry enquiryToReply = null;
         
         int count = 1;
         for (Enquiry enquiry : enquiries) {
-            if(enquiry.getResponse() != null) System.out.println("Response : " + enquiry.getResponse() + "\n");
+            if(enquiry.getResponse() != null) {
+                System.out.println("You had already previously replied to this enquiry as follows:");
+                System.out.println("Response : " + enquiry.getResponse() + "\n");
+                return;
+            }
             
             if (enquiryToReplyIndex == count) {
                 enquiryToReply = enquiry;
@@ -174,8 +178,8 @@ public class EnquiryController implements BaseController {
         }
     }
 
-    public void checkIfEnquiryReplied(int enquiryReplyIndex, String userID){
-        List<Enquiry> enquiries = enquiryDB.getEnquiriesByStudent(userID);
+    public void checkIfEnquiryReplied(int enquiryReplyIndex, String campId){
+        List<Enquiry> enquiries = enquiryDB.getEnquiriesByCamp(campId);
         int count = 1;
 
         for(Enquiry enquiry : enquiries){

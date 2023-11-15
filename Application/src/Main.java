@@ -156,6 +156,10 @@ public class Main {
                     campOperationsController.viewCampsForUserType(userType);
                     System.out.println("Type the name of the camp you would like to submit an enquiry for!");
                     String campID = scanner.nextLine();
+                    if (campDB.getCamp(campID) == null){
+                        System.out.println("Invalid camp name. Try again.");
+                        break;
+                    }
                     System.out.println("Type the enquiry you would like to make!");
                     String enquiry = scanner.nextLine();
                     enquiryController.submitEnquiry(userID, campID, enquiry);
@@ -289,7 +293,9 @@ public class Main {
                     System.out.println("Type the number of the enquiry you wish to reply to.");
                     int enquiryToReply = scanner.nextInt();
                     scanner.nextLine();
-                    System.out.println("Type the new enquiry you would like to make!");
+                    System.out.println("Type the reply you would like to make!");
+                    String reply = scanner.nextLine();
+                    enquiryController.replyToEnquiry(enquiryToReply, reply, campToViewEnquiries);
                     break;
                 case 7:
                     // View camp detail suggestions

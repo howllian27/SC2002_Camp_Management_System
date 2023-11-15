@@ -68,4 +68,15 @@ public class EnquiryDB {
         }
         return studentEnquiries;
     }
+
+    public List<Enquiry> getEnquiriesByCamp(String campId) {
+        List<Enquiry> campEnquiries = new ArrayList<>();
+        Camp camp = CampDB.getInstance().getCamp(campId);
+        for(Enquiry enquiry : enquiries) {
+            if(Objects.equals(enquiry.getCamp(), camp)) {
+                campEnquiries.add(enquiry);
+            }
+        }
+        return campEnquiries;
+    }
 }
