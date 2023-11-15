@@ -45,7 +45,7 @@ public class EnquiryDB {
         this.enquiries.add(enquiry);
     }
 
-    public void updateEnquiryReply(Enquiry oldEnquiry, Enquiry newEnquiry) {
+    public void updateEnquiry(Enquiry oldEnquiry, Enquiry newEnquiry) {
         try {
             enquiries.remove(oldEnquiry);
             enquiries.add(newEnquiry);

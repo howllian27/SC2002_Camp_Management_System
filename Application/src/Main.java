@@ -172,6 +172,38 @@ public class Main {
                     break;
                 case 6:
                     // View/Edit/Delete my enquiries
+                    System.out.println("Please type the number of the action you would like to perform.");
+                    System.out.println("1. View my enquiries");
+                    System.out.println("2. Edit my enquiries");
+                    System.out.println("3. Delete my enquiries");
+                    int enquiryChoice = scanner.nextInt();
+
+                    switch (enquiryChoice) {
+                        case 1:
+                            // View my enquiries
+                            enquiryController.viewEnquiriesByStudent(userID);
+                            break;
+                        case 2:
+                            // Edit my enquiries
+                            enquiryController.viewEnquiriesByStudent(userID);
+                            System.out.println("Type the enquiry you would like to edit!");
+                            int enquiryToEdit = scanner.nextInt();
+                            scanner.nextLine();
+                            System.out.println("Type the new enquiry you would like to make!");
+                            String newEnquiry = scanner.nextLine();
+                            enquiryController.editEnquiry(enquiryToEdit, newEnquiry, userID);
+                            break;
+                        case 3:
+                            // Delete my enquiries
+                            enquiryController.viewEnquiriesByStudent(userID);
+                            System.out.println("Type the enquiry you would like to delete!");
+                            String enquiryToDelete = scanner.nextLine();
+                            // enquiryController.deleteEnquiry(userID, enquiryToDelete);
+                            break;
+                        default:
+                            System.out.println("Invalid choice. Try again.");
+                            break;
+                    }
                     enquiryController.viewEnquiriesByStudent(userID);
                     break;
                 case 7:

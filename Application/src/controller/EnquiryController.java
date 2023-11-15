@@ -89,7 +89,37 @@ public class EnquiryController implements BaseController {
                 enquiry.getStudent(),
                 replyText
         );
-        EnquiryDB.getInstance().updateEnquiryReply(enquiry, newEnquiry);
+        EnquiryDB.getInstance().updateEnquiry(enquiry, newEnquiry);
         System.out.println("Reply sent successfully.");
+    }
+
+    public void editEnquiry(int enquiryToEditIndex, String newEnquiryText, String userID) {
+        List<Enquiry> enquiries = enquiryDB.getEnquiriesByStudent(userID);
+        Enquiry enquiryToEdit = null;
+        
+        int count = 1;
+        for (Enquiry enquiry : enquiries) {
+            if(enquiry.getResponse() != null) System.out.println("Response : " + enquiry.getResponse() + "\n");
+            
+            if (enquiryToEditIndex == count) {
+                enquiryToEdit = enquiry;
+            }
+
+            count++;
+        }
+
+        if (enquiryToEdit == null) {
+            System.out.println("Invalid enquiry index.");
+            return;
+        } else {
+            Enquiry editedEnquiry = new Enquiry(
+                    enquiryToEdit.getCamp(),
+                    enquiryToEdit.getStudent(),
+                    newEnquiryText
+            );
+    
+            EnquiryDB.getInstance().updateEnquiry(enquiryToEdit, editedEnquiry);
+            System.out.println("Enquiry edited successfully.");
+        }
     }
 }

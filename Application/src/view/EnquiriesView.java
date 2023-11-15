@@ -28,10 +28,12 @@ public class EnquiriesView {
                 System.out.println("|                                                             |");
                 System.out.println("+------------------------------------------------------------+\n");
         System.out.println("Displaying student enquiries:");
+        int count = 1;
         for (Enquiry enquiry : enquiries) {
-            System.out.println("Camp : ");
-            System.out.println("Enquiry : " + enquiry.getEnquiry());
+            System.out.println(count + ". " + "Enquiry : " + enquiry.getEnquiry());
+            System.out.println("   Camp : " + enquiry.getCamp().getName());
             if(enquiry.getResponse() != null) System.out.println("Response : " + enquiry.getResponse() + "\n");
+            count++;
         }
     }
 
