@@ -113,7 +113,7 @@ public class Main {
             System.out.println("3. Submit Enquiry for a Camp");
             System.out.println("4. Submit Suggestion for a Camp");
             System.out.println("5. View Registered Camps");
-            System.out.println("6. View Enquiries");
+            System.out.println("6. View/Edit/Delete Enquiries");
             System.out.println("7. View Enquiry Replies");
             System.out.println("8. Withdraw from a Camp");
             System.out.println("9. Change Password");
@@ -171,14 +171,15 @@ public class Main {
                     campListView.displayCamps(camps);
                     break;
                 case 6:
-                    // View enquiries
+                    // View/Edit/Delete my enquiries
                     enquiryController.viewEnquiriesByStudent(userID);
                     break;
                 case 7:
-                    // View enquiry replies
+                    // View my enquiry replies
                     break;
                 case 8:
                     // Withdraw from a camp
+
                     
                     break;
                 case 9:
@@ -205,10 +206,11 @@ public class Main {
             System.out.println("3. Edit an Existing Camp");
             System.out.println("4. View All Camps");
             System.out.println("5. View Registered Students for a Camp");
-            System.out.println("6. View Camp Detail Suggestions");
-            System.out.println("7. Accept/Reject Suggestions");
-            System.out.println("8. Generate Reports");
-            System.out.println("9. Logout");
+            System.out.println("6. View Enquiries for a Camp");
+            System.out.println("7. View Camp Detail Suggestions");
+            System.out.println("8. Accept/Reject Suggestions");
+            System.out.println("9. Generate Reports");
+            System.out.println("10. Logout");
             System.out.print("Enter choice: ");
             Scanner scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
@@ -242,19 +244,22 @@ public class Main {
                     campOperationsController.viewCampsForUserType(userType);
                     System.out.println("Select a camp to view registered students for:");
                     String campToView = scanner.nextLine();
-
                     campOperationsController.viewRegisteredStudents(campToView);
                     break;
+
                 case 6:
-                    // View camp detail suggestions
+                    //View camp enquiries
                     break;
                 case 7:
-                    // Accept/Reject suggestions
+                    // View camp detail suggestions
                     break;
                 case 8:
-                    // Generate reports
+                    // Accept/Reject suggestions
                     break;
                 case 9:
+                    // Generate reports
+                    break;
+                case 10:
                     currentUser = null;
                     return;
                 default:
