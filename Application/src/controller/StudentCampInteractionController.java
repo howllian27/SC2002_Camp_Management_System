@@ -71,9 +71,25 @@ public class StudentCampInteractionController implements BaseController {
     public void withdrawFromCamp(String userID, String campID) {
         Student student = (Student) userDB.getUser(userID, true);
         Camp camp = campDB.getCamp(campID);
-        if (student != null && camp != null) {
-            // Logic to withdraw the student from the camp
-            System.out.println("You have withdrawn!");
+        HashMap<String, Camp> registeredCamps = student.getRegisteredCamps();
+        boolean role = student.getCampCommitteeMemberStatus();
+
+        if (registeredCamps.containsKey(campID)){
+            if (student != null && camp != null) {
+                // Logic to register the student for the camp
+                student.removeCamp(campID);
+                camp.removeAttendee(userID);
+                camp.removeCommitteeMember(userID);
+                camp.getCampInformation().committeeSlots++;
+
+                if (role){
+                    student.removeCommitteeCamp();
+                }
+            
+                System.out.println("You have withdrawn!");
+            }
+        } else {
+            System.out.println("You are not registered!");
         }
     }
 }
