@@ -8,7 +8,7 @@ import model.Student;
 
 public class CampDB {
 
-    private Map<String, Camp> campDatabase;
+    private HashMap<String, Camp> campDatabase;
 
     // Static variable reference of userDB
     // of type CampDB
@@ -31,7 +31,7 @@ public class CampDB {
         return campDB;
     }
 
-    public Map<String, Camp> getAllCamps() {
+    public HashMap<String, Camp> getAllCamps() {
         return new HashMap<>(campDatabase);
     }
 
@@ -72,7 +72,7 @@ public class CampDB {
         return campDatabase.remove(campID) != null;
     }
 
-    public Map<String, Student> getAttendeesForCamp(String campID) {
+    public HashMap<String, Student> getAttendeesForCamp(String campID) {
         Camp camp = getCamp(campID);
         if (camp != null) {
             return new HashMap<>(camp.getAttendees());
@@ -80,7 +80,7 @@ public class CampDB {
         return new HashMap<>();
     }
 
-    public Map<String, Student> getCommitteeMembersForCamp(String campID) {
+    public HashMap<String, Student> getCommitteeMembersForCamp(String campID) {
         Camp camp = getCamp(campID);
         if (camp != null) {
             return new HashMap<>(camp.getCommittee());
@@ -88,10 +88,10 @@ public class CampDB {
         return new HashMap<>();
     }
 
-    public Map<String, Student> getAllStudentsForCamp(String campID) {
+    public HashMap<String, Student> getAllStudentsForCamp(String campID) {
         Camp camp = getCamp(campID);
         if (camp != null) {
-            Map<String, Student> allStudents = new HashMap<>(camp.getAttendees());
+            HashMap<String, Student> allStudents = new HashMap<>(camp.getAttendees());
             allStudents.putAll(camp.getCommittee());
             return allStudents;
         }
