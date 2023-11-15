@@ -1,5 +1,7 @@
 package view;
 
+import model.Enquiry;
+
 import java.util.List;
 /**
  * The EnquiriesView class is responsible for managing student inquiries and staff interactions.
@@ -16,7 +18,7 @@ public class EnquiriesView {
      *
      * @param enquiries A list of strings containing student inquiries.
      */
-    public void displayEnquiries(List<String> enquiries) {
+    public void displayEnquiries(List<Enquiry> enquiries) {
                 System.out.println("\n+------------------------------------------------------------+");
                 System.out.println("|                                                             |");
                 System.out.println("|                       ENQUIRIES PORTAL                      |");
@@ -26,8 +28,10 @@ public class EnquiriesView {
                 System.out.println("|                                                             |");
                 System.out.println("+------------------------------------------------------------+\n");
         System.out.println("Displaying student enquiries:");
-        for (String enquiry : enquiries) {
-            System.out.println(enquiry);
+        for (Enquiry enquiry : enquiries) {
+            System.out.println("Camp : ");
+            System.out.println("Enquiry : " + enquiry.getEnquiry());
+            if(enquiry.getResponse() != null) System.out.println("Response : " + enquiry.getResponse() + "\n");
         }
     }
 

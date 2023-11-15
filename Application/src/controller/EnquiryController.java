@@ -2,8 +2,6 @@ package controller;
 
 import database.EnquiryDB;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import database.CampDB;
@@ -63,44 +61,35 @@ public class EnquiryController implements BaseController {
     /**
      * Allows staff to view enquiries related to a camp.
      *
-     * @param campID The ID of the camp.
+     * @param campId The ID of the camp.
      */
-    public void viewEnquiriesByCamp(String campID) {
-        HashMap<String, Enquiry> enquiriesMap = enquiryDB.getEnquiries(campID);
-        List<String> enquiriesList = new ArrayList<>();
-
-        for (Enquiry enquiry : enquiriesMap.values()) {
-            String enquiryDetails = enquiry.toString();
-            enquiriesList.add(enquiryDetails);
-        }
-
-        enquiriesView.displayEnquiries(enquiriesList);
+    public void viewEnquiriesByCamp(String campId) {
+        List<Enquiry> enquiries = EnquiryDB.getInstance().getEnquiries(campId);
+        enquiriesView.displayEnquiries(enquiries);
     }
 
     /**
      * Allows staff to view enquiries related to a student.
-     * @param studentID
+     * @param studentID The Id of the student
     */
     public void viewEnquiriesByStudent(String studentID) {
-        HashMap<String, Enquiry> enquiriesMap = enquiryDB.getEnquiriesByStudent(studentID);
-        List<String> enquiriesList = new ArrayList<>();
-
-        for (Enquiry enquiry : enquiriesMap.values()) {
-            String enquiryDetails = enquiry.toString();
-            enquiriesList.add(enquiryDetails);
-        }
-
-        enquiriesView.displayEnquiries(enquiriesList);
+        List<Enquiry> enquiries = enquiryDB.getEnquiriesByStudent(studentID);
+        enquiriesView.displayEnquiries(enquiries);
     }
 
     /**
      * Allows staff or committee members to reply to an enquiry.
      *
-     * @param enquiryID The ID of the enquiry.
-     * @param replyText The reply text.
+     * @param enquiry The original enquiry object
+     * @param replyText The response to the enquiry.
      */
-    public void replyToEnquiry(String enquiryID, String replyText) {
-        enquiryDB.updateEnquiryReply(enquiryID, replyText);
+    public void replyToEnquiry(Enquiry enquiry, String replyText) {
+        Enquiry newEnquiry = new Enquiry(
+                enquiry.getCamp(),
+                enquiry.getStudent(),
+                replyText
+        );
+        EnquiryDB.getInstance().updateEnquiryReply(enquiry, newEnquiry);
         System.out.println("Reply sent successfully.");
     }
 }
