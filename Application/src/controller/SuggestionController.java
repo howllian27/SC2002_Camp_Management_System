@@ -70,26 +70,34 @@ public class SuggestionController implements BaseController {
 
     /**
      * This method is used to view all suggestions for a camp.
-     * @param campID
-     * @param studentID
-     * @param updatedText
+     * @param student
      */
-    public void editSuggestion(String campID, String studentID, String updatedText) {
-        Suggestion suggestion = suggestionDB.getSuggestion(campID, studentID);
-        if (suggestion == null) {
+    public void editSuggestion(Student student) {
+        Camp registeredCommitteeCamp = student.getRegisteredCommitteeCamp();
+        List<Suggestion> suggestions = suggestionDB.getSuggestionsByStudent(student.getID()); 
+
+        suggestionsView.displaySuggestions(suggestions, registeredCommitteeCamp);
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the number of the suggestion you want to edit: ");
+        int suggestionNumber = scanner.nextInt();
+        scanner.nextLine();
+        Suggestion suggestion;
+        if (suggestions.get(suggestionNumber-1) == null) {
             System.out.println("Suggestion not found!");
             return;
+        } else {
+            suggestion = suggestions.get(suggestionNumber-1);
         }
 
-        suggestion.setSuggestionText(updatedText);
+        CampInformation newCampInformation = suggestionsView.editSuggestionView(suggestion, registeredCommitteeCamp);
+        suggestion.setCampInformation(newCampInformation);
         suggestionDB.updateSuggestion(suggestion);
         System.out.println("Suggestion successfully updated!");
     }
 
     /**
      * This method is used to delete a suggestion for a camp.
-     * @param campID
-     * @param studentID
+     * @param student
     */
     public void deleteSuggestion(Student student) {
         Camp registeredCommitteeCamp = student.getRegisteredCommitteeCamp();

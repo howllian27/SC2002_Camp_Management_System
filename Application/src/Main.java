@@ -250,13 +250,7 @@ public class Main {
                     switch (suggestionChoice) {
                         case 1:
                             // Edit my suggestions
-                            suggestionController.viewIndivSuggestions(userID, student);
-                            System.out.println("Type the number of the suggestion you would like to edit!");
-                            int suggestionToEditIndex = scanner.nextInt();
-                            scanner.nextLine();
-                            System.out.println("Type the new suggestion you would like to make!");
-                            String newSuggestion = scanner.nextLine();
-                            // suggestionController.editSuggestion(userID, suggestionToEditIndex, newSuggestion);
+                            suggestionController.editSuggestion(student);
                             break;
                         case 2:
                             // Delete my suggestions

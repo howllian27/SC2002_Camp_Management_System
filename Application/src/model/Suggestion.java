@@ -32,4 +32,6 @@ public class Suggestion {
     public CampInformation getCampInformation() { return this.campInformation; }
     public String getStudentId() { return this.studentId; }
     public String getCampId() { return this.campId; }
+
+    public void setCampInformation(CampInformation campInformation) { this.campInformation = campInformation; }
 }
