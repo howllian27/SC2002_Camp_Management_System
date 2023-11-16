@@ -289,7 +289,6 @@ public class Main {
                     campOperationsController.viewCampsForUserType(userType);
                     System.out.println("Which camp would you like to edit?");
                     String campToEdit = scanner.nextLine();
-                    if (!campOperationsController.verifyCampOwnership(campToEdit, staff)) break;
                     campOperationsController.editCamp(campToEdit);
                     
                     break;
@@ -310,6 +309,7 @@ public class Main {
                     campOperationsController.viewCampsForUserType(userType);
                     System.out.println("Which camp would you like to view enquiries for?");
                     String campToViewEnquiries = scanner.nextLine();
+                    if (!campOperationsController.verifyCampOwnership(campToViewEnquiries, staff)) break;
                     enquiryController.viewEnquiriesByCamp(campToViewEnquiries);
                     System.out.println("Type the number of the enquiry you wish to reply to.");
                     int enquiryToReply = scanner.nextInt();
