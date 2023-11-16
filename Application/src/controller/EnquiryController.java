@@ -234,6 +234,8 @@ public class EnquiryController implements BaseController {
                     System.out.println("Response : " + enquiry.getResponse());
                 }
             }
+
+            count++;
         }
     }
 }

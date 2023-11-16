@@ -8,7 +8,7 @@ import java.util.*;
 import java.io.*;
 
 public class EnquiryDB {
-    private final ArrayList<Enquiry>  enquiries;
+    private ArrayList<Enquiry>  enquiries;
 
     // Static variable reference of userDB
     // of type EnquiryDB

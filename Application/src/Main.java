@@ -168,6 +168,11 @@ public class Main {
                     break;
                 case 4:
                     // Submit suggestion for a camp
+                    if (student.getCampCommitteeMemberStatus() == false){
+                        System.out.println("You are not a committee member!");
+                        break;
+                    }
+
                     break;
                 case 5:
                     // View registered camps
