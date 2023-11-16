@@ -15,6 +15,7 @@ public class Student extends User {
     private final HashMap<String, Camp> registeredCamps; //Camps where student is a member
     private Camp registeredCommitteeCamp;
     private boolean isCampCommitteeMember = false;
+    private int points = 0;
 
     /***
      * Constructs a new `Student` object with the given user ID and faculty.
@@ -93,5 +94,13 @@ public class Student extends User {
         if(registeredCommitteeCamp == null) return false;
         registeredCommitteeCamp = null;
         return true;
+    }
+
+    /**
+     * Adds points to the student's account.
+     * @param points
+    */
+    public void addPoints(int points) {
+        this.points += points;
     }
 }
