@@ -48,7 +48,7 @@ public class Main {
                 System.out.println("2. Exit");
                 System.out.print("Enter choice: ");
                 int choice = scanner.nextInt();
-                scanner.nextLine();  // Consume newline
+                scanner.nextLine();
 
                 switch (choice) {
                     case 1:
@@ -113,7 +113,7 @@ public class Main {
             System.out.println("3. Submit Enquiry for a Camp");
             System.out.println("4. Submit Suggestion for a Camp");
             System.out.println("5. View Registered Camps");
-            System.out.println("6. View/Edit/Delete Enquiries");
+            System.out.println("6. View/Edit/Delete/Reply to Enquiries");
             System.out.println("7. View Enquiry Replies");
             System.out.println("8. Withdraw from a Camp");
             System.out.println("9. Change Password");
@@ -181,6 +181,7 @@ public class Main {
                     enquiryController.viewEnquiriesByStudent(userID);
                     System.out.println("1. Edit my enquiries");
                     System.out.println("2. Delete my enquiries");
+                    System.out.println("3. Reply to enquiries (Camp Committee only)");
                     int enquiryChoice = scanner.nextInt();
 
                     switch (enquiryChoice) {
@@ -203,6 +204,22 @@ public class Main {
                             enquiryController.checkIfEnquiryReplied(enquiryToDeleteIndex, userID);
                             enquiryController.deleteEnquiry(enquiryToDeleteIndex, userID);
                             break;
+                        case 3:
+                            // Reply to enquiries (Camp Committee only)
+                            if (student.getCampCommitteeMemberStatus() == false){
+                                System.out.println("You are not a committee member!");
+                                break;
+                            }
+                            String campIdToReply = student.getRegisteredCommitteeCamp().getName();
+                            System.out.println("Your committee camp name is: " + campIdToReply);
+                            enquiryController.viewEnquiriesByCamp(campIdToReply);;
+                            System.out.println("Type the number of the enquiry you would like to reply to!");
+                            int enquiryToReplyIndex = scanner.nextInt();
+                            scanner.nextLine();
+                            enquiryController.checkIfEnquiryReplied(enquiryToReplyIndex, userID);
+                            System.out.println("Type the reply you would like to make!");
+                            String reply = scanner.nextLine();
+                            enquiryController.replyToEnquiryAsCommittee(enquiryToReplyIndex, reply, campIdToReply, userID);
                         default:
                             System.out.println("Invalid choice. Try again.");
                             break;

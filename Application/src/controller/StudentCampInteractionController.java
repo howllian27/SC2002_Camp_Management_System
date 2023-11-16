@@ -35,6 +35,28 @@ public class StudentCampInteractionController implements BaseController {
         this.userDB = UserDB.getInstance();
     }
 
+    public boolean checkForClashesInCampDates(Student student, Camp camp, HashMap<String, Camp> registeredCamps){
+        // Check for clashes in dates for registered camps and new camp
+        Date newCampStartDate = camp.getDates()[0];
+        Date newCampEndDate = camp.getDates()[1];
+
+        boolean hasClashes = false;
+
+        for (Camp registeredCamp : student.getRegisteredCamps().values()) {
+            Date registeredCampStartDate = registeredCamp.getDates()[0];
+            Date registeredCampEndDate = registeredCamp.getDates()[1];
+
+            // Check if there's a clash
+            if (newCampStartDate.before(registeredCampEndDate) && newCampEndDate.after(registeredCampStartDate)) {
+                hasClashes = true;
+                System.out.println("There's a clash in dates!");
+                break; // No need to check further, there's a clash
+            }
+        }
+
+        return hasClashes;
+    }
+
     /**
      * Allows a student to register for a camp.
      *
@@ -45,6 +67,15 @@ public class StudentCampInteractionController implements BaseController {
     public void registerForCamp(String userID, String campID, String role) {
         Student student = (Student) userDB.getUser(userID, true);
         Camp camp = campDB.getCamp(campID);
+        HashMap<String, Camp> registeredCamps = student.getRegisteredCamps();
+        
+        // Check for clashes in dates for registered camps and new camp
+        boolean hasClashes = checkForClashesInCampDates(student, camp, registeredCamps);
+        
+        if (hasClashes){
+            return;
+        }
+
         // Get the current date
         String currentDateStr = dateFormat.format(Calendar.getInstance().getTime());
         Date newCurrentDate = null;
@@ -58,7 +89,6 @@ public class StudentCampInteractionController implements BaseController {
 
         // Check if newCurrentDate is before campStartDate
         if (newCurrentDate.before(campStartDate)) {
-            HashMap<String, Camp> registeredCamps = student.getRegisteredCamps();
             if (!registeredCamps.containsKey(campID)){
                 if (student != null && camp != null) {
                     // Logic to register the student for the camp

@@ -116,15 +116,17 @@ public class EnquiryController implements BaseController {
      *
      * @param enquiry The original enquiry object
      * @param replyText The response to the enquiry.
+     * @param campID The ID of the camp.
+     * @param userId The ID of the user.
      */
-    public void replyToEnquiryAsCommittee(int enquiryToReplyIndex, String replyText, String userID) {
-        List<Enquiry> enquiries = enquiryDB.getEnquiriesByStudent(userID);
+    public void replyToEnquiryAsCommittee(int enquiryToReplyIndex, String replyText, String campID, String userID) {
+        List<Enquiry> enquiries = enquiryDB.getEnquiriesByCamp(campID);
         Enquiry enquiryToReply = null;
         
         int count = 1;
         for (Enquiry enquiry : enquiries) {
             if(enquiry.getResponse() != null) {
-                System.out.println("You had already previously replied to this enquiry as follows:");
+                System.out.println("This enquiry has already previously been replied as follows:");
                 System.out.println("Response : " + enquiry.getResponse() + "\n");
                 return;
             }
@@ -149,7 +151,7 @@ public class EnquiryController implements BaseController {
             } else {
                 System.out.println("The user with ID " + userID + " is not a student.");
             }
-            System.out.println("Enquiry replied successfully.");
+            System.out.println("\nEnquiry replied successfully.");
             System.out.println("+1 point for replying to an enquiry!");
         }
     }
