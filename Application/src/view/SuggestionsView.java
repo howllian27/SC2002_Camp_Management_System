@@ -137,16 +137,14 @@ public class SuggestionsView {
                 return campInformation;
             case 7:
                 System.out.println("Please enter your suggestions for the camp total slots:");
-                scanner.nextLine();
-                String totalSlotsSuggestion = scanner.nextLine();
-                campInformation = new CampInformation(camp.getName(), camp.getDates(), camp.getClosingDate(), camp.getFaculty(), camp.getLocation(), Integer.parseInt(totalSlotsSuggestion), camp.getCommitteeSlots(), camp.getDescription(), camp.getInCharge(), camp.getVisibility());
+                int totalSlotsSuggestion = scanner.nextInt();
+                campInformation = new CampInformation(camp.getName(), camp.getDates(), camp.getClosingDate(), camp.getFaculty(), camp.getLocation(), totalSlotsSuggestion, camp.getCommitteeSlots(), camp.getDescription(), camp.getInCharge(), camp.getVisibility());
 
                 return campInformation;
             case 8:
                 System.out.println("Please enter your suggestions for the camp committee slots:");
-                scanner.nextLine();
-                String committeeSlotsSuggestion = scanner.nextLine();
-                campInformation = new CampInformation(camp.getName(), camp.getDates(), camp.getClosingDate(), camp.getFaculty(), camp.getLocation(), camp.getTotalSlots(), Integer.parseInt(committeeSlotsSuggestion), camp.getDescription(), camp.getInCharge(), camp.getVisibility());
+                int committeeSlotsSuggestion = scanner.nextInt();
+                campInformation = new CampInformation(camp.getName(), camp.getDates(), camp.getClosingDate(), camp.getFaculty(), camp.getLocation(), camp.getTotalSlots(), committeeSlotsSuggestion, camp.getDescription(), camp.getInCharge(), camp.getVisibility());
 
                 return campInformation;
             default:
