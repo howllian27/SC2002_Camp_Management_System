@@ -48,6 +48,4 @@ public class CampInformation {
         this.inCharge = inCharge;
         this.isVisible = visibility;
     }
-
-
 }

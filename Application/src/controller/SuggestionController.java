@@ -29,16 +29,16 @@ public class SuggestionController implements BaseController {
         this.suggestionsView = new SuggestionsView(); // Assuming SuggestionsView is a class for displaying suggestions.
     }
 
-    public void submitSuggestion(String committeeID, String campID, CampInformation campInformation) {
-        Suggestion suggestion = new Suggestion(committeeID, campID, campInformation, false);
+    public void submitSuggestion(String studentID, String campID, String suggestionText) {
+        Suggestion suggestion = new Suggestion(studentID, campID, suggestionText, false);
         suggestionDB.addSuggestion(suggestion);
         System.out.println("Suggestion successfully submitted!");
     }
 
-    public void viewSuggestions(String committeeID) {
-        List<String> suggestions = suggestionDB.getSuggestionsByCommittee(committeeID);
+    public void viewSuggestions(String campID) {
+        List<Suggestion> suggestions = suggestionDB.getSuggestionsByCamp(campID);
         if (suggestions.isEmpty()) {
-            System.out.println("Suggestion not found!");
+            System.out.println("No suggestions found for this camp!");
         } else {
             suggestionsView.displaySuggestions(suggestions);
         }
@@ -52,17 +52,18 @@ public class SuggestionController implements BaseController {
         }
 
         suggestion.setSuggestionText(updatedText);
-        suggestionDB.updateSuggestion(campID, studentID, suggestion);
+        suggestionDB.updateSuggestion(suggestion);
         System.out.println("Suggestion successfully updated!");
     }
 
     public void deleteSuggestion(String campID, String studentID) {
-        if (suggestionDB.getSuggestion(campID, studentID) != null) {
+        Suggestion suggestion = suggestionDB.getSuggestion(campID, studentID);
+        if (suggestion == null) {
             System.out.println("Suggestion not found!");
             return;
         }
 
-        suggestionDB.removeSuggestion(campID, studentID);
+        suggestionDB.removeSuggestion(suggestion);
         System.out.println("Suggestion successfully deleted!");
     }
 
@@ -74,7 +75,6 @@ public class SuggestionController implements BaseController {
         }
 
         suggestion.setApproved(true);
-        suggestionDB.updateSuggestion(campID, studentID, suggestion);
         System.out.println("Suggestion successfully approved!");
     }
 }
