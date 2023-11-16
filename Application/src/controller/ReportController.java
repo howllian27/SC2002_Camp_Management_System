@@ -73,9 +73,11 @@ public class ReportController implements BaseController{
 
         switch (filterType) {
             case "Attendees":
+                System.out.println("List of Camp Attendees: ");
                 CampStudents = campDB.getAttendeesForCamp(CampID);
                 break;
             case "Camp committee":
+                System.out.println("List of Camp Committee Members: ");
                 CampStudents = campDB.getCommitteeMembersForCamp(CampID);
                 break;
         }
@@ -84,7 +86,7 @@ public class ReportController implements BaseController{
             if (concatenatedUserIDs.length() > 0) {
                 concatenatedUserIDs.append(", ");
             }
-            concatenatedUserIDs.append(student.getID());
+            concatenatedUserIDs.append(student.getName() + "(User ID: " + student.getID() + ")");
         }
 
         ReportList.add(cdetails + concatenatedUserIDs);
