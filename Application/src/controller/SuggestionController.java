@@ -29,8 +29,8 @@ public class SuggestionController implements BaseController {
         this.suggestionsView = new SuggestionsView(); // Assuming SuggestionsView is a class for displaying suggestions.
     }
 
-    public void submitSuggestion(String studentID, String campID, String suggestionText) {
-        Suggestion suggestion = new Suggestion(studentID, campID, suggestionText, false);
+    public void submitSuggestion(String studentID, String campID, CampInformation campInformationSuggestion) {
+        Suggestion suggestion = new Suggestion(studentID, campID, campInformationSuggestion, false);
         suggestionDB.addSuggestion(suggestion);
         System.out.println("Suggestion successfully submitted!");
     }
