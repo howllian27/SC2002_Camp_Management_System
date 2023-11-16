@@ -78,12 +78,12 @@ public class EnquiryController implements BaseController {
     }
 
     /**
-     * Allows staff or committee members to reply to an enquiry.
+     * Allows staff to reply to an enquiry.
      *
      * @param enquiry The original enquiry object
      * @param replyText The response to the enquiry.
      */
-    public void replyToEnquiry(int enquiryToReplyIndex, String replyText, String campID) {
+    public void replyToEnquiryAsStaff(int enquiryToReplyIndex, String replyText, String campID) {
         List<Enquiry> enquiries = enquiryDB.getEnquiriesByCamp(campID);
         Enquiry enquiryToReply = null;
         
@@ -108,6 +108,49 @@ public class EnquiryController implements BaseController {
         } else {
             enquiryToReply.setResponse(replyText);
             System.out.println("Enquiry replied successfully.");
+        }
+    }
+
+    /**
+     * Allows camp committee member to reply to an enquiry.
+     *
+     * @param enquiry The original enquiry object
+     * @param replyText The response to the enquiry.
+     */
+    public void replyToEnquiryAsCommittee(int enquiryToReplyIndex, String replyText, String userID) {
+        List<Enquiry> enquiries = enquiryDB.getEnquiriesByStudent(userID);
+        Enquiry enquiryToReply = null;
+        
+        int count = 1;
+        for (Enquiry enquiry : enquiries) {
+            if(enquiry.getResponse() != null) {
+                System.out.println("You had already previously replied to this enquiry as follows:");
+                System.out.println("Response : " + enquiry.getResponse() + "\n");
+                return;
+            }
+            
+            if (enquiryToReplyIndex == count) {
+                enquiryToReply = enquiry;
+            }
+
+            count++;
+        }
+
+        if (enquiryToReply == null) {
+            System.out.println("Invalid enquiry index.");
+            return;
+        } else {
+            User user = userDB.getUser(userID, true);
+            enquiryToReply.setResponse(replyText);
+
+            if (user instanceof Student) {
+                Student student = (Student) user;
+                student.addPoints(1);
+            } else {
+                System.out.println("The user with ID " + userID + " is not a student.");
+            }
+            System.out.println("Enquiry replied successfully.");
+            System.out.println("+1 point for replying to an enquiry!");
         }
     }
 

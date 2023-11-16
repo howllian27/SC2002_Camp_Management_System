@@ -295,7 +295,7 @@ public class Main {
                     scanner.nextLine();
                     System.out.println("Type the reply you would like to make!");
                     String reply = scanner.nextLine();
-                    enquiryController.replyToEnquiry(enquiryToReply, reply, campToViewEnquiries);
+                    enquiryController.replyToEnquiryAsStaff(enquiryToReply, reply, campToViewEnquiries);
                     break;
                 case 7:
                     // View camp detail suggestions
