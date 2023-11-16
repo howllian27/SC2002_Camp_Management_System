@@ -69,6 +69,11 @@ public class StudentCampInteractionController implements BaseController {
         Camp camp = campDB.getCamp(campID);
         HashMap<String, Camp> registeredCamps = student.getRegisteredCamps();
         
+        if (registeredCamps.containsKey(campID)){
+            System.out.println("You are already registered!");
+            return;
+        }
+        
         // Check for clashes in dates for registered camps and new camp
         boolean hasClashes = checkForClashesInCampDates(student, camp, registeredCamps);
         

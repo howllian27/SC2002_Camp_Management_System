@@ -244,7 +244,7 @@ public class Main {
                     // View/Edit/Delete my suggestions
                     System.out.println("Please type the number of the action you would like to perform.");
                     System.out.println("View my suggestions:");
-                    suggestionController.viewIndivSuggestions(userID);
+                    suggestionController.viewIndivSuggestions(userID, student);
                     System.out.println("1. Edit my suggestions");
                     System.out.println("2. Delete my suggestions");
                     int suggestionChoice = scanner.nextInt();
@@ -252,7 +252,7 @@ public class Main {
                     switch (suggestionChoice) {
                         case 1:
                             // Edit my suggestions
-                            suggestionController.viewIndivSuggestions(userID);
+                            suggestionController.viewIndivSuggestions(userID, student);
                             System.out.println("Type the number of the suggestion you would like to edit!");
                             int suggestionToEditIndex = scanner.nextInt();
                             scanner.nextLine();
@@ -262,7 +262,7 @@ public class Main {
                             break;
                         case 2:
                             // Delete my suggestions
-                            suggestionController.viewIndivSuggestions(userID);
+                            suggestionController.viewIndivSuggestions(userID, student);
                             System.out.println("Type the number of the suggestion you would like to delete!");
                             int suggestionToDeleteIndex = scanner.nextInt();
                             // suggestionController.deleteSuggestion(userID, suggestionToDeleteIndex);

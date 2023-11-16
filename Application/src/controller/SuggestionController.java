@@ -41,15 +41,17 @@ public class SuggestionController implements BaseController {
         suggestionDB.addSuggestion(suggestion);
         student.addPoints(1);
         System.out.println("Suggestion successfully submitted!");
-        System.out.println("+1 point for making a suggestion");
+        System.out.println("+1 point for making a suggestion \n");
     }
 
-    public void viewIndivSuggestions(String studentID) {
+    public void viewIndivSuggestions(String studentID, Student student) {
         List<Suggestion> suggestions = suggestionDB.getSuggestionsByStudent(studentID);
+        Camp registeredCommitteeCamp = student.getRegisteredCommitteeCamp();
+
         if (suggestions.isEmpty()) {
             System.out.println("You've made no suggestions so far!");
         } else {
-            suggestionsView.displaySuggestions(suggestions);
+            suggestionsView.displaySuggestions(suggestions, registeredCommitteeCamp);
         }
     }
 

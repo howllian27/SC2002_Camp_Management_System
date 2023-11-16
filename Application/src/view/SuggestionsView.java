@@ -12,7 +12,7 @@ import helper.DateConversionHelper;
  * It provides methods to display a list of suggestions and prompt users for their own suggestions.
  *
  * @author Cheng Lin
- * @version 10.0
+ * @version 1.0
  */
 
 public class SuggestionsView {
@@ -23,7 +23,7 @@ public class SuggestionsView {
      *
      * @param suggestions A list of strings containing suggestions to be displayed.
      */
-    public void displaySuggestions(List<Suggestion> suggestions) {
+    public void displaySuggestions(List<Suggestion> suggestions, Camp registeredCommitteeCamp) {
                 System.out.println("\n+------------------------------------------------------------+");
                 System.out.println("|                                                             |");
                 System.out.println("|                       SUGGESTIONS PORTAL                    |");
@@ -33,8 +33,41 @@ public class SuggestionsView {
                 System.out.println("|                                                             |");
                 System.out.println("+------------------------------------------------------------+\n");
         System.out.println("Displaying suggestions:");
+
+        CampInformation originalCampInfo = registeredCommitteeCamp.getCampInformation();
+
         for (Suggestion suggestion : suggestions) {
-            System.out.println(suggestion);
+            if (suggestion.getCampInformation().campName != originalCampInfo.campName) {
+                System.out.println("You Suggested to Change Camp Name to: " + suggestion.getCampInformation().campName + "\n");
+            }
+
+            else if (suggestion.getCampInformation().description != originalCampInfo.description) {
+                System.out.println("You Suggested to Change Camp Description to: " + suggestion.getCampInformation().description + "\n");
+            }
+
+            else if (suggestion.getCampInformation().location != originalCampInfo.location){
+                System.out.println("You Suggested to Change Camp Location to: " + suggestion.getCampInformation().location + "\n");
+            }
+
+            else if (suggestion.getCampInformation().dates[0] != originalCampInfo.dates[0]){
+                System.out.println("You Suggested to Change Camp Start Date to: " + suggestion.getCampInformation().dates[0] + "\n");
+            }
+
+            else if (suggestion.getCampInformation().dates[1] != originalCampInfo.dates[1]){
+                System.out.println("You Suggested to Change Camp End Date to: " + suggestion.getCampInformation().dates[1] + "\n");
+            }
+
+            else if (suggestion.getCampInformation().registrationClosingDate != originalCampInfo.registrationClosingDate){
+                System.out.println("You Suggested to Change Camp Registration Closing Date to: " + suggestion.getCampInformation().registrationClosingDate + "\n");
+            }
+
+            else if (suggestion.getCampInformation().totalSlots != originalCampInfo.totalSlots){
+                System.out.println("You Suggested to Change Number of Camp Total Slots to: " + suggestion.getCampInformation().totalSlots + "\n");
+            }
+
+            else if (suggestion.getCampInformation().committeeSlots != originalCampInfo.committeeSlots){
+                System.out.println("You Suggested to Change Number of Camp Committee Slots to: " + suggestion.getCampInformation().committeeSlots + "\n");
+            }
         }
     }
     
