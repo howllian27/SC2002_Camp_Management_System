@@ -15,6 +15,7 @@ import database.CampDB;
 import database.UserDB;
 import model.Camp;
 import model.CampInformation;
+import model.Staff;
 import model.Student;
 import model.User;
 import view.CampListView;
@@ -270,6 +271,7 @@ public class Main {
             int choice = scanner.nextInt();
             scanner.nextLine();  // Consume newline
             String userType = "staff";
+            Staff staff = (Staff) userDB.getUser(userID, false);
     
             switch (choice) {
                 case 1:
@@ -284,8 +286,10 @@ public class Main {
                     break;
                 case 3:
                     // Edit an existing camp
+                    campOperationsController.viewCampsForUserType(userType);
                     System.out.println("Which camp would you like to edit?");
                     String campToEdit = scanner.nextLine();
+                    if (!campOperationsController.verifyCampOwnership(campToEdit, staff)) break;
                     campOperationsController.editCamp(campToEdit);
                     
                     break;

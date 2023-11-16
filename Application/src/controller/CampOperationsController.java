@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import database.CampDB;
 import model.Camp;
 import model.CampInformation;
+import model.Staff;
 import model.Student;
 import view.CampListView;
 import view.CampDetailView;
@@ -39,6 +40,28 @@ public class CampOperationsController implements BaseController {
         this.campListView = new CampListView();
         this.campDetailView = new CampDetailView();
         this.editCampView = new EditCampView();
+    }
+
+    /**
+     * Verify if the camp exists
+     * 
+     * @param campID
+     * @param staffID
+    */
+    public boolean verifyCampOwnership(String campID, Staff staff) {
+        Camp camp = campDB.getCamp(campID);
+        if (camp == null) {
+            System.out.println("Camp does not exist.");
+            return false;
+        }
+
+        HashMap<String, Camp> createdCamps = staff.getCamps();
+        if (!createdCamps.containsKey(campID)) {
+            System.out.println("You do not own this camp. \n");
+            return false;
+        }
+
+        return true;
     }
 
     /** 
