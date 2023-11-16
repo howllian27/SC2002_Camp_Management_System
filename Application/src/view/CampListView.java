@@ -13,21 +13,55 @@ import model.Camp;
  */
 
 public class CampListView {
+    /* 
+     * Displays a list of all available camps by printing their names.
+    */
+    public void displayCampsStudentMenu(){
+        System.out.println("\n+------------------------------------------------------------+");
+        System.out.println("|                                                             |");
+        System.out.println("|                    LIST OF CAMPS YOU ARE IN                 |");
+        System.out.println("|                                                             |");
+        System.out.println("|                                                             |");
+        System.out.println("|        To return to the main menu, simply enter '0'.        |");
+        System.out.println("|                                                             |");
+        System.out.println("+------------------------------------------------------------+\n");
+    }
 
+    /*
+     * Displays a list of all available camps by printing their names.
+     */
+    public void displayCampsStaffMenu(){
+        System.out.println("\n+------------------------------------------------------------+");
+        System.out.println("|                                                             |");
+        System.out.println("|                  LIST OF CAMPS You Manage                   |");
+        System.out.println("|                                                             |");
+        System.out.println("|                                                             |");
+        System.out.println("|        To return to the main menu, simply enter '0'.        |");
+        System.out.println("|                                                             |");
+        System.out.println("+------------------------------------------------------------+\n");
+    }
+    
     /**
      * Displays a list of all available camps by printing their names.
      * @param camps A list of Camp objects containing the available camps to be displayed.
      */
     public void displayCamps(List<Camp> camps) {
         //Displays a list of all available camps.
-                System.out.println("\n+------------------------------------------------------------+");
-                System.out.println("|                                                             |");
-                System.out.println("|                    LIST OF CAMPS YOU ARE IN                 |");
-                System.out.println("|                                                             |");
-                System.out.println("|                                                             |");
-                System.out.println("|        To return to the main menu, simply enter '0'.        |");
-                System.out.println("|                                                             |");
-                System.out.println("+------------------------------------------------------------+\n");
+        displayCampsStudentMenu();
+        System.out.println("List of Camps:");
+        System.out.println();
+        int count = 1;
+        for (Camp camp : camps) {
+            System.out.println(count + ". " + "Camp Name: " + camp.getName());
+            System.out.println("    " + "Total Slots: " + camp.getTotalSlots());
+            System.out.println("    " + "Remaining Slots: " + camp.getRemainingSlots());
+            System.out.println("    " + "Remaining Committee Slots: " + camp.getCommitteeSlots());
+            count++;
+        }
+    }
+
+    public void displayCampsForStaff(List<Camp> camps){
+        displayCampsStaffMenu();
         System.out.println("List of Camps:");
         System.out.println();
         int count = 1;

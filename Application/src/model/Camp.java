@@ -11,7 +11,7 @@ import java.util.HashMap;
  * @version 1.0
  */
 public class Camp {
-    private final CampInformation campInformation;
+    private CampInformation campInformation;
     private final HashMap<String, Student> attendees;
     private final HashMap<String, Student> committee;
 
@@ -36,6 +36,7 @@ public class Camp {
     public void setDescription(String description) { this.campInformation.description = description; }
     public void setInCharge(Staff inCharge) { this.campInformation.inCharge = inCharge; }
     public void setVisibility(boolean visibility) { this.campInformation.isVisible = visibility; }
+    public void setCampInformation(CampInformation campInformation) { this.campInformation = campInformation; }
 
     //Getters
     public CampInformation getCampInformation() { return this.campInformation; }

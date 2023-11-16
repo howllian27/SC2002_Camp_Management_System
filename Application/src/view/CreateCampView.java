@@ -77,7 +77,7 @@ public class CreateCampView {
 
         CampInformation campInformation = new CampInformation(campName, dates, registrationClosingDate, faculty, location, totalSlots, committeeSlots, description, staff, isVisible);
 
-        campOperationsController.createCamp(campInformation);
+        campOperationsController.createCamp(campInformation, staff);
         return campInformation;
     }
 }

@@ -68,10 +68,11 @@ public class CampOperationsController implements BaseController {
     * Create a new camp
     * @param campInformation The camp information to be created.
     */ 
-    public void createCamp(CampInformation campInformation) {
+    public void createCamp(CampInformation campInformation, Staff staff) {
         Camp camp = new Camp(campInformation); // Assuming Camp constructor takes CampInformation
         boolean success = campDB.addCamp(camp.getName(), camp);
         if (success) {
+            staff.addCamp(camp.getName(), camp);
             campDetailView.displayCampDetails(camp);
         }
     }

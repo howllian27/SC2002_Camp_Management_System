@@ -44,35 +44,35 @@ public class SuggestionsView {
 
         for (Suggestion suggestion : suggestions) {
             if (suggestion.getCampInformation().campName != originalCampInfo.campName) {
-                System.out.println(count + ". You Suggested to Change Camp Name to: " + suggestion.getCampInformation().campName + "\n");
+                System.out.println(count + ". Suggestion Made to Change Camp Name to: " + suggestion.getCampInformation().campName + "\n");
             }
 
             else if (suggestion.getCampInformation().description != originalCampInfo.description) {
-                System.out.println(count + ". You Suggested to Change Camp Description to: " + suggestion.getCampInformation().description + "\n");
+                System.out.println(count + ". Suggestion Made to Change Camp Description to: " + suggestion.getCampInformation().description + "\n");
             }
 
             else if (suggestion.getCampInformation().location != originalCampInfo.location){
-                System.out.println(count + ". You Suggested to Change Camp Location to: " + suggestion.getCampInformation().location + "\n");
+                System.out.println(count + ". Suggestion Made to Change Camp Location to: " + suggestion.getCampInformation().location + "\n");
             }
 
             else if (suggestion.getCampInformation().dates[0] != originalCampInfo.dates[0]){
-                System.out.println(count + ". You Suggested to Change Camp Start Date to: " + suggestion.getCampInformation().dates[0] + "\n");
+                System.out.println(count + ". Suggestion Made to Change Camp Start Date to: " + suggestion.getCampInformation().dates[0] + "\n");
             }
 
             else if (suggestion.getCampInformation().dates[1] != originalCampInfo.dates[1]){
-                System.out.println(count + ". You Suggested to Change Camp End Date to: " + suggestion.getCampInformation().dates[1] + "\n");
+                System.out.println(count + ". Suggestion Made to Change Camp End Date to: " + suggestion.getCampInformation().dates[1] + "\n");
             }
 
             else if (suggestion.getCampInformation().registrationClosingDate != originalCampInfo.registrationClosingDate){
-                System.out.println(count + ". You Suggested to Change Camp Registration Closing Date to: " + suggestion.getCampInformation().registrationClosingDate + "\n");
+                System.out.println(count + ". Suggestion Made to Change Camp Registration Closing Date to: " + suggestion.getCampInformation().registrationClosingDate + "\n");
             }
 
             else if (suggestion.getCampInformation().totalSlots != originalCampInfo.totalSlots){
-                System.out.println(count + ". You Suggested to Change Number of Camp Total Slots to: " + suggestion.getCampInformation().totalSlots + "\n");
+                System.out.println(count + ". Suggestion Made to Change Number of Camp Total Slots to: " + suggestion.getCampInformation().totalSlots + "\n");
             }
 
             else if (suggestion.getCampInformation().committeeSlots != originalCampInfo.committeeSlots){
-                System.out.println(count + ". You Suggested to Change Number of Camp Committee Slots to: " + suggestion.getCampInformation().committeeSlots + "\n");
+                System.out.println(count + ". Suggestion Made to Change Number of Camp Committee Slots to: " + suggestion.getCampInformation().committeeSlots + "\n");
             }
         }
     }
@@ -90,21 +90,18 @@ public class SuggestionsView {
         switch (informationChoice){
             case 1:
                 System.out.println("Please enter your suggestions for the camp name:");
-                scanner.nextLine();
                 String nameSuggestion = scanner.nextLine();
                 campInformation = new CampInformation(nameSuggestion, camp.getDates(), camp.getClosingDate(), camp.getFaculty(), camp.getLocation(), camp.getTotalSlots(), camp.getCommitteeSlots(), camp.getDescription(), camp.getInCharge(), camp.getVisibility());
 
                 return campInformation;
             case 2:
                 System.out.println("Please enter your suggestions for the camp description:");
-                scanner.nextLine();
                 String descriptionSuggestion = scanner.nextLine();
                 campInformation = new CampInformation(camp.getName(), camp.getDates(), camp.getClosingDate(), camp.getFaculty(), camp.getLocation(), camp.getTotalSlots(), camp.getCommitteeSlots(), descriptionSuggestion, camp.getInCharge(), camp.getVisibility());
 
                 return campInformation;
             case 3:
                 System.out.println("Please enter your suggestions for the camp location:");
-                scanner.nextLine();
                 String locationSuggestion = scanner.nextLine();
                 campInformation = new CampInformation(camp.getName(), camp.getDates(), camp.getClosingDate(), camp.getFaculty(), locationSuggestion, camp.getTotalSlots(), camp.getCommitteeSlots(), camp.getDescription(), camp.getInCharge(), camp.getVisibility());
 

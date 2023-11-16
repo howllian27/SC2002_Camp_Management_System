@@ -2,13 +2,18 @@ package controller;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.HashMap;
 
 import database.SuggestionDB;
 import database.CampDB;
+import database.UserDB;
+
 import model.Camp;
 import model.CampInformation;
+import model.Staff;
 import model.Student;
 import model.Suggestion;
+import view.CampListView;
 import view.SuggestionsView;
 
 /**
@@ -22,7 +27,10 @@ public class SuggestionController implements BaseController {
 
     SuggestionDB suggestionDB;
     CampDB campDB;
+    UserDB userDB;
+
     private SuggestionsView suggestionsView;
+    private CampListView campListView;
 
     public SuggestionController() {
         setMasterVariables();
@@ -31,8 +39,10 @@ public class SuggestionController implements BaseController {
     @Override
     public void setMasterVariables() {
         this.campDB = CampDB.getInstance();
+        this.userDB = UserDB.getInstance();
         this.suggestionDB = SuggestionDB.getInstance();
         this.suggestionsView = new SuggestionsView();
+        this.campListView = new CampListView();
     }
 
     /**
@@ -134,5 +144,67 @@ public class SuggestionController implements BaseController {
 
         suggestion.setApproved(true);
         System.out.println("Suggestion successfully approved!");
+    }
+
+    public void staffSuggestionHandler(Staff staff){
+        HashMap<String, Camp> staffCamps = staff.getCamps();
+
+        //Get list of staff camps
+        List <Camp> camps = staffCamps.values().stream().toList();
+        campListView.displayCampsForStaff(camps);
+
+        // Get staff input on which camp to view suggestions
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the number of the camp you want to view suggestions for: ");
+        int campNumber;
+        try {
+            campNumber = scanner.nextInt();
+        } catch(Exception e) {
+            System.out.println("Invalid input!");
+            return;
+        }
+        
+        Camp selectedCamp = camps.get(campNumber-1);
+
+
+        List<Suggestion> suggestions = suggestionDB.getSuggestionsByCamp(selectedCamp.getName());
+        if (suggestions == null){
+            System.out.println("No suggestions found for this camp!");
+            return;
+        }
+        suggestionsView.displaySuggestions(suggestions, selectedCamp);
+        System.out.println("Enter the number of the suggestion you want to approve/reject: ");
+        int suggestionNumber = scanner.nextInt();
+        Suggestion suggestion;
+        if (suggestions.get(suggestionNumber-1) == null) {
+            System.out.println("Suggestion not found!");
+            return;
+        } else {
+            suggestion = suggestions.get(suggestionNumber-1);
+        }
+
+        System.out.print("Enter 1 to approve, 2 to reject: ");
+        int choice = scanner.nextInt();
+
+        switch (choice){
+            case 1:
+                suggestion.setApproved(true);
+                selectedCamp.setCampInformation(suggestion.getCampInformation());
+                Student suggestionSetter = (Student) userDB.getUser(suggestion.getStudentId(), true);
+                suggestionSetter.addPoints(1);
+                System.out.println("Student's points is now: " + suggestionSetter.getPoints());
+
+                System.out.println("Suggestion successfully approved!");
+                break;
+            
+            case 2:
+                System.out.println("Suggestion successfully rejected!");
+                break;
+            
+            default:
+                System.out.println("Invalid input!");
+                break;
+        }
+        
     }
 }

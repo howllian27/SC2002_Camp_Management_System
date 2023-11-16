@@ -108,6 +108,7 @@ public class Main {
 
     private static void studentMenu(String userID, User user) {
         while (true) {
+            System.console().flush();
             System.out.println("Student Menu:");
             System.out.println("1. View Available Camps");
             System.out.println("2. Register for Camp");
@@ -123,6 +124,7 @@ public class Main {
             System.out.print("Enter choice: ");
             Scanner scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
+            System.out.println("");
             scanner.nextLine();
             String userType = "student";
             Student student = (Student) userDB.getUser(userID, true);
@@ -295,13 +297,13 @@ public class Main {
             System.out.println("4. View All Camps");
             System.out.println("5. View Registered Students for a Camp");
             System.out.println("6. View/Reply to Enquiries for a Camp");
-            System.out.println("7. View Camp Detail Suggestions");
-            System.out.println("8. Accept/Reject Suggestions");
-            System.out.println("9. Generate Reports");
-            System.out.println("10. Logout");
+            System.out.println("7. Accept/Reject Suggestions");
+            System.out.println("8. Generate Reports");
+            System.out.println("9. Logout");
             System.out.print("Enter choice: ");
             Scanner scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
+            System.out.println("");
             scanner.nextLine();  // Consume newline
             String userType = "staff";
             Staff staff = (Staff) userDB.getUser(userID, false);
@@ -352,15 +354,13 @@ public class Main {
                     enquiryController.replyToEnquiryAsStaff(enquiryToReply, reply, campToViewEnquiries);
                     break;
                 case 7:
-                    // View camp detail suggestions
+                    // Accept/Reject suggestions
+                    suggestionController.staffSuggestionHandler(staff);
                     break;
                 case 8:
-                    // Accept/Reject suggestions
-                    break;
-                case 9:
                     // Generate reports
                     break;
-                case 10:
+                case 9:
                     currentUser = null;
                     return;
                 default:
