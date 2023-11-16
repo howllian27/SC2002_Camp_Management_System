@@ -11,6 +11,7 @@ import controller.UserController;
 import controller.StudentCampInteractionController;
 import controller.SuggestionController;
 import controller.EnquiryController;
+import controller.ReportController;
 
 import database.CampDB;
 import database.UserDB;
@@ -37,6 +38,7 @@ public class Main {
     static StudentCampInteractionController studentCampInteractionController = new StudentCampInteractionController();
     static EnquiryController enquiryController = new EnquiryController();
     static SuggestionController suggestionController = new SuggestionController();
+    static ReportController reportController = new ReportController();
 
     // Initialise views
     static CreateCampView createCampView = new CreateCampView();
@@ -108,7 +110,7 @@ public class Main {
 
     private static void studentMenu(String userID, User user) {
         while (true) {
-            System.console().flush();
+            System.out.println("");
             System.out.println("Student Menu:");
             System.out.println("1. View Available Camps");
             System.out.println("2. Register for Camp");
@@ -290,6 +292,7 @@ public class Main {
     private static void staffMenu(String userID, User user) {
         
         while (true) {
+            System.out.println("");
             System.out.println("Staff Menu:");
             System.out.println("1. Change Password");
             System.out.println("2. Create a New Camp");
@@ -359,6 +362,7 @@ public class Main {
                     break;
                 case 8:
                     // Generate reports
+                    reportController.generateReportsForStaff(staff);
                     break;
                 case 9:
                     currentUser = null;

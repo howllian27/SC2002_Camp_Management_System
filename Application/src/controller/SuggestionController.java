@@ -168,7 +168,7 @@ public class SuggestionController implements BaseController {
 
 
         List<Suggestion> suggestions = suggestionDB.getSuggestionsByCamp(selectedCamp.getName());
-        if (suggestions == null){
+        if (suggestions.size() == 0){
             System.out.println("No suggestions found for this camp!");
             return;
         }
@@ -192,7 +192,6 @@ public class SuggestionController implements BaseController {
                 selectedCamp.setCampInformation(suggestion.getCampInformation());
                 Student suggestionSetter = (Student) userDB.getUser(suggestion.getStudentId(), true);
                 suggestionSetter.addPoints(1);
-                System.out.println("Student's points is now: " + suggestionSetter.getPoints());
 
                 System.out.println("Suggestion successfully approved!");
                 break;
