@@ -9,6 +9,7 @@ import controller.EnquiryController;
 // import controller.SuggestionController;
 import controller.UserController;
 import controller.StudentCampInteractionController;
+import controller.SuggestionController;
 import controller.EnquiryController;
 
 import database.CampDB;
@@ -35,6 +36,7 @@ public class Main {
     static CampOperationsController campOperationsController = new CampOperationsController();
     static StudentCampInteractionController studentCampInteractionController = new StudentCampInteractionController();
     static EnquiryController enquiryController = new EnquiryController();
+    static SuggestionController suggestionController = new SuggestionController();
 
     // Initialise views
     static CreateCampView createCampView = new CreateCampView();
@@ -115,10 +117,11 @@ public class Main {
             System.out.println("4. Submit Suggestion for a Camp");
             System.out.println("5. View Registered Camps");
             System.out.println("6. View/Edit/Delete/Reply to Enquiries");
-            System.out.println("7. View Enquiry Replies");
-            System.out.println("8. Withdraw from a Camp");
-            System.out.println("9. Change Password");
-            System.out.println("10. Logout");
+            System.out.println("7. View/Edit/Delete Suggestions");
+            System.out.println("8. View Enquiry Replies");
+            System.out.println("9. Withdraw from a Camp");
+            System.out.println("10. Change Password");
+            System.out.println("11. Logout");
             System.out.print("Enter choice: ");
             Scanner scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
@@ -169,9 +172,14 @@ public class Main {
                 case 4:
                     // Submit suggestion for a camp
                     if (student.getCampCommitteeMemberStatus() == false){
-                        System.out.println("You are not a committee member!");
+                        System.out.println("You are not a committee member, so you can't make suggestions!");
                         break;
                     }
+
+                    Camp camp = student.getRegisteredCommitteeCamp();
+                    System.out.println("Your committee camp name is: " + camp.getName() + "\n");
+
+                    suggestionController.submitSuggestion(student, camp.getName());
 
                     break;
                 case 5:
@@ -233,22 +241,53 @@ public class Main {
                     enquiryController.viewEnquiriesByStudent(userID);
                     break;
                 case 7:
+                    // View/Edit/Delete my suggestions
+                    System.out.println("Please type the number of the action you would like to perform.");
+                    System.out.println("View my suggestions:");
+                    suggestionController.viewIndivSuggestions(userID);
+                    System.out.println("1. Edit my suggestions");
+                    System.out.println("2. Delete my suggestions");
+                    int suggestionChoice = scanner.nextInt();
+
+                    switch (suggestionChoice) {
+                        case 1:
+                            // Edit my suggestions
+                            suggestionController.viewIndivSuggestions(userID);
+                            System.out.println("Type the number of the suggestion you would like to edit!");
+                            int suggestionToEditIndex = scanner.nextInt();
+                            scanner.nextLine();
+                            System.out.println("Type the new suggestion you would like to make!");
+                            String newSuggestion = scanner.nextLine();
+                            // suggestionController.editSuggestion(userID, suggestionToEditIndex, newSuggestion);
+                            break;
+                        case 2:
+                            // Delete my suggestions
+                            suggestionController.viewIndivSuggestions(userID);
+                            System.out.println("Type the number of the suggestion you would like to delete!");
+                            int suggestionToDeleteIndex = scanner.nextInt();
+                            // suggestionController.deleteSuggestion(userID, suggestionToDeleteIndex);
+                            break;
+                        default:
+                            System.out.println("Invalid choice. Try again.");
+                            break;
+                    }
+                case 8:
                     // View my enquiry replies
                     break;
-                case 8:
+                case 9:
                     // Withdraw from a camp
                     campOperationsController.viewCampsForUserType(userType);
                     System.out.println("Type the name of the camp you would like to withdraw from.");
                     String withdrawCampID = scanner.nextLine(); 
                     studentCampInteractionController.withdrawFromCamp(userID, withdrawCampID);
                     break;
-                case 9:
+                case 10:
                     System.out.println("Please enter your new password:");
                     String newPassword = scanner.nextLine();
                     userController.changePassword(userID, newPassword);
                     System.out.println(user.getPassword());
                     break;
-                case 10:
+                case 11:
                     currentUser = null;
                     return;
                 default:

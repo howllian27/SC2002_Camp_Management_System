@@ -61,21 +61,21 @@ public class SuggestionsView {
                 System.out.println("Please enter your suggestions for the camp name:");
                 scanner.nextLine();
                 String nameSuggestion = scanner.nextLine();
-                campInformation = new CampInformation(nameSuggestion, null, null, null, "", -1, -1, "", null, false);
+                campInformation = new CampInformation(nameSuggestion, camp.getDates(), camp.getClosingDate(), camp.getFaculty(), camp.getLocation(), camp.getTotalSlots(), camp.getCommitteeSlots(), camp.getDescription(), camp.getInCharge(), camp.getVisibility());
 
                 return campInformation;
             case 2:
                 System.out.println("Please enter your suggestions for the camp description:");
                 scanner.nextLine();
                 String descriptionSuggestion = scanner.nextLine();
-                campInformation = new CampInformation("", null, null, null, "", -1, -1, descriptionSuggestion, null, false);
+                campInformation = new CampInformation(camp.getName(), camp.getDates(), camp.getClosingDate(), camp.getFaculty(), camp.getLocation(), camp.getTotalSlots(), camp.getCommitteeSlots(), descriptionSuggestion, camp.getInCharge(), camp.getVisibility());
 
                 return campInformation;
             case 3:
                 System.out.println("Please enter your suggestions for the camp location:");
                 scanner.nextLine();
                 String locationSuggestion = scanner.nextLine();
-                campInformation = new CampInformation("", null, null, null, locationSuggestion, -1, -1, "", null, false);
+                campInformation = new CampInformation(camp.getName(), camp.getDates(), camp.getClosingDate(), camp.getFaculty(), locationSuggestion, camp.getTotalSlots(), camp.getCommitteeSlots(), camp.getDescription(), camp.getInCharge(), camp.getVisibility());
 
                 return campInformation;
             case 4:
@@ -84,8 +84,7 @@ public class SuggestionsView {
                 String startDateSuggestion = scanner.nextLine();
                 Date startDate =  dateConversionHelper.convertDate(startDateSuggestion);
                 Date oldEndDate = camp.getDates()[1];
-
-                campInformation = new CampInformation("", new Date[]{startDate, oldEndDate}, null, null, "", -1, -1, "", null, false);
+                campInformation = new CampInformation(camp.getName(), new Date[]{startDate, oldEndDate}, camp.getClosingDate(), camp.getFaculty(), camp.getLocation(), camp.getTotalSlots(), camp.getCommitteeSlots(), camp.getDescription(), camp.getInCharge(), camp.getVisibility());
 
                 return campInformation;
             case 5:
@@ -94,8 +93,7 @@ public class SuggestionsView {
                 String endDateSuggestion = scanner.nextLine();
                 Date endDate =  dateConversionHelper.convertDate(endDateSuggestion);
                 Date oldStartDate = camp.getDates()[0];
-
-                campInformation = new CampInformation("", new Date[]{oldStartDate, endDate}, null, null, "", -1, -1, "", null, false);
+                campInformation = new CampInformation(camp.getName(), new Date[]{oldStartDate, endDate}, camp.getClosingDate(), camp.getFaculty(), camp.getLocation(), camp.getTotalSlots(), camp.getCommitteeSlots(), camp.getDescription(), camp.getInCharge(), camp.getVisibility());
 
                 return campInformation;
             case 6:
@@ -103,21 +101,21 @@ public class SuggestionsView {
                 scanner.nextLine();
                 String closingDateSuggestion = scanner.nextLine();
                 Date closingDate =  dateConversionHelper.convertDate(closingDateSuggestion);
-                campInformation = new CampInformation("", null, closingDate, null, "", -1, -1, "", null, false);
+                campInformation = new CampInformation(camp.getName(), camp.getDates(), closingDate, camp.getFaculty(), camp.getLocation(), camp.getTotalSlots(), camp.getCommitteeSlots(), camp.getDescription(), camp.getInCharge(), camp.getVisibility());
 
                 return campInformation;
             case 7:
                 System.out.println("Please enter your suggestions for the camp total slots:");
                 scanner.nextLine();
                 String totalSlotsSuggestion = scanner.nextLine();
-                campInformation = new CampInformation("", null, null, null, "", Integer.parseInt(totalSlotsSuggestion), -1, "", null, false);
+                campInformation = new CampInformation(camp.getName(), camp.getDates(), camp.getClosingDate(), camp.getFaculty(), camp.getLocation(), Integer.parseInt(totalSlotsSuggestion), camp.getCommitteeSlots(), camp.getDescription(), camp.getInCharge(), camp.getVisibility());
 
                 return campInformation;
             case 8:
                 System.out.println("Please enter your suggestions for the camp committee slots:");
                 scanner.nextLine();
                 String committeeSlotsSuggestion = scanner.nextLine();
-                campInformation = new CampInformation("", null, null, null, "", -1, Integer.parseInt(committeeSlotsSuggestion), "", null, false);
+                campInformation = new CampInformation(camp.getName(), camp.getDates(), camp.getClosingDate(), camp.getFaculty(), camp.getLocation(), camp.getTotalSlots(), Integer.parseInt(committeeSlotsSuggestion), camp.getDescription(), camp.getInCharge(), camp.getVisibility());
 
                 return campInformation;
             default:

@@ -30,6 +30,6 @@ public class Suggestion {
     }
 
     public CampInformation getCampInformation() { return this.campInformation; }
-    public String getStudentId() { return this.getStudentId(); }
-    public String getCampId() { return this.getCampId(); }
+    public String getStudentId() { return this.studentId; }
+    public String getCampId() { return this.campId; }
 }
