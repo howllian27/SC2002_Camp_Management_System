@@ -35,6 +35,14 @@ public class StudentCampInteractionController implements BaseController {
         this.userDB = UserDB.getInstance();
     }
 
+    /**
+     * Checks for clashes in dates for registered camps and new camp.
+     * 
+     * @param student
+     * @param camp
+     * @param registeredCamps
+     * @return
+    */
     public boolean checkForClashesInCampDates(Student student, Camp camp, HashMap<String, Camp> registeredCamps){
         // Check for clashes in dates for registered camps and new camp
         Date newCampStartDate = camp.getDates()[0];

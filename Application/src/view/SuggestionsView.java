@@ -111,7 +111,6 @@ public class SuggestionsView {
                 return campInformation;
             case 4:
                 System.out.println("Please enter your suggestions for the camp start date: (dd-mm-yyyy)");
-                scanner.nextLine();
                 String startDateSuggestion = scanner.nextLine();
                 Date startDate =  dateConversionHelper.convertDate(startDateSuggestion);
                 Date oldEndDate = camp.getDates()[1];
@@ -120,7 +119,6 @@ public class SuggestionsView {
                 return campInformation;
             case 5:
                 System.out.println("Please enter your suggestions for the camp end date: (dd-mm-yyyy)");
-                scanner.nextLine();
                 String endDateSuggestion = scanner.nextLine();
                 Date endDate =  dateConversionHelper.convertDate(endDateSuggestion);
                 Date oldStartDate = camp.getDates()[0];
@@ -129,7 +127,6 @@ public class SuggestionsView {
                 return campInformation;
             case 6:
                 System.out.println("Please enter your suggestions for the camp registration closing date: (dd-mm-yyyy)");
-                scanner.nextLine();
                 String closingDateSuggestion = scanner.nextLine();
                 Date closingDate =  dateConversionHelper.convertDate(closingDateSuggestion);
                 campInformation = new CampInformation(camp.getName(), camp.getDates(), closingDate, camp.getFaculty(), camp.getLocation(), camp.getTotalSlots(), camp.getCommitteeSlots(), camp.getDescription(), camp.getInCharge(), camp.getVisibility());
