@@ -166,6 +166,7 @@ public class CampOperationsController implements BaseController {
 
     /** 
      * View registered students
+     * @param campID The camp ID to be viewed.
     */
     public void viewRegisteredStudents(String campID){
         Camp camp = campDB.getCamp(campID);
