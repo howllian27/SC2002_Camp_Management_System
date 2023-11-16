@@ -74,8 +74,6 @@ public class Main {
                         //     System.out.println("Invalid input. Try again.");
                         //     break;
                         // }
-
-                        System.out.println(isStudentBool);
                         
                         User currentUser = userController.loginUser(userID, password, isStudentBool);
                         if (currentUser == null) {
@@ -242,9 +240,9 @@ public class Main {
                     break;
                 case 7:
                     // View/Edit/Delete my suggestions
-                    System.out.println("Please type the number of the action you would like to perform.");
                     System.out.println("View my suggestions:");
-                    suggestionController.viewIndivSuggestions(userID, student);
+                    if (!suggestionController.viewIndivSuggestions(userID, student)) break;
+                    System.out.println("\n Please type the number of the action you would like to perform.");
                     System.out.println("1. Edit my suggestions");
                     System.out.println("2. Delete my suggestions");
                     int suggestionChoice = scanner.nextInt();
@@ -262,10 +260,7 @@ public class Main {
                             break;
                         case 2:
                             // Delete my suggestions
-                            suggestionController.viewIndivSuggestions(userID, student);
-                            System.out.println("Type the number of the suggestion you would like to delete!");
-                            int suggestionToDeleteIndex = scanner.nextInt();
-                            // suggestionController.deleteSuggestion(userID, suggestionToDeleteIndex);
+                            suggestionController.deleteSuggestion(student);
                             break;
                         default:
                             System.out.println("Invalid choice. Try again.");

@@ -36,7 +36,7 @@ public class LoginView {
      * Displays a message indicating that the login was successful.
      */
     public void displayLoginSuccess() {
-        System.out.println("Login Successful");
+        System.out.println("Login Successful \n");
         
     }
 
@@ -44,7 +44,7 @@ public class LoginView {
      * Displays a message indicating that the login was unsuccessful due to invalid credentials.
      */
     public void displayLoginError() {
-        System.out.println("Login Failed. Please try again.");
+        System.out.println("Login Failed. Please try again. \n");
         
     }
 

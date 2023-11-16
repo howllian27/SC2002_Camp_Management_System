@@ -34,7 +34,7 @@ public class CampDetailView {
         System.out.println("Total Slots: " + camp.getTotalSlots());
         System.out.println("Remaining Slots: " + camp.getRemainingSlots());
         System.out.println("Description: " + camp.getDescription());
-        System.out.println("Staff In Charge: " + camp.getInCharge().getName());
+        System.out.println("Staff In Charge: " + camp.getInCharge().getName() + "\n");
         
     }
 }

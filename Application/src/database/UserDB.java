@@ -77,7 +77,7 @@ public class UserDB
             counter++;
         }
         // For debugging, you can print the populated user map
-        prettyPrintUserMap(userMap);
+        // prettyPrintUserMap(userMap);
     }
 
     public void prettyPrintUserMap(Map<String, User> userMap) {
