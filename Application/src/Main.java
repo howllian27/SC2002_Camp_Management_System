@@ -188,7 +188,7 @@ public class Main {
                     // View registered camps
                     HashMap<String, Camp> registeredCamps = student.getRegisteredCamps();
                     List <Camp> camps = new ArrayList<Camp> (registeredCamps.values());
-                    campListView.displayCamps(camps);
+                    campListView.displayCampsForStudent(camps);
                     break;
                 case 6:
                     // View/Edit/Delete my enquiries
