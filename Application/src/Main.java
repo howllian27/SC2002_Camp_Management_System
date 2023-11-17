@@ -110,7 +110,7 @@ public class Main {
 
     private static void studentMenu(String userID, User user) {
         while (true) {
-            System.out.println("");
+            System.out.println("-----------------------------------------------------");
             System.out.println("Student Menu:");
             System.out.println("1. View Available Camps");
             System.out.println("2. Register for Camp");
@@ -123,6 +123,7 @@ public class Main {
             System.out.println("9. Withdraw from a Camp");
             System.out.println("10. Change Password");
             System.out.println("11. Logout");
+            System.out.println("-----------------------------------------------------");
             System.out.print("Enter choice: ");
             Scanner scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
@@ -292,7 +293,7 @@ public class Main {
     private static void staffMenu(String userID, User user) {
         
         while (true) {
-            System.out.println("");
+            System.out.println("-----------------------------------------------------");
             System.out.println("Staff Menu:");
             System.out.println("1. Change Password");
             System.out.println("2. Create a New Camp");
@@ -303,6 +304,7 @@ public class Main {
             System.out.println("7. Accept/Reject Suggestions");
             System.out.println("8. Generate Reports");
             System.out.println("9. Logout");
+            System.out.println("-----------------------------------------------------");
             System.out.print("Enter choice: ");
             Scanner scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
