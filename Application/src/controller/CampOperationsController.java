@@ -121,7 +121,7 @@ public class CampOperationsController implements BaseController {
         if (userType.equals("staff")) {
             Map<String, Camp> campMap = campDB.getAllCamps();
             camps = campMap.values().stream().toList();
-            campListView.displayCamps(camps);
+            campListView.displayCampsForStaff(camps);
         }
         if (userType.equals("student")) {
             Map<String, Camp> campMap = campDB.getAllCamps();
@@ -132,7 +132,7 @@ public class CampOperationsController implements BaseController {
         if (camps.isEmpty()) {
             System.out.println("Camp does not exist.");
         } else {
-            campListView.displayCamps(camps);
+            campListView.displayCampsForStudent(camps);
         }
     }
 

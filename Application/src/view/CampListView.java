@@ -45,7 +45,7 @@ public class CampListView {
      * Displays a list of all available camps by printing their names.
      * @param camps A list of Camp objects containing the available camps to be displayed.
      */
-    public void displayCamps(List<Camp> camps) {
+    public void displayCampsForStudent(List<Camp> camps) {
         //Displays a list of all available camps.
         displayCampsStudentMenu();
         System.out.println("List of Camps:");
