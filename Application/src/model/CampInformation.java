@@ -24,6 +24,7 @@ public class CampInformation {
 
     /***
      * Constructs a new `CampInformation` object with the provided camp details.
+     *
      * @param campName The name of the camp.
      * @param dates An array for the dates of the camp.
      * @param registrationClosingDate The closing date for camp registration.

@@ -19,6 +19,7 @@ public class Student extends User {
 
     /***
      * Constructs a new `Student` object with the given user ID and faculty.
+     *
      * @param userID The user ID of the student.
      * @param faculty The faculty to which the student belongs.
      */
@@ -30,6 +31,7 @@ public class Student extends User {
 
     /***
      * Constructs a new `Student` object with the given user ID, password and  faculty.
+     *
      * @param userID The user ID of the student.
      * @param password The password of the student.
      * @param faculty The faculty to which the student belongs.
@@ -55,6 +57,7 @@ public class Student extends User {
     /***
      * Adds a camp to the set of camps where the student is registered, simultaneously marking
      * it as previously registered.
+     *
      * @param camp The camp to be added.
      * @return `true` if the camp is added successfully, `false` if it is already registered.
      */
@@ -69,6 +72,7 @@ public class Student extends User {
 
     /***
      * Adds a camp as the student's committee camp.
+     *
      * @param camp The camp to be set as the committee camp.
      * @return `true` if the camp is set as the committee camp successfully, `false` if the student is already a committee member in a camp.
      */
@@ -80,6 +84,7 @@ public class Student extends User {
 
     /***
      * Removes a camp from the set of camps where the student is registered.
+     *
      * @param campId The campId to be removed.
      * @return `true` if the camp is removed successfully, `false` if it's not found in the registered camps.
      */
@@ -89,6 +94,7 @@ public class Student extends User {
 
     /***
      * Removes the student's committee camp.
+     *
      * @return `true` if the committee camp is removed successfully, `false` if the student is not part of a camp committee.
      */
     public boolean removeCommitteeCamp() {
@@ -99,6 +105,7 @@ public class Student extends User {
 
     /**
      * Adds points to the student's account.
+     *
      * @param points
     */
     public void addPoints(int points) {

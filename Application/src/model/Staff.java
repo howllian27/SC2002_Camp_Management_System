@@ -14,6 +14,7 @@ public class Staff extends User {
 
     /***
      * Constructs a new `Staff` class with the given user ID and faculty.
+     *
      * @param userID The staff's user ID.
      * @param faculty The faculty to which the staff belongs to.
      */
@@ -24,6 +25,7 @@ public class Staff extends User {
 
     /***
      * Constructs a new `Staff` class with the given user ID, password and faculty.
+     *
      * @param userID The staff's user ID.
      * @param password The password of the staff.
      * @param faculty The faculty to which the staff belongs to.
@@ -36,12 +38,14 @@ public class Staff extends User {
     //Getters
     /***
      * Gets a HashMap of camps that were created but the staff.
+     *
      * @return A HashMap of the camps created by this staff object
      */
     public HashMap<String, Camp> getCamps() { return this.createdCamps; }
 
     /***
      * Adds a camp to the staff's created camps list
+     *
      * @param campId The camp Id.
      * @param camp The created camp object.
      */
@@ -51,6 +55,7 @@ public class Staff extends User {
 
     /***
      * Removes a camp from the staff's created camp list.
+     *
      * @param campId The camp Id.
      */
     public void removeCamp(String campId) {

@@ -17,6 +17,7 @@ public class Camp {
 
     /***
      * Constructs a new `Camp` object with the provided camp information.
+     *
      * @param campInformation The information associated with the camp.
      */
     public Camp(CampInformation campInformation) {
@@ -54,12 +55,14 @@ public class Camp {
 
     /***
      * Returns the set of attendees for this camp.
+     *
      * @return A set of students who are attendees for the camp.
      */
     public HashMap<String, Student> getAttendees() { return attendees; }
 
     /***
-     * Returns the set of committee members for the camp
+     * Returns the set of committee members for the camp.
+     *
      * @return A set of students who are committee members for the camp.
      */
     public HashMap<String, Student> getCommittee() { return committee; }
@@ -68,7 +71,8 @@ public class Camp {
 
     /***
      * Adds a student to the list of attendees for this camp.
-     * @param student The student to be added as an attendee
+     *
+     * @param student The student to be added as an attendee.
      * @return `true` if the student is added successfully, `false` if the student is already an attendee.
      */
     public boolean addAttendee(String studentId, Student student) {
@@ -79,7 +83,8 @@ public class Camp {
 
     /***
      * Adds a student to the list of committee members for this camp.
-     * @param student The student to be added as a committee member
+     *
+     * @param student The student to be added as a committee member.
      * @return `true` if the student was added successfully, `false`if the student was already a committee member.
      */
     public boolean addCommitteeMember(String studentId, Student student) {
@@ -90,6 +95,7 @@ public class Camp {
 
     /***
      * Removes a student from the list of attendees for this camp.
+     *
      * @param studentId The id of the students to be removed from the camp attendees.
      * @return `true` if the student was removed successfully, `false` if the student was not already an attendee.
      */
@@ -101,6 +107,7 @@ public class Camp {
 
     /***
      * Removes a student from the list of committee members for the camp.
+     *
      * @param studentId The id of the student to be removed from the committee members.
      * @return `true` if the student was removed successfully, `false` if the student was not already a committee member.
      */
