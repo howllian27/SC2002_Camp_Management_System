@@ -15,8 +15,9 @@ import view.CampDetailView;
 import view.EditCampView;
 
 /**
- * The CampOperationsController class is responsible for handling operations related to camp information.
+ * The {@code CampOperationsController } class is responsible for handling operations related to camp information.
  * It interacts with the CampDB for database operations and uses CampListView and CampDetailView for displaying relevant information.
+ *
  * @author Chan Hin Wai Howell
  * @version 1.0
  * @since 2023-10-28
@@ -43,11 +44,12 @@ public class CampOperationsController implements BaseController {
     }
 
     /**
-     * Verify if the camp exists
-     * 
-     * @param campID
-     * @param staffID
-    */
+     * Verify if the camp exists and is owned by the staff.
+     *
+     * @param campID The ID of the camp to verify.
+     * @param staff The staff attempting the verification.
+     * @return True if the camp exists and is owned by the staff; false otherwise.
+     */
     public boolean verifyCampOwnership(String campID, Staff staff) {
         Camp camp = campDB.getCamp(campID);
         if (camp == null) {
@@ -64,10 +66,12 @@ public class CampOperationsController implements BaseController {
         return true;
     }
 
-    /** 
-    * Create a new camp
-    * @param campInformation The camp information to be created.
-    */ 
+    /**
+     * Create a new camp.
+     *
+     * @param campInformation The camp information to be created.
+     * @param staff The staff creating the camp.
+     */
     public void createCamp(CampInformation campInformation, Staff staff) {
         Camp camp = new Camp(campInformation); // Assuming Camp constructor takes CampInformation
         boolean success = campDB.addCamp(camp.getName(), camp);
@@ -76,12 +80,11 @@ public class CampOperationsController implements BaseController {
             campDetailView.displayCampDetails(camp);
         }
     }
-
-    /** 
-    * Edit a camp
-    * @param campID The camp ID to be edited.
-    * @param updatedDetails The updated details of the camp.
-    */ 
+    /**
+     * Edit a camp.
+     *
+     * @param campID The camp ID to be edited.
+     */
     public void editCamp(String campID) {
         if (campDB.getCamp(campID) == null) {
             System.out.println("Camp does not exist.");
@@ -98,10 +101,11 @@ public class CampOperationsController implements BaseController {
         }
     }
 
-    /** 
-    * Edit a camp
-    * @param campID The camp ID to be edited.
-    */ 
+    /**
+     * Delete a camp.
+     *
+     * @param campID The camp ID to be deleted.
+     */
     public void deleteCamp(String campID) {
         if (campDB.getCamp(campID) != null) {
             System.out.println("Camp does not exist.");
@@ -112,10 +116,11 @@ public class CampOperationsController implements BaseController {
         System.out.println("Camp successfully deleted!");
     }
 
-    /** 
-    * View all camp
-    * @param userType The user type to be viewed.
-    */ 
+    /**
+     * View all camps based on user type.
+     *
+     * @param userType The user type to be viewed ("staff" or "student").
+     */
     public void viewCampsForUserType(String userType) {
         List<Camp> camps = null;
         if (userType.equals("staff")) {
@@ -128,7 +133,7 @@ public class CampOperationsController implements BaseController {
             camps = campMap.values().stream()
                               .filter(Camp::getVisibility) // Keep only camps where getVisibility is true
                               .collect(Collectors.toList());          
-        }        
+        }
         if (camps.isEmpty()) {
             System.out.println("Camp does not exist.");
         } else {
@@ -137,7 +142,8 @@ public class CampOperationsController implements BaseController {
     }
 
     /** 
-    * View camp details
+    * View camp details.
+     *
     * @param campID The camp ID to be viewed.
     */ 
     public void viewCampDetails(String campID) {
@@ -149,10 +155,11 @@ public class CampOperationsController implements BaseController {
         }
     }
 
-    /** 
-    * Toggle camp visibility
-    * @param campID The camp ID to be viewed.
-    */ 
+    /**
+     * Toggle camp visibility.
+     *
+     * @param campID The camp ID to be toggled.
+     */
     public void toggleCampVisibility(String campID) {
         var camp = campDB.getCamp(campID);
         if (camp == null) {
@@ -165,10 +172,11 @@ public class CampOperationsController implements BaseController {
         System.out.println("Camp visibility toggled!");
     }
 
-    /** 
-     * View registered students
-     * @param campID The camp ID to be viewed.
-    */
+    /**
+     * View registered students for a camp.
+     *
+     * @param campID The camp ID to view registered students.
+     */
     public void viewRegisteredStudents(String campID){
         Camp camp = campDB.getCamp(campID);
         HashMap<String, Student> attendees = camp.getAttendees();

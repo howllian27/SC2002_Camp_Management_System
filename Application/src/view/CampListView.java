@@ -27,7 +27,7 @@ public class CampListView {
         System.out.println("+------------------------------------------------------------+\n");
     }
 
-    /*
+    /***
      * Displays a list of all available camps by printing their names.
      */
     public void displayCampsStaffMenu(){
@@ -60,6 +60,11 @@ public class CampListView {
         }
     }
 
+    /**
+     * Displays a list of available camps for staff users.
+     *
+     * @param camps A list of {@code Camp} objects containing the available camps to be displayed.
+     */
     public void displayCampsForStaff(List<Camp> camps){
         displayCampsStaffMenu();
         System.out.println("List of Camps:");
@@ -74,6 +79,11 @@ public class CampListView {
         }
     }
 
+    /**
+     * Displays a detailed list of camps for users, including additional information.
+     *
+     * @param camps A list of {@code Camp} objects containing the camps to be displayed in detail.
+     */
     public void displayDetailedCamps(List<Camp> camps) {
                 System.out.println("\n+------------------------------------------------------------+");
                 System.out.println("|                                                             |");

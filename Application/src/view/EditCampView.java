@@ -8,8 +8,26 @@ import java.text.SimpleDateFormat;
 
 import model.Camp;
 
+/**
+ * The {@code EditCampView} class provides a user interface for editing camp information.
+ * Users can interactively modify various details of a given camp, including its name,
+ * dates, registration closing date, location, slots, description, and visibility.
+ * The changes made by the user are reflected in the provided {@code Camp} object.
+ *
+ * <p><b>Note:</b> To exit the edit portal, the user can enter '9' or '0' when prompted for a choice.
+ *
+ * @author Cheng Lin
+ * @version 1.0
+ */
 public class EditCampView {
-    
+
+    /**
+     * Displays the current details of the camp and allows the user to edit specific attributes.
+     * The user can choose which camp details to modify and provide new values.
+     *
+     * @param camp The {@code Camp} object representing the camp to be edited.
+     * @return The edited {@code Camp} object reflecting the changes made by the user.
+     */
     public Camp editCampInfoView(Camp camp){
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         System.out.println("\n+------------------------------------------------------------+");
@@ -44,10 +62,10 @@ public class EditCampView {
             System.out.print("Enter choice: ");
             Scanner scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
-            scanner.nextLine(); 
-            
+            scanner.nextLine();
+
             switch(choice){
-                case 1: 
+                case 1:
                     System.out.print("Enter new camp name: ");
                     String newCampName = scanner.nextLine();
                     camp.setName(newCampName);
@@ -58,7 +76,7 @@ public class EditCampView {
                     System.out.print("2. End Date ");
                     int datechoice = scanner.nextInt();
                     switch(datechoice){
-                        case 1: 
+                        case 1:
                             System.out.print("Enter new start date (dd-mm-yyyy) ");
                             String  newStartDateString = scanner.nextLine();
                             Date newStartDate = null;
@@ -71,12 +89,12 @@ public class EditCampView {
 
                             Date dates_Start[] = {newStartDate, camp.getDates()[1]};
                             camp.setDates(dates_Start);
-                            break; 
-                        case 2: 
+                            break;
+                        case 2:
                             System.out.print("Enter new end date (dd-mm-yyyy) ");
                             String  newEndDateString = scanner.nextLine();
                             Date newEndDate = null;
-                            
+
                             try {
                                 newEndDate = dateFormat.parse(newEndDateString);
                             } catch (ParseException e) {
@@ -128,11 +146,11 @@ public class EditCampView {
                 default:
                     break;
             }
-            
+
             return camp;
         }
 
-        
+
     }
 
 }

@@ -17,8 +17,9 @@ import view.CampListView;
 import view.SuggestionsView;
 
 /**
- * The SuggestionController class is responsible for managing suggestions related to camps.
+ * The {@code SuggestionController } class is responsible for managing suggestions related to camps.
  * It interacts with the SuggestionDB for database operations and uses SuggestionsView for displaying relevant information.
+ *
  * @author Chan Hin Wai Howell
  * @version 1.0
  * @since 2023-11-02
@@ -46,10 +47,11 @@ public class SuggestionController implements BaseController {
     }
 
     /**
-     * This method is used to submit a suggestion for a camp.
-     * @param student
-     * @param campID
-    */
+     * Submits a suggestion for a camp.
+     *
+     * @param student The student submitting the suggestion.
+     * @param campID The ID of the camp for which the suggestion is submitted.
+     */
     public void submitSuggestion(Student student, String campID) {
         Camp camp = campDB.getCamp(campID);
         CampInformation campInformationSuggestion = suggestionsView.promptForSuggestions(camp);
@@ -61,10 +63,12 @@ public class SuggestionController implements BaseController {
     }
 
     /**
-     * This method is used to view all suggestions for a camp.
-     * @param studentID
-     * @param student
-    */
+     * Views all suggestions submitted by a student.
+     *
+     * @param studentID The ID of the student.
+     * @param student The student object.
+     * @return True if suggestions exist, false otherwise.
+     */
     public boolean viewIndivSuggestions(String studentID, Student student) {
         List<Suggestion> suggestions = suggestionDB.getSuggestionsByStudent(studentID);
         Camp registeredCommitteeCamp = student.getRegisteredCommitteeCamp();
@@ -79,8 +83,9 @@ public class SuggestionController implements BaseController {
     }
 
     /**
-     * This method is used to view all suggestions for a camp.
-     * @param student
+     * Edits a suggestion submitted by a student.
+     *
+     * @param student The student submitting the suggestion.
      */
     public void editSuggestion(Student student) {
         Camp registeredCommitteeCamp = student.getRegisteredCommitteeCamp();
@@ -106,9 +111,10 @@ public class SuggestionController implements BaseController {
     }
 
     /**
-     * This method is used to delete a suggestion for a camp.
-     * @param student
-    */
+     * Deletes a suggestion submitted by a student.
+     *
+     * @param student The student submitting the suggestion.
+     */
     public void deleteSuggestion(Student student) {
         Camp registeredCommitteeCamp = student.getRegisteredCommitteeCamp();
         List<Suggestion> suggestions = suggestionDB.getSuggestionsByStudent(student.getID()); 
@@ -131,10 +137,11 @@ public class SuggestionController implements BaseController {
     }
 
     /**
-     * This method is used to approve a suggestion for a camp.
-     * @param campID
-     * @param studentID
-    */
+     * Approves a suggestion for a camp.
+     *
+     * @param campID The ID of the camp.
+     * @param studentID The ID of the student who submitted the suggestion.
+     */
     public void approveSuggestion(String campID, String studentID) {
         Suggestion suggestion = suggestionDB.getSuggestion(campID, studentID);
         if (suggestion == null) {
@@ -146,6 +153,12 @@ public class SuggestionController implements BaseController {
         System.out.println("Suggestion successfully approved!");
     }
 
+    /**
+     * Handles suggestions for a staff member.
+     * Displays suggestions for a specific camp and allows staff to approve or reject them.
+     *
+     * @param staff The staff member handling suggestions.
+     */
     public void staffSuggestionHandler(Staff staff){
         HashMap<String, Camp> staffCamps = staff.getCamps();
 

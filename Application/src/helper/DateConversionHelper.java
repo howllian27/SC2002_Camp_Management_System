@@ -18,8 +18,7 @@ public class DateConversionHelper {
 
         try {
             // Parse the input date string into a Date object
-            Date date = dateFormat.parse(dateString);
-            return date;
+            return dateFormat.parse(dateString);
         } catch (ParseException e) {
             e.printStackTrace();
         }

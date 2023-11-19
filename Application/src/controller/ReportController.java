@@ -20,6 +20,13 @@ import database.EnquiryDB;
 import view.ReportView;
 import view.CampListView;
 
+/**
+ * The {@code ReportController } class is responsible for generating various reports related to camps and student enquiries.
+ * It interacts with the CampDB and EnquiryDB for retrieving necessary data and uses ReportView and CampListView for displaying information.
+ *
+ * @author Chan Hin Wai Howell
+ * @version 1.0
+ */
 public class ReportController implements BaseController{
 
     private FileHelper fileHelper;
@@ -43,6 +50,7 @@ public class ReportController implements BaseController{
 
     /**
      * Displays the report menu to the user.
+     *
      * @param staff The staff member who is currently logged in.
      */
     public void generateReportsForStaff(Staff staff){
@@ -57,24 +65,25 @@ public class ReportController implements BaseController{
         int campChoice = sc.nextInt();
         Camp selectedCamp = camps.get(campChoice - 1);
 
-        switch (choice){
-            case 1:
+        switch (choice) {
+            case 1 -> {
                 System.out.println("Generating Camp Report...");
                 generateStudentReport(selectedCamp, "Attendees");
-                break;
-            case 2:
+            }
+            case 2 -> {
                 System.out.println("Generating Camp Performance Report...");
                 generateStudentReport(selectedCamp, "Camp committee");
-                break;
-            case 3:
+            }
+            case 3 -> {
                 System.out.println("Generating Student Enquiry Report...");
                 generateStudentEnquiryReport(selectedCamp);
-                break;
+            }
         }
     }
 
     /**
      * Generates a report for a camp.
+     *
      * @param selectedCamp The camp to generate a report for.
      * @param filterType The type of report to generate.
      */
@@ -93,28 +102,27 @@ public class ReportController implements BaseController{
                             "Camp In Charge: " + campDetails.inCharge.getName() + "\n\n";
 
         StringBuilder concatenatedUserIDs = new StringBuilder();
-        Map<String, Student> CampStudents = new HashMap<>();
-
-
-        switch (filterType) {
-            case "Attendees":
+        Map<String, Student> CampStudents = switch (filterType) {
+            case "Attendees" -> {
                 System.out.println("List of Camp Attendees: ");
-                CampStudents = campDB.getAttendeesForCamp(selectedCamp.getName());
-                break;
-            case "Camp committee":
+                yield campDB.getAttendeesForCamp(selectedCamp.getName());
+            }
+            case "Camp committee" -> {
                 System.out.println("List of Camp Committee Members: ");
-                CampStudents = campDB.getCommitteeMembersForCamp(selectedCamp.getName());
-                break;
-        }
+                yield campDB.getCommitteeMembersForCamp(selectedCamp.getName());
+            }
+            default -> new HashMap<>();
+        };
+
 
         for (Student student : CampStudents.values()) {
-            if (concatenatedUserIDs.length() > 0) {
+            if (!concatenatedUserIDs.isEmpty()) {
                 concatenatedUserIDs.append(", ");
             }
-            concatenatedUserIDs.append(student.getName() + "(User ID: " + student.getID() + ")");
+            concatenatedUserIDs.append(student.getName()).append("(User ID: ").append(student.getID()).append(")");
 
             if (filterType == "Camp Committee"){
-                concatenatedUserIDs.append("Total Points: " + student.getPoints() + "\n");
+                concatenatedUserIDs.append("Total Points: ").append(student.getPoints()).append("\n");
             }
         }
 
@@ -128,7 +136,12 @@ public class ReportController implements BaseController{
             System.out.println("Camp Performance Report generated successfully!");
         }
     }
-    
+
+    /**
+     * Generates a report for student enquiries in a camp.
+     *
+     * @param camp The camp to generate the report for.
+     */
     public void generateStudentEnquiryReport(Camp camp){
         List<String> reportList = new ArrayList<>();
         List<Enquiry> enquiryList = enquiryDB.getEnquiriesByCamp(camp.getName());

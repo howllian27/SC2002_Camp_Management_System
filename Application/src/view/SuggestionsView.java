@@ -7,6 +7,7 @@ import model.Camp;
 import model.CampInformation;
 import model.Suggestion;
 import helper.DateConversionHelper;
+
 /**
  * The SuggestionsView class is responsible for managing and displaying suggestions and user interactions.
  * It provides methods to display a list of suggestions and prompt users for their own suggestions.
@@ -14,7 +15,6 @@ import helper.DateConversionHelper;
  * @author Cheng Lin
  * @version 1.0
  */
-
 public class SuggestionsView {
 
     DateConversionHelper dateConversionHelper = new DateConversionHelper();
@@ -78,13 +78,14 @@ public class SuggestionsView {
     }
 
     /**
-     * Prompts users to enter their suggestions.
+     * Prompts users to enter their suggestions for a specific aspect of the camp information.
+     * Based on the user's input, constructs a new CampInformation object with the suggested changes.
      *
-     * @param informationChoice
-     * @param campInformation
-     * @param camp
-     * @return
-    */
+     * @param informationChoice The user's choice for which camp information aspect to suggest changes.
+     * @param campInformation    The original CampInformation object.
+     * @param camp               The associated camp object.
+     * @return A CampInformation object with the suggested changes.
+     */
     public CampInformation suggestCampInformation(int informationChoice, CampInformation campInformation, Camp camp){
         Scanner scanner  = new Scanner(System.in);
         switch (informationChoice){
@@ -145,9 +146,13 @@ public class SuggestionsView {
                 return null;
         }
     }
-    
+
     /**
-     * Prompts users to enter their suggestions.
+     * Prompts users to enter their suggestions for various aspects of the camp information.
+     * Displays the current camp information and lets the user choose which aspect to suggest changes for.
+     *
+     * @param camp The camp object associated with the suggestions.
+     * @return A CampInformation object with the suggested changes.
      */
     public CampInformation promptForSuggestions(Camp camp) {
         System.out.println("Type the number of the information you would like to make a suggestion for:");
@@ -167,6 +172,14 @@ public class SuggestionsView {
         return suggestCampInformation(informationChoice, campInformation, camp);
     }
 
+    /**
+     * Allows users to edit their suggestions based on the original suggestion and associated camp.
+     * Displays the original suggestion and prompts the user to provide an edited suggestion.
+     *
+     * @param suggestion The original suggestion made by the user.
+     * @param camp       The camp associated with the suggestion.
+     * @return A CampInformation object with the edited suggestion.
+     */
     public CampInformation editSuggestionView(Suggestion suggestion, Camp camp){
         CampInformation originalCampInfo = camp.getCampInformation();
         CampInformation campInformation;
@@ -257,10 +270,11 @@ public class SuggestionsView {
             return null;
         }
     }
+
     /**
      * Displays camp details and suggested changes, and allows the staff member to approve or reject the changes.
+     * Provides a detailed overview of suggested changes and prompts the staff member for approval.
      *
-     * @param camp The Camp object containing the camp's information.
      * @param suggestions A list of strings containing suggestions to be displayed.
      */
     public void viewAndApproveSuggestions(List<String> suggestions){

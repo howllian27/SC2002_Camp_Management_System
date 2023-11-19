@@ -11,8 +11,23 @@ import model.Faculty;
 import model.Staff;
 import model.User;
 
+/**
+ * The {@code CreateCampView} class is responsible for interacting with users to create a new camp.
+ * It gathers information about the camp from the user, constructs a {@code CampInformation} object,
+ * and invokes the necessary controller methods to create the camp.
+ *
+ * @author Cheng Lin
+ * @version 1.0
+ */
 public class CreateCampView {
     CampOperationsController campOperationsController = new CampOperationsController();
+
+    /**
+     * Gathers information from the user to create a new camp.
+     *
+     * @param user The user initiating the camp creation (assumed to be a staff member).
+     * @return The {@code CampInformation} object representing the newly created camp.
+     */
     public CampInformation creatingCamp(User user){
         Staff staff = (Staff) user;
         Scanner scanner = new Scanner(System.in);

@@ -5,9 +5,10 @@ import model.User;
 import view.LoginView;
 
 /**
- * The UserController class is responsible for handling user-related operations.
+ * The {@code UserController } class is responsible for handling user-related operations.
  * It provides methods for user login and password change functionalities.
  * This class interacts with the UserDB for database operations and uses LoginView for displaying relevant messages.
+ *
  * @author Chan Hin Wai Howell
  * @version 1.0
  * @since 2023-10-28

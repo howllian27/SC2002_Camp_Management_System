@@ -12,8 +12,9 @@ import model.Camp;
 import model.Student;
 
 /**
- * The StudentCampInteractionController class is responsible for managing student interactions with camps.
+ * The {@code StudentCampInteractionController } class is responsible for managing student interactions with camps.
  * It provides methods for students to register for and withdraw from camps.
+ *
  * @author Chan Hin Wai Howell
  * @version 1.0
  * @since 2023-11-02
@@ -36,13 +37,13 @@ public class StudentCampInteractionController implements BaseController {
     }
 
     /**
-     * Checks for clashes in dates for registered camps and new camp.
-     * 
-     * @param student
-     * @param camp
-     * @param registeredCamps
-     * @return
-    */
+     * Checks for clashes in dates for registered camps and a new camp.
+     *
+     * @param student The student object.
+     * @param camp The camp object.
+     * @param registeredCamps The HashMap of registered camps for the student.
+     * @return True if there are clashes in dates, false otherwise.
+     */
     public boolean checkForClashesInCampDates(Student student, Camp camp, HashMap<String, Camp> registeredCamps){
         // Check for clashes in dates for registered camps and new camp
         Date newCampStartDate = camp.getDates()[0];

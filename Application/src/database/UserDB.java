@@ -10,6 +10,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The {@code UserDB} class represents an in-memory database for managing users, including students and staff.
+ * It provides methods for adding, removing, updating, and retrieving user information.
+ * This class follows the Singleton design pattern to ensure a single instance is used throughout the application.
+ *
+ * @author Wei Hong
+ * @version 1.0
+ */
 public class UserDB
 {
     private final Map<String, User> stringStudentMap;
@@ -35,7 +43,11 @@ public class UserDB
         populateUserMap(false); // Populate the staff map
     }
 
-    // Static method to create instance of Singleton(UserDB) class
+    /**
+     * Returns the singleton instance of the {@code UserDB} class.
+     *
+     * @return The singleton instance of {@code UserDB}.
+     */
     public static synchronized UserDB getInstance()
     {
         if (userDB == null)
@@ -44,6 +56,11 @@ public class UserDB
         return userDB;
     }
 
+    /**
+     * Populates the user map with data from the corresponding file.
+     *
+     * @param isStudent {@code true} if populating student map, {@code false} for staff map.
+     */
     public void populateUserMap(boolean isStudent) {
         String path = isStudent ? STUDENT_FILE_PATH : STAFF_FILE_PATH;
         List<String> listOfTxtLines = fileHelper.readFile(path);
@@ -80,6 +97,11 @@ public class UserDB
         // prettyPrintUserMap(userMap);
     }
 
+    /**
+     * Prints a formatted representation of the user map for debugging purposes.
+     *
+     * @param userMap The user map to be printed.
+     */
     public void prettyPrintUserMap(Map<String, User> userMap) {
         for (Map.Entry<String, User> entry : userMap.entrySet()) {
             String key = entry.getKey();
@@ -90,6 +112,12 @@ public class UserDB
         }
     }
 
+    /**
+     * Converts a faculty string to the corresponding {@code Faculty} enum.
+     *
+     * @param facultyString The string representation of the faculty.
+     * @return The corresponding {@code Faculty} enum.
+     */
     public Faculty getFacultyEnum(String facultyString) {
         switch (facultyString) {
             case "SCSE":
@@ -107,6 +135,13 @@ public class UserDB
         }
     }
 
+    /**
+     * Adds a user to the user map, either in the student or staff map based on the parameter.
+     *
+     * @param user      The user to be added.
+     * @param isStudent {@code true} if adding a student, {@code false} for staff.
+     * @return {@code true} if the user was successfully added, {@code false} otherwise.
+     */
     public boolean addUser(User user, boolean isStudent) {
         if (user == null) {
             return false;
@@ -128,17 +163,39 @@ public class UserDB
         return true;
     }
 
+    /**
+     * Removes a user from the user map, either in the student or staff map based on the parameter.
+     *
+     * @param userID    The ID of the user to be removed.
+     * @param isStudent {@code true} if removing a student, {@code false} for staff.
+     * @return {@code true} if the user was successfully removed, {@code false} otherwise.
+     */
     public boolean removeUser(String userID, boolean isStudent) {
         Map<String, User> userMap = isStudent ? stringStudentMap : staffUserMap;
         User removedUser = userMap.remove(userID);
         return removedUser != null;
     }
 
+    /**
+     * Retrieves a user from the user map, either in the student or staff map based on the parameter.
+     *
+     * @param userID    The ID of the user to be retrieved.
+     * @param isStudent {@code true} if retrieving a student, {@code false} for staff.
+     * @return The user object or {@code null} if not found.
+     */
     public User getUser(String userID, boolean isStudent) {
         Map<String, User> userMap = isStudent ? stringStudentMap : staffUserMap;
         return userMap.get(userID);
     }
 
+    /**
+     * Updates the password for a user in the user map.
+     * The user can be either a student or staff member.
+     *
+     * @param userID      The ID of the user whose password is to be updated.
+     * @param newPassword The new password to be set.
+     * @return {@code true} if the password was successfully updated, {@code false} otherwise.
+     */
     public boolean updatePassword(String userID, String newPassword) {
         User user = getUser(userID, true);
         if (user != null) {

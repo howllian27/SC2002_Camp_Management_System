@@ -13,7 +13,8 @@ import model.User;
 import view.EnquiriesView;
 
 /**
- * The EnquiryController class is responsible for handling enquiries from users.
+ * The {@code EnquiryController } class is responsible for handling enquiries from users.
+ *
  * @author Chan Hin Wai Howell
  * @version 1.0
  * @since 2023-11-02
@@ -48,8 +49,8 @@ public class EnquiryController implements BaseController {
         Camp camp = campDB.getCamp(campID);
         User user = userDB.getUser(userID, true);
 
-        if (user instanceof Student) {
-            Student student = (Student) user; // Safe downcast after checking with instanceof
+        if (user instanceof Student student) {
+            // Safe downcast after checking with instanceof
             Enquiry enquiry = new Enquiry(camp, student, enquiryText);
             enquiryDB.addEnquiry(enquiry);
             System.out.println("Enquiry submitted successfully.");
@@ -70,6 +71,7 @@ public class EnquiryController implements BaseController {
 
     /**
      * Allows staff to view enquiries related to a student.
+     *
      * @param studentID The Id of the student
     */
     public void viewEnquiriesByStudent(String studentID) {
@@ -80,8 +82,9 @@ public class EnquiryController implements BaseController {
     /**
      * Allows staff to reply to an enquiry.
      *
-     * @param enquiry The original enquiry object
+     * @param enquiryToReplyIndex The index of the enquiry to reply to.
      * @param replyText The response to the enquiry.
+     * @param campID The ID of the camp.
      */
     public void replyToEnquiryAsStaff(int enquiryToReplyIndex, String replyText, String campID) {
         List<Enquiry> enquiries = enquiryDB.getEnquiriesByCamp(campID);
@@ -114,10 +117,10 @@ public class EnquiryController implements BaseController {
     /**
      * Allows camp committee member to reply to an enquiry.
      *
-     * @param enquiry The original enquiry object
+     * @param enquiryToReplyIndex The index of the enquiry to reply to.
      * @param replyText The response to the enquiry.
      * @param campID The ID of the camp.
-     * @param userId The ID of the user.
+     * @param userID The ID of the user.
      */
     public void replyToEnquiryAsCommittee(int enquiryToReplyIndex, String replyText, String campID, String userID) {
         List<Enquiry> enquiries = enquiryDB.getEnquiriesByCamp(campID);
@@ -195,10 +198,10 @@ public class EnquiryController implements BaseController {
 
     /**
      * Allows students to delete their enquiries.
-     * 
-     * @param enquiryToDeleteIndex
-     * @param userID
-    */
+     *
+     * @param enquiryToDeleteIndex The index of the enquiry to delete.
+     * @param userID The ID of the user.
+     */
     public void deleteEnquiry(int enquiryToDeleteIndex, String userID) {
         List<Enquiry> enquiries = enquiryDB.getEnquiriesByStudent(userID);
         Enquiry enquiryToDelete = null;
@@ -223,6 +226,12 @@ public class EnquiryController implements BaseController {
         }
     }
 
+    /**
+     * Checks if an enquiry has been replied to and displays the response.
+     *
+     * @param enquiryReplyIndex The index of the enquiry to check.
+     * @param campId The ID of the camp.
+     */
     public void checkIfEnquiryReplied(int enquiryReplyIndex, String campId){
         List<Enquiry> enquiries = enquiryDB.getEnquiriesByCamp(campId);
         int count = 1;
