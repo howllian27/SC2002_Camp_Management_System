@@ -20,10 +20,11 @@ import model.CampInformation;
 import model.Staff;
 import model.Student;
 import model.User;
+import utils.Input;
 import view.CampListView;
 import view.CreateCampView;
 
-
+import utils.Logger;
 
 public class Main {
     private static User currentUser = null;
@@ -45,56 +46,41 @@ public class Main {
     static CampListView campListView = new CampListView();
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         while (true) {
             if (currentUser == null) {
-                System.out.println("Welcome to CAMs!");
-                System.out.println("1. Login");
-                System.out.println("2. Exit");
-                System.out.print("Enter choice: ");
-                int choice = scanner.nextInt();
-                scanner.nextLine();
+                    System.out.println("Welcome to CAMs!");
+                    System.out.println("1. Login");
+                    System.out.println("2. Exit");
+                    System.out.print("Enter choice: ");
 
-                switch (choice) {
-                    case 1:
-                        System.out.print("Enter User ID: ");
-                        String userID = scanner.nextLine();
-                        System.out.print("Enter Password: ");
-                        String password = scanner.nextLine();
-                        System.out.print("Are you a student? (Y/N): ");
-                        String isStudent = scanner.nextLine();
-                        boolean isStudentBool = true;
-                        
-                        if (isStudent.equals("Y") || isStudent.equals("y")){
-                            isStudentBool = true;
-                        }
-                        else if (isStudent.equals("N") || isStudent.equals("n")){
-                            isStudentBool = false;
-                        }
+                    int choice = Input.nextInt();
 
-                        // else{
-                        //     System.out.println("Invalid input. Try again.");
-                        //     break;
-                        // }
-                        
-                        User currentUser = userController.loginUser(userID, password, isStudentBool);
-                        if (currentUser == null) {
-                            System.out.println("Invalid credentials. Try again.");
-                        } else {
-                            if (isStudentBool) {
-                                studentMenu(userID, currentUser);
-                            } else {
-                                staffMenu(userID, currentUser);
+                    switch (choice) {
+                        case 1 -> {
+                            System.out.print("Enter User ID: ");
+                            String userID = Input.nextLine();
+                            System.out.print("Enter Password: ");
+                            String password = Input.nextLine();
+                            System.out.print("Are you a student? (Y/N): ");
+                            String isStudent = Input.nextLine();
+                            boolean isStudentBool = !isStudent.equals("N") && !isStudent.equals("n");
+
+                            User currentUser = userController.loginUser(userID, password, isStudentBool);
+
+                            if (currentUser != null) { //Removed unnecessary error message
+                                if (isStudentBool) {
+                                    studentMenu(userID, currentUser);
+                                } else {
+                                    staffMenu(userID, currentUser);
+                                }
                             }
                         }
-                        break;
-                    case 2:
-                        System.out.println("Goodbye!");
-                        scanner.close();
-                        return;
-                    default:
-                        System.out.println("Invalid choice. Try again.");
-                }
+                        case 2 -> {
+                            Logger.Success("Goodbye!");
+                            return;
+                        }
+                        default -> System.out.println("Invalid choice. Try again.");
+                    }
             } else {
                 // if (currentUser instanceof StudentDB) {
                 //     studentMenu(scanner);
@@ -125,10 +111,11 @@ public class Main {
             System.out.println("11. Logout");
             System.out.println("-----------------------------------------------------");
             System.out.print("Enter choice: ");
-            Scanner scanner = new Scanner(System.in);
-            int choice = scanner.nextInt();
-            System.out.println("");
-            scanner.nextLine();
+
+
+            int choice = Input.nextInt();
+
+            System.out.println();
             String userType = "student";
             Student student = (Student) userDB.getUser(userID, true);
 
@@ -141,11 +128,11 @@ public class Main {
                     // Register for a camp
                     campOperationsController.viewCampsForUserType(userType);
                     System.out.println("Type the name of the camp you would like to register for!");
-                    String selectedCampID = scanner.nextLine(); 
+                    String selectedCampID = Input.nextLine();
                     System.out.println("Would you like to register as a participant or a committee member?");
                     System.out.println("1. Participant");
                     System.out.println("2. Committee Member");
-                    int roleChoice = scanner.nextInt();
+                    int roleChoice = Input.nextInt();
                     if (roleChoice == 1){
                         userType = "student";
                     }
@@ -162,19 +149,19 @@ public class Main {
                     // Submit enquiry for a camp
                     campOperationsController.viewCampsForUserType(userType);
                     System.out.println("Type the name of the camp you would like to submit an enquiry for!");
-                    String campID = scanner.nextLine();
+                    String campID = Input.nextLine();
                     if (campDB.getCamp(campID) == null){
                         System.out.println("Invalid camp name. Try again.");
                         break;
                     }
                     System.out.println("Type the enquiry you would like to make!");
-                    String enquiry = scanner.nextLine();
+                    String enquiry = Input.nextLine();
                     enquiryController.submitEnquiry(userID, campID, enquiry);
 
                     break;
                 case 4:
                     // Submit suggestion for a camp
-                    if (student.getCampCommitteeMemberStatus() == false){
+                    if (!student.getCampCommitteeMemberStatus()){
                         System.out.println("You are not a committee member, so you can't make suggestions!");
                         break;
                     }
@@ -199,31 +186,31 @@ public class Main {
                     System.out.println("1. Edit my enquiries");
                     System.out.println("2. Delete my enquiries");
                     System.out.println("3. Reply to enquiries (Camp Committee only)");
-                    int enquiryChoice = scanner.nextInt();
+                    int enquiryChoice = Input.nextInt();
 
                     switch (enquiryChoice) {
                         case 1:
                             // Edit my enquiries
                             enquiryController.viewEnquiriesByStudent(userID);
                             System.out.println("Type the enquiry you would like to edit!");
-                            int enquiryToEditIndex = scanner.nextInt();
+                            int enquiryToEditIndex = Input.nextInt();
                             enquiryController.checkIfEnquiryReplied(enquiryToEditIndex, userID);
-                            scanner.nextLine();
+                            Input.nextLine();
                             System.out.println("Type the new enquiry you would like to make!");
-                            String newEnquiry = scanner.nextLine();
+                            String newEnquiry = Input.nextLine();
                             enquiryController.editEnquiry(enquiryToEditIndex, newEnquiry, userID);
                             break;
                         case 2:
                             // Delete my enquiries
                             enquiryController.viewEnquiriesByStudent(userID);
                             System.out.println("Type the number of the enquiry you would like to delete!");
-                            int enquiryToDeleteIndex = scanner.nextInt();
+                            int enquiryToDeleteIndex = Input.nextInt();
                             enquiryController.checkIfEnquiryReplied(enquiryToDeleteIndex, userID);
                             enquiryController.deleteEnquiry(enquiryToDeleteIndex, userID);
                             break;
                         case 3:
                             // Reply to enquiries (Camp Committee only)
-                            if (student.getCampCommitteeMemberStatus() == false){
+                            if (!student.getCampCommitteeMemberStatus()){
                                 System.out.println("You are not a committee member!");
                                 break;
                             }
@@ -231,11 +218,11 @@ public class Main {
                             System.out.println("Your committee camp name is: " + campIdToReply);
                             enquiryController.viewEnquiriesByCamp(campIdToReply);;
                             System.out.println("Type the number of the enquiry you would like to reply to!");
-                            int enquiryToReplyIndex = scanner.nextInt();
-                            scanner.nextLine();
+                            int enquiryToReplyIndex = Input.nextInt();
+                            Input.nextLine();
                             enquiryController.checkIfEnquiryReplied(enquiryToReplyIndex, userID);
                             System.out.println("Type the reply you would like to make!");
-                            String reply = scanner.nextLine();
+                            String reply = Input.nextLine();
                             enquiryController.replyToEnquiryAsCommittee(enquiryToReplyIndex, reply, campIdToReply, userID);
                         default:
                             System.out.println("Invalid choice. Try again.");
@@ -250,20 +237,16 @@ public class Main {
                     System.out.println("\n Please type the number of the action you would like to perform.");
                     System.out.println("1. Edit my suggestions");
                     System.out.println("2. Delete my suggestions");
-                    int suggestionChoice = scanner.nextInt();
+                    int suggestionChoice = Input.nextInt();
 
                     switch (suggestionChoice) {
-                        case 1:
+                        case 1 ->
                             // Edit my suggestions
-                            suggestionController.editSuggestion(student);
-                            break;
-                        case 2:
+                                suggestionController.editSuggestion(student);
+                        case 2 ->
                             // Delete my suggestions
-                            suggestionController.deleteSuggestion(student);
-                            break;
-                        default:
-                            System.out.println("Invalid choice. Try again.");
-                            break;
+                                suggestionController.deleteSuggestion(student);
+                        default -> System.out.println("Invalid choice. Try again.");
                     }
                 case 8:
                     // View my enquiry replies
@@ -272,12 +255,12 @@ public class Main {
                     // Withdraw from a camp
                     campOperationsController.viewCampsForUserType(userType);
                     System.out.println("Type the name of the camp you would like to withdraw from.");
-                    String withdrawCampID = scanner.nextLine(); 
+                    String withdrawCampID = Input.nextLine();
                     studentCampInteractionController.withdrawFromCamp(userID, withdrawCampID);
                     break;
                 case 10:
                     System.out.println("Please enter your new password:");
-                    String newPassword = scanner.nextLine();
+                    String newPassword = Input.nextLine();
                     userController.changePassword(userID, newPassword);
                     System.out.println(user.getPassword());
                     break;
@@ -307,70 +290,65 @@ public class Main {
             System.out.println("-----------------------------------------------------");
             System.out.print("Enter choice: ");
             Scanner scanner = new Scanner(System.in);
-            int choice = scanner.nextInt();
-            System.out.println("");
-            scanner.nextLine();  // Consume newline
+            int choice = Input.nextInt();
+            System.out.println();
+            Input.nextLine();  // Consume newline
             String userType = "staff";
             Staff staff = (Staff) userDB.getUser(userID, false);
-    
+
             switch (choice) {
-                case 1:
+                case 1 -> {
                     System.out.println("Please enter your new password:");
-                    String newPassword = scanner.nextLine();
+                    String newPassword = Input.nextLine();
                     userController.changePassword(userID, newPassword);
                     System.out.println(user.getPassword());
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     // Create a new camp
                     CampInformation campInformation = createCampView.creatingCamp(user);
-                    break;
-                case 3:
+                }
+                case 3 -> {
                     // Edit an existing camp
                     campOperationsController.viewCampsForUserType(userType);
                     System.out.println("Which camp would you like to edit?");
-                    String campToEdit = scanner.nextLine();
+                    String campToEdit = Input.nextLine();
                     campOperationsController.editCamp(campToEdit);
-                    
-                    break;
-                case 4:
+                }
+                case 4 ->
                     // View all camps
-                    campOperationsController.viewCampsForUserType(userType);
-                    break;
-                case 5:
+                        campOperationsController.viewCampsForUserType(userType);
+                case 5 -> {
                     // View registered students for a camp
                     campOperationsController.viewCampsForUserType(userType);
                     System.out.println("Select a camp to view registered students for:");
-                    String campToView = scanner.nextLine();
+                    String campToView = Input.nextLine();
                     campOperationsController.viewRegisteredStudents(campToView);
-                    break;
-
-                case 6:
+                }
+                case 6 -> {
                     //View/Reply to camp enquiries
                     campOperationsController.viewCampsForUserType(userType);
                     System.out.println("Which camp would you like to view enquiries for?");
-                    String campToViewEnquiries = scanner.nextLine();
+                    String campToViewEnquiries = Input.nextLine();
                     if (!campOperationsController.verifyCampOwnership(campToViewEnquiries, staff)) break;
                     enquiryController.viewEnquiriesByCamp(campToViewEnquiries);
                     System.out.println("Type the number of the enquiry you wish to reply to.");
-                    int enquiryToReply = scanner.nextInt();
-                    scanner.nextLine();
+                    int enquiryToReply = Input.nextInt();
+                    Input.nextLine();
                     System.out.println("Type the reply you would like to make!");
-                    String reply = scanner.nextLine();
+                    String reply = Input.nextLine();
                     enquiryController.replyToEnquiryAsStaff(enquiryToReply, reply, campToViewEnquiries);
-                    break;
-                case 7:
+                }
+                case 7 ->
                     // Accept/Reject suggestions
-                    suggestionController.staffSuggestionHandler(staff);
-                    break;
-                case 8:
+                        suggestionController.staffSuggestionHandler(staff);
+                case 8 ->
                     // Generate reports
-                    reportController.generateReportsForStaff(staff);
-                    break;
-                case 9:
+                        reportController.generateReportsForStaff(staff);
+                case 9 -> {
                     currentUser = null;
                     return;
-                default:
-                    System.out.println("Invalid choice. Try again.");
+                }
+                default -> System.out.println("Invalid choice. Try again.");
             }
         }
     }
