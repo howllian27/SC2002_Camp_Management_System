@@ -1,4 +1,4 @@
-package utils;
+package helper;
 
 /**
  * Utility class for logging messages with color-coded output.
@@ -7,7 +7,7 @@ package utils;
  * @author Shun Jie
  * @version 1.0
  */
-public class Logger {
+public class LoggerHelper {
     public static final String LOGGER_WARNING_INTEGER = "Please enter a valid number.";
 
     // ANSI escape codes for text colors

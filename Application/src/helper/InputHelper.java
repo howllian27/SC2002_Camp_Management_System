@@ -1,4 +1,4 @@
-package utils;
+package helper;
 
 import java.util.Scanner;
 
@@ -10,7 +10,7 @@ import java.util.Scanner;
  * @author Shun Jie
  * @version 1.0
  */
-public class Input {
+public class InputHelper {
     private static final Scanner scanner = new Scanner(System.in);
 
     /**
@@ -30,7 +30,7 @@ public class Input {
      */
     public static int nextInt() {
         while(!scanner.hasNextInt()) {
-            Logger.Warning(Logger.LOGGER_WARNING_INTEGER);
+            LoggerHelper.Warning(LoggerHelper.LOGGER_WARNING_INTEGER);
             scanner.nextLine();
         }
         int nextInt = scanner.nextInt();

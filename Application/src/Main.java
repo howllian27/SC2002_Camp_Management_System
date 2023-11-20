@@ -15,16 +15,15 @@ import controller.ReportController;
 
 import database.CampDB;
 import database.UserDB;
+import helper.InputHelper;
+import helper.LoggerHelper;
 import model.Camp;
 import model.CampInformation;
 import model.Staff;
 import model.Student;
 import model.User;
-import utils.Input;
 import view.CampListView;
 import view.CreateCampView;
-
-import utils.Logger;
 
 public class Main {
     private static User currentUser = null;
@@ -53,16 +52,16 @@ public class Main {
                     System.out.println("2. Exit");
                     System.out.print("Enter choice: ");
 
-                    int choice = Input.nextInt();
+                    int choice = InputHelper.nextInt();
 
                     switch (choice) {
                         case 1 -> {
                             System.out.print("Enter User ID: ");
-                            String userID = Input.nextLine();
+                            String userID = InputHelper.nextLine();
                             System.out.print("Enter Password: ");
-                            String password = Input.nextLine();
+                            String password = InputHelper.nextLine();
                             System.out.print("Are you a student? (Y/N): ");
-                            String isStudent = Input.nextLine();
+                            String isStudent = InputHelper.nextLine();
                             boolean isStudentBool = !isStudent.equals("N") && !isStudent.equals("n");
 
                             User currentUser = userController.loginUser(userID, password, isStudentBool);
@@ -76,7 +75,7 @@ public class Main {
                             }
                         }
                         case 2 -> {
-                            Logger.Success("Goodbye!");
+                            LoggerHelper.Success("Goodbye!");
                             return;
                         }
                         default -> System.out.println("Invalid choice. Try again.");
@@ -113,7 +112,7 @@ public class Main {
             System.out.print("Enter choice: ");
 
 
-            int choice = Input.nextInt();
+            int choice = InputHelper.nextInt();
 
             System.out.println();
             String userType = "student";
@@ -128,11 +127,11 @@ public class Main {
                     // Register for a camp
                     campOperationsController.viewCampsForUserType(userType);
                     System.out.println("Type the name of the camp you would like to register for!");
-                    String selectedCampID = Input.nextLine();
+                    String selectedCampID = InputHelper.nextLine();
                     System.out.println("Would you like to register as a participant or a committee member?");
                     System.out.println("1. Participant");
                     System.out.println("2. Committee Member");
-                    int roleChoice = Input.nextInt();
+                    int roleChoice = InputHelper.nextInt();
                     if (roleChoice == 1){
                         userType = "student";
                     }
@@ -149,13 +148,13 @@ public class Main {
                     // Submit enquiry for a camp
                     campOperationsController.viewCampsForUserType(userType);
                     System.out.println("Type the name of the camp you would like to submit an enquiry for!");
-                    String campID = Input.nextLine();
+                    String campID = InputHelper.nextLine();
                     if (campDB.getCamp(campID) == null){
                         System.out.println("Invalid camp name. Try again.");
                         break;
                     }
                     System.out.println("Type the enquiry you would like to make!");
-                    String enquiry = Input.nextLine();
+                    String enquiry = InputHelper.nextLine();
                     enquiryController.submitEnquiry(userID, campID, enquiry);
 
                     break;
@@ -186,25 +185,25 @@ public class Main {
                     System.out.println("1. Edit my enquiries");
                     System.out.println("2. Delete my enquiries");
                     System.out.println("3. Reply to enquiries (Camp Committee only)");
-                    int enquiryChoice = Input.nextInt();
+                    int enquiryChoice = InputHelper.nextInt();
 
                     switch (enquiryChoice) {
                         case 1:
                             // Edit my enquiries
                             enquiryController.viewEnquiriesByStudent(userID);
                             System.out.println("Type the enquiry you would like to edit!");
-                            int enquiryToEditIndex = Input.nextInt();
+                            int enquiryToEditIndex = InputHelper.nextInt();
                             enquiryController.checkIfEnquiryReplied(enquiryToEditIndex, userID);
-                            Input.nextLine();
+                            InputHelper.nextLine();
                             System.out.println("Type the new enquiry you would like to make!");
-                            String newEnquiry = Input.nextLine();
+                            String newEnquiry = InputHelper.nextLine();
                             enquiryController.editEnquiry(enquiryToEditIndex, newEnquiry, userID);
                             break;
                         case 2:
                             // Delete my enquiries
                             enquiryController.viewEnquiriesByStudent(userID);
                             System.out.println("Type the number of the enquiry you would like to delete!");
-                            int enquiryToDeleteIndex = Input.nextInt();
+                            int enquiryToDeleteIndex = InputHelper.nextInt();
                             enquiryController.checkIfEnquiryReplied(enquiryToDeleteIndex, userID);
                             enquiryController.deleteEnquiry(enquiryToDeleteIndex, userID);
                             break;
@@ -218,11 +217,11 @@ public class Main {
                             System.out.println("Your committee camp name is: " + campIdToReply);
                             enquiryController.viewEnquiriesByCamp(campIdToReply);;
                             System.out.println("Type the number of the enquiry you would like to reply to!");
-                            int enquiryToReplyIndex = Input.nextInt();
-                            Input.nextLine();
+                            int enquiryToReplyIndex = InputHelper.nextInt();
+                            InputHelper.nextLine();
                             enquiryController.checkIfEnquiryReplied(enquiryToReplyIndex, userID);
                             System.out.println("Type the reply you would like to make!");
-                            String reply = Input.nextLine();
+                            String reply = InputHelper.nextLine();
                             enquiryController.replyToEnquiryAsCommittee(enquiryToReplyIndex, reply, campIdToReply, userID);
                         default:
                             System.out.println("Invalid choice. Try again.");
@@ -237,7 +236,7 @@ public class Main {
                     System.out.println("\n Please type the number of the action you would like to perform.");
                     System.out.println("1. Edit my suggestions");
                     System.out.println("2. Delete my suggestions");
-                    int suggestionChoice = Input.nextInt();
+                    int suggestionChoice = InputHelper.nextInt();
 
                     switch (suggestionChoice) {
                         case 1 ->
@@ -255,12 +254,12 @@ public class Main {
                     // Withdraw from a camp
                     campOperationsController.viewCampsForUserType(userType);
                     System.out.println("Type the name of the camp you would like to withdraw from.");
-                    String withdrawCampID = Input.nextLine();
+                    String withdrawCampID = InputHelper.nextLine();
                     studentCampInteractionController.withdrawFromCamp(userID, withdrawCampID);
                     break;
                 case 10:
                     System.out.println("Please enter your new password:");
-                    String newPassword = Input.nextLine();
+                    String newPassword = InputHelper.nextLine();
                     userController.changePassword(userID, newPassword);
                     System.out.println(user.getPassword());
                     break;
@@ -290,16 +289,16 @@ public class Main {
             System.out.println("-----------------------------------------------------");
             System.out.print("Enter choice: ");
             Scanner scanner = new Scanner(System.in);
-            int choice = Input.nextInt();
+            int choice = InputHelper.nextInt();
             System.out.println();
-            Input.nextLine();  // Consume newline
+            InputHelper.nextLine();  // Consume newline
             String userType = "staff";
             Staff staff = (Staff) userDB.getUser(userID, false);
 
             switch (choice) {
                 case 1 -> {
                     System.out.println("Please enter your new password:");
-                    String newPassword = Input.nextLine();
+                    String newPassword = InputHelper.nextLine();
                     userController.changePassword(userID, newPassword);
                     System.out.println(user.getPassword());
                 }
@@ -311,7 +310,7 @@ public class Main {
                     // Edit an existing camp
                     campOperationsController.viewCampsForUserType(userType);
                     System.out.println("Which camp would you like to edit?");
-                    String campToEdit = Input.nextLine();
+                    String campToEdit = InputHelper.nextLine();
                     campOperationsController.editCamp(campToEdit);
                 }
                 case 4 ->
@@ -321,21 +320,21 @@ public class Main {
                     // View registered students for a camp
                     campOperationsController.viewCampsForUserType(userType);
                     System.out.println("Select a camp to view registered students for:");
-                    String campToView = Input.nextLine();
+                    String campToView = InputHelper.nextLine();
                     campOperationsController.viewRegisteredStudents(campToView);
                 }
                 case 6 -> {
                     //View/Reply to camp enquiries
                     campOperationsController.viewCampsForUserType(userType);
                     System.out.println("Which camp would you like to view enquiries for?");
-                    String campToViewEnquiries = Input.nextLine();
+                    String campToViewEnquiries = InputHelper.nextLine();
                     if (!campOperationsController.verifyCampOwnership(campToViewEnquiries, staff)) break;
                     enquiryController.viewEnquiriesByCamp(campToViewEnquiries);
                     System.out.println("Type the number of the enquiry you wish to reply to.");
-                    int enquiryToReply = Input.nextInt();
-                    Input.nextLine();
+                    int enquiryToReply = InputHelper.nextInt();
+                    InputHelper.nextLine();
                     System.out.println("Type the reply you would like to make!");
-                    String reply = Input.nextLine();
+                    String reply = InputHelper.nextLine();
                     enquiryController.replyToEnquiryAsStaff(enquiryToReply, reply, campToViewEnquiries);
                 }
                 case 7 ->
