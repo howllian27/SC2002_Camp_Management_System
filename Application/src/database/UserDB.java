@@ -24,8 +24,8 @@ public class UserDB
     private final Map<String, User> staffUserMap;
     private final FileHelper fileHelper;
 
-    private static final String STUDENT_FILE_PATH = "./src/database/data/student_list.txt";
-    private static final String STAFF_FILE_PATH = "./src/database/data/staff_list.txt";
+    private static final String STUDENT_FILE_PATH = "Application/src/database/data/student_list.txt";
+    private static final String STAFF_FILE_PATH = "Application/src/database/data/staff_list.txt";
 
     // Static variable reference of userDB
     // of type UserDB
