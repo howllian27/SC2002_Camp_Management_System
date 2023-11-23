@@ -82,12 +82,17 @@ public class CampOperationsController implements BaseController {
      *
      * @param campID The camp ID to be edited.
      */
-    public void editCamp(String campID) {
+    public void editCamp(String campID, Staff staff) {
         if (campDB.getCamp(campID) == null) {
             System.out.println("Camp does not exist.");
             return;
         }
         Camp updatedCamp = campDB.getCamp(campID);
+
+        if (updatedCamp.getInCharge() != staff) {
+            System.out.println("You do not own this camp.");
+            return;
+        }
         updatedCamp = editCampView.editCampInfoView(updatedCamp);
 
         if (!updatedCamp.getName().equals(campID)){
@@ -136,6 +141,21 @@ public class CampOperationsController implements BaseController {
             System.out.println("Camp does not exist.");
         } else {
             CampListView.displayCampsForStudent(camps);
+        }
+    }
+
+    /**
+     * View specific camps for staff.
+     *
+     * @param userType The user type to be viewed ("staff" or "student").
+     */
+    public void viewIndivCamps(Staff staff) {
+        LoggerHelper.clearScreen();
+        List <Camp> camps = staff.getCamps().values().stream().toList();
+        if (camps.isEmpty()) {
+            System.out.println("You do not own any camps!");
+        } else {
+            CampListView.displayCampsForStaff(camps);
         }
     }
 

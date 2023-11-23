@@ -75,14 +75,14 @@ public class EditCampView {
                     int datechoice = InputHelper.nextInt();
                     switch(datechoice){
                         case 1:
-                            System.out.print("Enter new start date (dd-mm-yyyy) ");
+                            System.out.print("Enter new start date (dd-mm-yyyy): ");
                             Date newStartDate = InputHelper.nextDate();
 
                             Date[] dates_Start = {newStartDate, camp.getDates()[1]};
                             camp.setDates(dates_Start);
                             break;
                         case 2:
-                            System.out.print("Enter new end date (dd-mm-yyyy) ");
+                            System.out.print("Enter new end date (dd-mm-yyyy): ");
                             Date newEndDate = InputHelper.nextDate();
 
                             Date[] dates_End = {camp.getDates()[1], newEndDate};

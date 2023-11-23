@@ -330,10 +330,10 @@ public class Main {
                 case 3 -> {
                     // Edit an existing camp
                     LoggerHelper.clearScreen();
-                    campOperationsController.viewCampsForUserType(userType);
+                    campOperationsController.viewIndivCamps(staff);
                     System.out.println("Which camp would you like to edit?");
                     String campToEdit = InputHelper.nextLine();
-                    campOperationsController.editCamp(campToEdit);
+                    campOperationsController.editCamp(campToEdit, staff);
                 }
                 case 4 ->{
                     // View all camps
