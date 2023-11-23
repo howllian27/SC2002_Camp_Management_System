@@ -29,6 +29,14 @@ public class CreateCampView {
      * @return The {@code CampInformation} object representing the newly created camp.
      */
     public CampInformation creatingCamp(User user){
+        System.out.println("\n+------------------------------------------------------------+");
+        System.out.println("|                                                             |");
+        System.out.println("|                    CAMP CREATION PORTAL                     |");
+        System.out.println("|                                                             |");
+        System.out.println("|                                                             |");
+        System.out.println("|        To return to the main menu, simply enter '0'.        |");
+        System.out.println("|                                                             |");
+        System.out.println("+------------------------------------------------------------+\n");
         Staff staff = (Staff) user;
         Scanner scanner = new Scanner(System.in);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");

@@ -1,3 +1,4 @@
+
 package helper;
 
 /**
@@ -46,5 +47,14 @@ public class LoggerHelper {
     //Private method to print the message with color and reset
     private static void print(String message) {
         System.out.println(message + RESET);
+    }
+
+    // Clears the screen
+    public static void clearScreen() {
+        try {
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        } catch (Exception err) {
+
+        }
     }
 }

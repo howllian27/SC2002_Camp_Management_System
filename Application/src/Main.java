@@ -47,6 +47,16 @@ public class Main {
     public static void main(String[] args) {
         while (true) {
             if (currentUser == null) {
+                    System.out.println("+--------------------------------------+");
+                    System.out.println("|       ____    _    __  __ ____       |");
+                    System.out.println("|      / ___|  / \\  |  \\/  / ___|      |");
+                    System.out.println("|     | |     / _ \\ | |\\/| \\___ \\      |");
+                    System.out.println("|     | |___ / ___ \\| |  | |___) |     |");
+                    System.out.println("|      \\____/_/   \\_\\_|  |_|____/      |");
+                    System.out.println("|                                      |");
+                    System.out.println("+--------------------------------------+\n");
+
+
                     System.out.println("Welcome to CAMs!");
                     System.out.println("1. Login");
                     System.out.println("2. Exit");
@@ -67,6 +77,7 @@ public class Main {
                             User currentUser = userController.loginUser(userID, password, isStudentBool);
 
                             if (currentUser != null) { //Removed unnecessary error message
+                                LoggerHelper.clearScreen();
                                 if (isStudentBool) {
                                     studentMenu(userID, currentUser);
                                 } else {
@@ -121,10 +132,12 @@ public class Main {
             switch (choice) {
                 case 1:
                     // Display available camps
+                    LoggerHelper.clearScreen();
                     campOperationsController.viewCampsForUserType(userType);
                     break;
                 case 2:
                     // Register for a camp
+                    LoggerHelper.clearScreen();
                     campOperationsController.viewCampsForUserType(userType);
                     System.out.println("Type the name of the camp you would like to register for!");
                     String selectedCampID = InputHelper.nextLine();
@@ -146,6 +159,7 @@ public class Main {
                     break;
                 case 3:
                     // Submit enquiry for a camp
+                    LoggerHelper.clearScreen();
                     campOperationsController.viewCampsForUserType(userType);
                     System.out.println("Type the name of the camp you would like to submit an enquiry for!");
                     String campID = InputHelper.nextLine();
@@ -160,6 +174,7 @@ public class Main {
                     break;
                 case 4:
                     // Submit suggestion for a camp
+                    LoggerHelper.clearScreen();
                     if (!student.getCampCommitteeMemberStatus()){
                         System.out.println("You are not a committee member, so you can't make suggestions!");
                         break;
@@ -173,12 +188,14 @@ public class Main {
                     break;
                 case 5:
                     // View registered camps
+                    LoggerHelper.clearScreen();
                     HashMap<String, Camp> registeredCamps = student.getRegisteredCamps();
                     List <Camp> camps = new ArrayList<Camp> (registeredCamps.values());
                     campListView.displayCampsForStudent(camps);
                     break;
                 case 6:
                     // View/Edit/Delete my enquiries
+                    LoggerHelper.clearScreen();
                     System.out.println("Please type the number of the action you would like to perform.");
                     System.out.println("View my enquiries:");
                     enquiryController.viewEnquiriesByStudent(userID);
@@ -231,6 +248,7 @@ public class Main {
                     break;
                 case 7:
                     // View/Edit/Delete my suggestions
+                    LoggerHelper.clearScreen();
                     System.out.println("View my suggestions:");
                     if (!suggestionController.viewIndivSuggestions(userID, student)) break;
                     System.out.println("\n Please type the number of the action you would like to perform.");
@@ -249,15 +267,18 @@ public class Main {
                     }
                 case 8:
                     // View my enquiry replies
+                    LoggerHelper.clearScreen();
                     break;
                 case 9:
                     // Withdraw from a camp
+                    LoggerHelper.clearScreen();
                     campOperationsController.viewCampsForUserType(userType);
                     System.out.println("Type the name of the camp you would like to withdraw from.");
                     String withdrawCampID = InputHelper.nextLine();
                     studentCampInteractionController.withdrawFromCamp(userID, withdrawCampID);
                     break;
                 case 10:
+                    LoggerHelper.clearScreen();
                     System.out.println("Please enter your new password:");
                     String newPassword = InputHelper.nextLine();
                     userController.changePassword(userID, newPassword);
@@ -297,6 +318,7 @@ public class Main {
 
             switch (choice) {
                 case 1 -> {
+                    LoggerHelper.clearScreen();
                     System.out.println("Please enter your new password:");
                     String newPassword = InputHelper.nextLine();
                     userController.changePassword(userID, newPassword);
@@ -304,20 +326,25 @@ public class Main {
                 }
                 case 2 -> {
                     // Create a new camp
+                    LoggerHelper.clearScreen();
                     CampInformation campInformation = createCampView.creatingCamp(user);
                 }
                 case 3 -> {
                     // Edit an existing camp
+                    LoggerHelper.clearScreen();
                     campOperationsController.viewCampsForUserType(userType);
                     System.out.println("Which camp would you like to edit?");
                     String campToEdit = InputHelper.nextLine();
                     campOperationsController.editCamp(campToEdit);
                 }
-                case 4 ->
+                case 4 ->{
                     // View all camps
-                        campOperationsController.viewCampsForUserType(userType);
+                    LoggerHelper.clearScreen();
+                    campOperationsController.viewCampsForUserType(userType);
+                }
                 case 5 -> {
                     // View registered students for a camp
+                    LoggerHelper.clearScreen();
                     campOperationsController.viewCampsForUserType(userType);
                     System.out.println("Select a camp to view registered students for:");
                     String campToView = InputHelper.nextLine();
@@ -325,6 +352,7 @@ public class Main {
                 }
                 case 6 -> {
                     //View/Reply to camp enquiries
+                    LoggerHelper.clearScreen();
                     campOperationsController.viewCampsForUserType(userType);
                     System.out.println("Which camp would you like to view enquiries for?");
                     String campToViewEnquiries = InputHelper.nextLine();
@@ -337,12 +365,16 @@ public class Main {
                     String reply = InputHelper.nextLine();
                     enquiryController.replyToEnquiryAsStaff(enquiryToReply, reply, campToViewEnquiries);
                 }
-                case 7 ->
+                case 7 ->{
                     // Accept/Reject suggestions
-                        suggestionController.staffSuggestionHandler(staff);
-                case 8 ->
+                    LoggerHelper.clearScreen();
+                    suggestionController.staffSuggestionHandler(staff);
+                }
+                case 8 ->{
                     // Generate reports
-                        reportController.generateReportsForStaff(staff);
+                    LoggerHelper.clearScreen();
+                    reportController.generateReportsForStaff(staff);
+                }
                 case 9 -> {
                     currentUser = null;
                     return;
