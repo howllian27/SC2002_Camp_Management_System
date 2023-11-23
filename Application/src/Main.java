@@ -312,7 +312,7 @@ public class Main {
             System.out.println("-----------------------------------------------------");
             System.out.print("Enter choice: ");
             int choice = InputHelper.nextInt();
-            
+
             String userType = "staff";
             Staff staff = (Staff) userDB.getUser(userID, false);
 
