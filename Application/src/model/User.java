@@ -11,6 +11,7 @@ public class User {
     private final Faculty faculty;
     private String password = "password";
     private final String name;
+    private boolean firstTimeRegistered;
 
     /**
      * Constructs a new {@code User} object with default values.
@@ -20,6 +21,7 @@ public class User {
         this.userID = "default";
         this.faculty = Faculty.SCHOOL;
         this.name = "";
+        this.firstTimeRegistered = false;
     }
 
     /***
@@ -55,7 +57,9 @@ public class User {
     public Faculty getFaculty() { return this.faculty; }
     public String getPassword() { return this.password; }
     public String getName() { return this.name; }
+    public boolean getFirstTimeRegistered() { return this.firstTimeRegistered; }
 
     //Setter
     public void setPassword(String password) { this.password = password; }
+    public void setRegisteredStatus() { this.firstTimeRegistered = true; };
 }

@@ -77,9 +77,17 @@ public class Main {
                             boolean isStudentBool = !isStudent.equals("N") && !isStudent.equals("n");
 
                             User currentUser = userController.loginUser(userID, password, isStudentBool);
+                            
+                            if (currentUser.getFirstTimeRegistered() == false){
+                                System.out.println("Please enter your new password:");
+                                String newPassword = InputHelper.nextLine();
+                                userController.changePassword(userID, newPassword);
+                                currentUser.setRegisteredStatus();
+                            }
+
+                            LoggerHelper.clearScreen();
 
                             if (currentUser != null) { //Removed unnecessary error message
-                                LoggerHelper.clearScreen();
                                 if (isStudentBool) {
                                     studentMenu(userID, currentUser);
                                 } else {
@@ -282,7 +290,6 @@ public class Main {
                     System.out.println("Please enter your new password:");
                     String newPassword = InputHelper.nextLine();
                     userController.changePassword(userID, newPassword);
-                    System.out.println(user.getPassword());
                     break;
                 case 11:
                     currentUser = null;
@@ -320,7 +327,6 @@ public class Main {
                     System.out.println("Please enter your new password:");
                     String newPassword = InputHelper.nextLine();
                     userController.changePassword(userID, newPassword);
-                    System.out.println(user.getPassword());
                 }
                 case 2 -> {
                     // Create a new camp
