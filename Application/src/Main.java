@@ -24,6 +24,7 @@ import model.Student;
 import model.User;
 import view.CampListView;
 import view.CreateCampView;
+import view.SuggestionsView;
 
 public class Main {
     private static User currentUser = null;
@@ -43,10 +44,12 @@ public class Main {
     // Initialise views
     static CreateCampView createCampView = new CreateCampView();
     static CampListView campListView = new CampListView();
+    static SuggestionsView suggestionsView = new SuggestionsView();
 
     public static void main(String[] args) {
         while (true) {
             if (currentUser == null) {
+                    LoggerHelper.clearScreen();
                     System.out.println("+--------------------------------------+");
                     System.out.println("|       ____    _    __  __ ____       |");
                     System.out.println("|      / ___|  / \\  |  \\/  / ___|      |");
@@ -181,6 +184,7 @@ public class Main {
                     }
 
                     Camp camp = student.getRegisteredCommitteeCamp();
+                    suggestionsView.setMasterView();
                     System.out.println("Your committee camp name is: " + camp.getName() + "\n");
 
                     suggestionController.submitSuggestion(student, camp.getName());
@@ -196,9 +200,8 @@ public class Main {
                 case 6:
                     // View/Edit/Delete my enquiries
                     LoggerHelper.clearScreen();
-                    System.out.println("Please type the number of the action you would like to perform.");
-                    System.out.println("View my enquiries:");
                     enquiryController.viewEnquiriesByStudent(userID);
+                    System.out.println("Please type the number of the action you would like to perform.");
                     System.out.println("1. Edit my enquiries");
                     System.out.println("2. Delete my enquiries");
                     System.out.println("3. Reply to enquiries (Camp Committee only)");
