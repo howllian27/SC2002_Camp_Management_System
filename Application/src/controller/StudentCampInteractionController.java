@@ -119,7 +119,10 @@ public class StudentCampInteractionController implements BaseController {
                     }
                     System.out.println("You are registered!");
                 }
-            } else {
+            } else if(!student.getPreviouslyRegisteredCamps().containsKey(campID)){
+                System.out.println("You cannot register for this camp again!");
+                
+            }else {
                 System.out.println("You are already registered!");
             }
         } else {
