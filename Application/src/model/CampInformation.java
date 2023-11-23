@@ -3,7 +3,7 @@ package model;
 import java.util.Date;
 
 /***
- * The `CampInformation` class represents information about a camp, including details
+ * The {@code CampInformation} class represents information about a camp, including details
  * such as its name, dates, registration information, location and more.
  *
  * @author Shun Jie
@@ -23,7 +23,7 @@ public class CampInformation {
     private final int MAXCOMMITTEESLOTS = 10;
 
     /***
-     * Constructs a new `CampInformation` object with the provided camp details.
+     * Constructs a new {@code CampInformation} object with the provided camp details.
      *
      * @param campName The name of the camp.
      * @param dates An array for the dates of the camp.

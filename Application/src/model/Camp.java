@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 /**
- * The `Camp` class represents a camping event, providing information
+ * The {@code Camp} class represents a camping event, providing information
  * about the camp, its attendees and the committee members.
  *
  * @author Shun Jie
@@ -16,7 +16,7 @@ public class Camp {
     private final HashMap<String, Student> committee;
 
     /***
-     * Constructs a new `Camp` object with the provided camp information.
+     * Constructs a new {@code Camp} object with the provided camp information object.
      *
      * @param campInformation The information associated with the camp.
      */
@@ -72,8 +72,9 @@ public class Camp {
     /***
      * Adds a student to the list of attendees for this camp.
      *
-     * @param student The student to be added as an attendee.
-     * @return `true` if the student is added successfully, `false` if the student is already an attendee.
+     * @param studentId The student to be added as an attendee.
+     * @param student The student object of the associated studentId.
+     * @return {@code true} if the student is added successfully, `false` if the student is already an attendee.
      */
     public boolean addAttendee(String studentId, Student student) {
         if(attendees.size() >= campInformation.totalSlots) return false;
@@ -84,8 +85,9 @@ public class Camp {
     /***
      * Adds a student to the list of committee members for this camp.
      *
-     * @param student The student to be added as a committee member.
-     * @return `true` if the student was added successfully, `false`if the student was already a committee member.
+     * @param studentId The student to be added as a committee member.
+     * @param student The student object of the associated studentId.
+     * @return {@code true} if the student was added successfully, `false`if the student was already a committee member.
      */
     public boolean addCommitteeMember(String studentId, Student student) {
         if(committee.size() >= campInformation.committeeSlots) return false;
@@ -97,7 +99,7 @@ public class Camp {
      * Removes a student from the list of attendees for this camp.
      *
      * @param studentId The id of the students to be removed from the camp attendees.
-     * @return `true` if the student was removed successfully, `false` if the student was not already an attendee.
+     * @return {@code true} if the student was removed successfully, `false` if the student was not already an attendee.
      */
     public boolean removeAttendee(String studentId) {
         if(attendees.get(studentId) == null) return false;
@@ -109,7 +111,7 @@ public class Camp {
      * Removes a student from the list of committee members for the camp.
      *
      * @param studentId The id of the student to be removed from the committee members.
-     * @return `true` if the student was removed successfully, `false` if the student was not already a committee member.
+     * @return {@code true} if the student was removed successfully, `false` if the student was not already a committee member.
      */
     public boolean removeCommitteeMember(String studentId) {
         if(committee.get(studentId) == null) return false;

@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 
 /***
- * The `Student` class represents a student user in the system, including their
+ * The {@code Student} class represents a student user in the system, including their
  * registration status for various camps and committee memberships.
  *
  * @author Shun Jie
@@ -18,10 +18,11 @@ public class Student extends User {
     private int points = 0;
 
     /***
-     * Constructs a new `Student` object with the given user ID and faculty.
+     * Constructs a new {@code Student} object with the given user ID and faculty.
      *
      * @param userID The user ID of the student.
      * @param faculty The faculty to which the student belongs.
+     * @param name The name of this student.
      */
     public Student(String userID, Faculty faculty, String name) {
         super(userID, faculty, name);
@@ -30,11 +31,12 @@ public class Student extends User {
     }
 
     /***
-     * Constructs a new `Student` object with the given user ID, password and  faculty.
+     * Constructs a new {@code Student} object with the given user ID, password and  faculty.
      *
      * @param userID The user ID of the student.
      * @param password The password of the student.
      * @param faculty The faculty to which the student belongs.
+     * @param name The name of this student.
      */
     public Student(String userID, String password, Faculty faculty, String name) {
         super(userID, password, faculty, name);
@@ -58,8 +60,9 @@ public class Student extends User {
      * Adds a camp to the set of camps where the student is registered, simultaneously marking
      * it as previously registered.
      *
-     * @param camp The camp to be added.
-     * @return `true` if the camp is added successfully, `false` if it is already registered.
+     * @param campId The unique identifier of a camp.
+     * @param camp The camp object of the campId.
+     * @return {@code true} if the camp is added successfully, {@code false} if it is already registered.
      */
     public boolean addCamp(String campId, Camp camp) {
         if (!registeredCamps.containsKey(campId)) {
@@ -74,7 +77,7 @@ public class Student extends User {
      * Adds a camp as the student's committee camp.
      *
      * @param camp The camp to be set as the committee camp.
-     * @return `true` if the camp is set as the committee camp successfully, `false` if the student is already a committee member in a camp.
+     * @return {@code true} if the camp is set as the committee camp successfully, {@code false} if the student is already a committee member in a camp.
      */
     public boolean addCommitteeCamp(Camp camp) {
         if(registeredCommitteeCamp != null) return false;
@@ -86,7 +89,7 @@ public class Student extends User {
      * Removes a camp from the set of camps where the student is registered.
      *
      * @param campId The campId to be removed.
-     * @return `true` if the camp is removed successfully, `false` if it's not found in the registered camps.
+     * @return {@code true} if the camp is removed successfully, {@code false} if it's not found in the registered camps.
      */
     public boolean removeCamp(String campId) {
         return registeredCamps.remove(campId) != null;
@@ -95,7 +98,7 @@ public class Student extends User {
     /***
      * Removes the student's committee camp.
      *
-     * @return `true` if the committee camp is removed successfully, `false` if the student is not part of a camp committee.
+     * @return {@code true} if the committee camp is removed successfully, {@code false} if the student is not part of a camp committee.
      */
     public boolean removeCommitteeCamp() {
         if(registeredCommitteeCamp == null) return false;
@@ -106,7 +109,7 @@ public class Student extends User {
     /**
      * Adds points to the student's account.
      *
-     * @param points
+     * @param points The numbers of points to add to this {@code Student}
     */
     public void addPoints(int points) {
         this.points += points;

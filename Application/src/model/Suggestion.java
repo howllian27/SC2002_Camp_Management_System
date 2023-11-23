@@ -14,7 +14,7 @@ public class Suggestion {
     private boolean isApproved;
 
     /**
-     * Constructs a Suggestion object with the specified student ID, camp ID, camp information, and approval status.
+     * Constructs a {@code Suggestion} object with the specified student ID, camp ID, camp information, and approval status.
      *
      * @param studentId The ID of the student making the suggestion.
      * @param campId The ID of the camp associated with the suggestion.

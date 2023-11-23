@@ -1,5 +1,8 @@
 package model;
 
+/***
+ * The {@code Faculty} enum represents the different schools in the university.
+ */
 public enum Faculty {
     SCSE, //School of Computer Science and Engineering
     ADM, //School of Art, Design and Media

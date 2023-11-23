@@ -3,7 +3,7 @@ package model;
 import java.util.HashMap;
 
 /***
- * The `Staff` class represents a staff user in the system, including the camps that
+ * The {@code Staff} class represents a staff user in the system, including the camps that
  * they have created.
  *
  * @author Shun Jie
@@ -13,10 +13,11 @@ public class Staff extends User {
     private final HashMap<String, Camp> createdCamps;
 
     /***
-     * Constructs a new `Staff` class with the given user ID and faculty.
+     * Constructs a new {@code Staff} class with the given user ID and faculty.
      *
      * @param userID The staff's user ID.
      * @param faculty The faculty to which the staff belongs to.
+     * @param name The name of this staff member.
      */
     public Staff(String userID, Faculty faculty, String name) {
         super(userID, faculty, name);
@@ -24,11 +25,12 @@ public class Staff extends User {
     }
 
     /***
-     * Constructs a new `Staff` class with the given user ID, password and faculty.
+     * Constructs a new {@code Staff} class with the given user ID, password and faculty.
      *
      * @param userID The staff's user ID.
-     * @param password The password of the staff.
-     * @param faculty The faculty to which the staff belongs to.
+     * @param password The password of this staff.
+     * @param faculty The faculty to which this staff belongs to.
+     * @param name The name of this staff member.
      */
     public Staff(String userID, String password, Faculty faculty, String name) {
         super(userID, password, faculty, name);

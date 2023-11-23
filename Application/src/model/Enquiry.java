@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Represents an enquiry made by a student regarding a camp, along with a response.
+ * The {@code Enquiry} class represents an enquiry made by a student regarding a camp, along with a response.
  * This class encapsulates information about the student, camp, enquiry, and response.
  *
  * @author Shun Jie

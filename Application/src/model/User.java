@@ -1,7 +1,7 @@
 package model;
 
 /***
- * The `User` class represents a user in the system with a unique user ID, password and faculty.
+ * The {@code User} class represents a user in the system with a unique user ID, password and faculty.
  *
  * @author Shun Jie
  * @version 1.0
@@ -13,7 +13,7 @@ public class User {
     private final String name;
 
     /**
-     * Constructs a new `User` object with default values.
+     * Constructs a new {@code User} object with default values.
      * The default user ID is "default," and the default faculty is "SCHOOL."
      */
     public User() {
@@ -22,11 +22,12 @@ public class User {
         this.name = "";
     }
 
-    /**
-     * Constructs a new `User` object with the given user ID and faculty.
+    /***
+     * Constructs a new {@code User} object with the given user ID and faculty.
      *
-     * @param userID   The user ID of the user.
-     * @param faculty  The faculty to which the user belongs.
+     * @param userID The unique identifier of this user.
+     * @param faculty The school that this user is part of.
+     * @param name The name of this user.
      */
     public User(String userID, Faculty faculty, String name) {
         this.userID = userID;
@@ -35,11 +36,12 @@ public class User {
     }
 
     /**
-     * Constructs a new `User` object with the given user ID, password, and faculty.
+     * Constructs a new {@code User} object with the given user ID, password, faculty and name.
      *
-     * @param userID   The user ID of the user.
+     * @param userID   The user ID of this user.
      * @param password The user's password.
-     * @param faculty  The faculty to which the user belongs.
+     * @param faculty  The faculty to which this user belongs.
+     * @param name The name of this user.
      */
     public User(String userID, String password, Faculty faculty, String name) {
         this.userID = userID;
