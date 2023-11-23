@@ -63,7 +63,8 @@ public class CampListView {
 
     /**
      * Displays a list of all available camps by printing their names.
-     * @param camps A list of Camp objects containing the available camps to be displayed.
+     * @param camps A list of Camp objects containing the camps they registered for.
+     * @param student A student object to get role of student in their registered camps. 
      */
     public static void displayRegCampsForStudent(List<Camp> camps, Student student) {
         //Displays a list of all available camps.
