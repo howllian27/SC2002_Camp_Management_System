@@ -3,6 +3,7 @@ package view;
 import java.util.Arrays;
 import java.util.List;
 import model.Camp;
+import model.Student;
 
 /**
  * The {@code CampListView} class is responsible for displaying a list of available camps.
@@ -56,6 +57,30 @@ public class CampListView {
             System.out.println("    " + "Total Slots: " + camp.getTotalSlots());
             System.out.println("    " + "Remaining Slots: " + camp.getRemainingSlots());
             System.out.println("    " + "Remaining Committee Slots: " + camp.getCommitteeSlots());
+            count++;
+        }
+    }
+
+    /**
+     * Displays a list of all available camps by printing their names.
+     * @param camps A list of Camp objects containing the available camps to be displayed.
+     */
+    public static void displayRegCampsForStudent(List<Camp> camps, Student student) {
+        //Displays a list of all available camps.
+        displayCampsStudentMenu();
+        System.out.println("List of Camps:");
+        System.out.println();
+        int count = 1;
+        for (Camp camp : camps) {
+            System.out.println(count + ". " + "Camp Name: " + camp.getName());
+            System.out.println("    " + "Total Slots: " + camp.getTotalSlots());
+            System.out.println("    " + "Remaining Slots: " + camp.getRemainingSlots());
+            System.out.println("    " + "Remaining Committee Slots: " + camp.getCommitteeSlots());
+            if (camp == student.getRegisteredCommitteeCamp()){
+                System.out.println("    " + "Role: Camp Committee");
+            }else{
+                System.out.println("    " + "Role: Participant");
+            }
             count++;
         }
     }

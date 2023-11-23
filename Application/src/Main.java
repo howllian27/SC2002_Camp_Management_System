@@ -192,7 +192,7 @@ public class Main {
                     LoggerHelper.clearScreen();
                     HashMap<String, Camp> registeredCamps = student.getRegisteredCamps();
                     List <Camp> camps = new ArrayList<Camp> (registeredCamps.values());
-                    CampListView.displayCampsForStudent(camps);
+                    CampListView.displayRegCampsForStudent(camps, student);
                     break;
                 case 6:
                     // View/Edit/Delete my enquiries
