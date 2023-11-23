@@ -177,6 +177,12 @@ public class CampOperationsController implements BaseController {
      */
     public void viewRegisteredStudents(String campID){
         Camp camp = campDB.getCamp(campID);
+
+        if(camp == null) {
+            LoggerHelper.Error("Camp not found.");
+            return;
+        }
+
         HashMap<String, Student> attendees = camp.getAttendees();
 
         for (Map.Entry<String, Student> set :
