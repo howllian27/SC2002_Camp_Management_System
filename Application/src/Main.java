@@ -358,7 +358,6 @@ public class Main {
                     enquiryController.viewEnquiriesByCamp(campToViewEnquiries);
                     System.out.println("Type the number of the enquiry you wish to reply to.");
                     int enquiryToReply = InputHelper.nextInt();
-                    InputHelper.nextLine();
                     System.out.println("Type the reply you would like to make!");
                     String reply = InputHelper.nextLine();
                     enquiryController.replyToEnquiryAsStaff(enquiryToReply, reply, campToViewEnquiries);
