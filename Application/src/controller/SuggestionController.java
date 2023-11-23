@@ -30,8 +30,6 @@ public class SuggestionController implements BaseController {
     CampDB campDB;
     UserDB userDB;
 
-    private SuggestionsView suggestionsView;
-
     public SuggestionController() {
         setMasterVariables();
     }
@@ -41,7 +39,6 @@ public class SuggestionController implements BaseController {
         this.campDB = CampDB.getInstance();
         this.userDB = UserDB.getInstance();
         this.suggestionDB = SuggestionDB.getInstance();
-        this.suggestionsView = new SuggestionsView();
     }
 
     /**
@@ -52,7 +49,7 @@ public class SuggestionController implements BaseController {
      */
     public void submitSuggestion(Student student, String campID) {
         Camp camp = campDB.getCamp(campID);
-        CampInformation campInformationSuggestion = suggestionsView.promptForSuggestions(camp);
+        CampInformation campInformationSuggestion = SuggestionsView.promptForSuggestions(camp);
         Suggestion suggestion = new Suggestion(student.getID(), campID, campInformationSuggestion, false);
         suggestionDB.addSuggestion(suggestion);
         student.addPoints(1);
@@ -75,7 +72,7 @@ public class SuggestionController implements BaseController {
             System.out.println("You've made no suggestions so far!");
             return false;
         } else {
-            suggestionsView.displaySuggestions(suggestions, registeredCommitteeCamp);
+            SuggestionsView.displaySuggestions(suggestions, registeredCommitteeCamp);
             return true;
         }
     }
@@ -89,7 +86,7 @@ public class SuggestionController implements BaseController {
         Camp registeredCommitteeCamp = student.getRegisteredCommitteeCamp();
         List<Suggestion> suggestions = suggestionDB.getSuggestionsByStudent(student.getID()); 
 
-        suggestionsView.displaySuggestions(suggestions, registeredCommitteeCamp);
+        SuggestionsView.displaySuggestions(suggestions, registeredCommitteeCamp);
         System.out.println("Enter the number of the suggestion you want to edit: ");
         int suggestionNumber = InputHelper.nextInt();
 
@@ -101,7 +98,7 @@ public class SuggestionController implements BaseController {
             suggestion = suggestions.get(suggestionNumber-1);
         }
 
-        CampInformation newCampInformation = suggestionsView.editSuggestionView(suggestion, registeredCommitteeCamp);
+        CampInformation newCampInformation = SuggestionsView.editSuggestionView(suggestion, registeredCommitteeCamp);
         suggestion.setCampInformation(newCampInformation);
         suggestionDB.updateSuggestion(suggestion);
         System.out.println("Suggestion successfully updated!");
@@ -116,7 +113,7 @@ public class SuggestionController implements BaseController {
         Camp registeredCommitteeCamp = student.getRegisteredCommitteeCamp();
         List<Suggestion> suggestions = suggestionDB.getSuggestionsByStudent(student.getID()); 
 
-        suggestionsView.displaySuggestions(suggestions, registeredCommitteeCamp);
+        SuggestionsView.displaySuggestions(suggestions, registeredCommitteeCamp);
         System.out.println("Enter the number of the suggestion you want to delete: ");
         int suggestionNumber = InputHelper.nextInt();
         Suggestion suggestion;
@@ -179,7 +176,7 @@ public class SuggestionController implements BaseController {
             System.out.println("No suggestions found for this camp!");
             return;
         }
-        suggestionsView.displaySuggestions(suggestions, selectedCamp);
+        SuggestionsView.displaySuggestions(suggestions, selectedCamp);
         System.out.println("Enter the number of the suggestion you want to approve/reject: ");
         int suggestionNumber = InputHelper.nextInt();
 
