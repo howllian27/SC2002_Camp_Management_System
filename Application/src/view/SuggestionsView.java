@@ -8,7 +8,6 @@ import helper.InputHelper;
 import model.Camp;
 import model.CampInformation;
 import model.Suggestion;
-import helper.DateConversionHelper;
 
 /**
  * The {@code SuggestionsView} class is responsible for managing and displaying suggestions and user interactions.
@@ -18,10 +17,7 @@ import helper.DateConversionHelper;
  * @version 1.0
  */
 public class SuggestionsView {
-
-    DateConversionHelper dateConversionHelper = new DateConversionHelper();
-
-    public void setMasterView() {
+    public static void setMasterView() {
                 System.out.println("\n+------------------------------------------------------------+");
                 System.out.println("|                                                             |");
                 System.out.println("|                       SUGGESTIONS PORTAL                    |");
@@ -37,7 +33,7 @@ public class SuggestionsView {
      * @param suggestions A list of strings containing suggestions to be displayed.
      * @param registeredCommitteeCamp The camp object related to the suggestions.
      */
-    public void displaySuggestions(List<Suggestion> suggestions, Camp registeredCommitteeCamp) {
+    public static void displaySuggestions(List<Suggestion> suggestions, Camp registeredCommitteeCamp) {
         setMasterView();
         System.out.println("Displaying suggestions:");
 
@@ -89,7 +85,7 @@ public class SuggestionsView {
      * @param camp               The associated camp object.
      * @return A CampInformation object with the suggested changes.
      */
-    public CampInformation suggestCampInformation(int informationChoice, CampInformation campInformation, Camp camp){
+    public static CampInformation suggestCampInformation(int informationChoice, CampInformation campInformation, Camp camp){
         switch (informationChoice){
             case 1:
                 System.out.println("Please enter your suggestions for the camp name:");
@@ -111,24 +107,21 @@ public class SuggestionsView {
                 return campInformation;
             case 4:
                 System.out.println("Please enter your suggestions for the camp start date: (dd-mm-yyyy)");
-                String startDateSuggestion = InputHelper.nextLine();
-                Date startDate =  dateConversionHelper.convertDate(startDateSuggestion);
+                Date startDate = InputHelper.nextDate();
                 Date oldEndDate = camp.getDates()[1];
                 campInformation = new CampInformation(camp.getName(), new Date[]{startDate, oldEndDate}, camp.getClosingDate(), camp.getFaculty(), camp.getLocation(), camp.getTotalSlots(), camp.getCommitteeSlots(), camp.getDescription(), camp.getInCharge(), camp.getVisibility());
 
                 return campInformation;
             case 5:
                 System.out.println("Please enter your suggestions for the camp end date: (dd-mm-yyyy)");
-                String endDateSuggestion = InputHelper.nextLine();
-                Date endDate =  dateConversionHelper.convertDate(endDateSuggestion);
+                Date endDate = InputHelper.nextDate();
                 Date oldStartDate = camp.getDates()[0];
                 campInformation = new CampInformation(camp.getName(), new Date[]{oldStartDate, endDate}, camp.getClosingDate(), camp.getFaculty(), camp.getLocation(), camp.getTotalSlots(), camp.getCommitteeSlots(), camp.getDescription(), camp.getInCharge(), camp.getVisibility());
 
                 return campInformation;
             case 6:
                 System.out.println("Please enter your suggestions for the camp registration closing date: (dd-mm-yyyy)");
-                String closingDateSuggestion = InputHelper.nextLine();
-                Date closingDate =  dateConversionHelper.convertDate(closingDateSuggestion);
+                Date closingDate = InputHelper.nextDate();
                 campInformation = new CampInformation(camp.getName(), camp.getDates(), closingDate, camp.getFaculty(), camp.getLocation(), camp.getTotalSlots(), camp.getCommitteeSlots(), camp.getDescription(), camp.getInCharge(), camp.getVisibility());
 
                 return campInformation;
@@ -156,7 +149,7 @@ public class SuggestionsView {
      * @param camp The camp object associated with the suggestions.
      * @return A CampInformation object with the suggested changes.
      */
-    public CampInformation promptForSuggestions(Camp camp) {
+    public static CampInformation promptForSuggestions(Camp camp) {
         System.out.println("Type the number of the information you would like to make a suggestion for:");
         System.out.println("1. Current Camp Name: " + camp.getName());
         System.out.println("2. Current Camp Description: " + camp.getDescription());
@@ -181,7 +174,7 @@ public class SuggestionsView {
      * @param camp       The camp associated with the suggestion.
      * @return A CampInformation object with the edited suggestion.
      */
-    public CampInformation editSuggestionView(Suggestion suggestion, Camp camp){
+    public static CampInformation editSuggestionView(Suggestion suggestion, Camp camp){
         CampInformation originalCampInfo = camp.getCampInformation();
         CampInformation campInformation;
 
@@ -217,8 +210,7 @@ public class SuggestionsView {
         else if (suggestion.getCampInformation().dates[0] != originalCampInfo.dates[0]){
             System.out.println("You Suggested to Change Camp Start Date to: " + suggestion.getCampInformation().dates[0] + "\n");
             System.out.println("Type edited suggestion:");
-            String startDateSuggestion = InputHelper.nextLine();
-            Date startDate =  dateConversionHelper.convertDate(startDateSuggestion);
+            Date startDate = InputHelper.nextDate();
             Date oldEndDate = camp.getDates()[1];
             campInformation = new CampInformation(camp.getName(), new Date[]{startDate, oldEndDate}, camp.getClosingDate(), camp.getFaculty(), camp.getLocation(), camp.getTotalSlots(), camp.getCommitteeSlots(), camp.getDescription(), camp.getInCharge(), camp.getVisibility());
 
@@ -229,8 +221,7 @@ public class SuggestionsView {
             System.out.println("You Suggested to Change Camp End Date to: " + suggestion.getCampInformation().dates[1] + "\n");
             System.out.println("Type edited suggestion:");
 
-            String endDateSuggestion = InputHelper.nextLine();
-            Date endDate =  dateConversionHelper.convertDate(endDateSuggestion);
+            Date endDate = InputHelper.nextDate();
             Date oldStartDate = camp.getDates()[0];
             campInformation = new CampInformation(camp.getName(), new Date[]{oldStartDate, endDate}, camp.getClosingDate(), camp.getFaculty(), camp.getLocation(), camp.getTotalSlots(), camp.getCommitteeSlots(), camp.getDescription(), camp.getInCharge(), camp.getVisibility());
 
@@ -241,8 +232,7 @@ public class SuggestionsView {
             System.out.println("You Suggested to Change Camp Registration Closing Date to: " + suggestion.getCampInformation().registrationClosingDate + "\n");
             System.out.println("Type edited suggestion:");
 
-            String closingDateSuggestion = InputHelper.nextLine();
-            Date closingDate =  dateConversionHelper.convertDate(closingDateSuggestion);
+            Date closingDate = InputHelper.nextDate();
             campInformation = new CampInformation(camp.getName(), camp.getDates(), closingDate, camp.getFaculty(), camp.getLocation(), camp.getTotalSlots(), camp.getCommitteeSlots(), camp.getDescription(), camp.getInCharge(), camp.getVisibility());
 
             return campInformation;
@@ -277,7 +267,7 @@ public class SuggestionsView {
      *
      * @param suggestions A list of strings containing suggestions to be displayed.
      */
-    public void viewAndApproveSuggestions(List<String> suggestions){
+    public static void viewAndApproveSuggestions(List<String> suggestions){
 
         // Prompt the staff member for approval
         System.out.print("\nDo you approve these changes? (yes/no): ");
