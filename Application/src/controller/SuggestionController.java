@@ -1,13 +1,13 @@
 package controller;
 
 import java.util.List;
-import java.util.Scanner;
 import java.util.HashMap;
 
 import database.SuggestionDB;
 import database.CampDB;
 import database.UserDB;
 
+import helper.InputHelper;
 import model.Camp;
 import model.CampInformation;
 import model.Staff;
@@ -31,7 +31,6 @@ public class SuggestionController implements BaseController {
     UserDB userDB;
 
     private SuggestionsView suggestionsView;
-    private CampListView campListView;
 
     public SuggestionController() {
         setMasterVariables();
@@ -43,7 +42,6 @@ public class SuggestionController implements BaseController {
         this.userDB = UserDB.getInstance();
         this.suggestionDB = SuggestionDB.getInstance();
         this.suggestionsView = new SuggestionsView();
-        this.campListView = new CampListView();
     }
 
     /**
@@ -92,10 +90,9 @@ public class SuggestionController implements BaseController {
         List<Suggestion> suggestions = suggestionDB.getSuggestionsByStudent(student.getID()); 
 
         suggestionsView.displaySuggestions(suggestions, registeredCommitteeCamp);
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the number of the suggestion you want to edit: ");
-        int suggestionNumber = scanner.nextInt();
-        scanner.nextLine();
+        int suggestionNumber = InputHelper.nextInt();
+
         Suggestion suggestion;
         if (suggestions.get(suggestionNumber-1) == null) {
             System.out.println("Suggestion not found!");
@@ -120,10 +117,8 @@ public class SuggestionController implements BaseController {
         List<Suggestion> suggestions = suggestionDB.getSuggestionsByStudent(student.getID()); 
 
         suggestionsView.displaySuggestions(suggestions, registeredCommitteeCamp);
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the number of the suggestion you want to delete: ");
-        int suggestionNumber = scanner.nextInt();
-        scanner.nextLine();
+        int suggestionNumber = InputHelper.nextInt();
         Suggestion suggestion;
         if (suggestions.get(suggestionNumber-1) == null) {
             System.out.println("Suggestion not found!");
@@ -164,14 +159,13 @@ public class SuggestionController implements BaseController {
 
         //Get list of staff camps
         List <Camp> camps = staffCamps.values().stream().toList();
-        campListView.displayCampsForStaff(camps);
+        CampListView.displayCampsForStaff(camps);
 
         // Get staff input on which camp to view suggestions
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the number of the camp you want to view suggestions for: ");
         int campNumber;
         try {
-            campNumber = scanner.nextInt();
+            campNumber = InputHelper.nextInt();
         } catch(Exception e) {
             System.out.println("Invalid input!");
             return;
@@ -181,13 +175,14 @@ public class SuggestionController implements BaseController {
 
 
         List<Suggestion> suggestions = suggestionDB.getSuggestionsByCamp(selectedCamp.getName());
-        if (suggestions.size() == 0){
+        if (suggestions.isEmpty()){
             System.out.println("No suggestions found for this camp!");
             return;
         }
         suggestionsView.displaySuggestions(suggestions, selectedCamp);
         System.out.println("Enter the number of the suggestion you want to approve/reject: ");
-        int suggestionNumber = scanner.nextInt();
+        int suggestionNumber = InputHelper.nextInt();
+
         Suggestion suggestion;
         if (suggestions.get(suggestionNumber-1) == null) {
             System.out.println("Suggestion not found!");
@@ -197,7 +192,7 @@ public class SuggestionController implements BaseController {
         }
 
         System.out.print("Enter 1 to approve, 2 to reject: ");
-        int choice = scanner.nextInt();
+        int choice = InputHelper.nextInt();
 
         switch (choice){
             case 1:

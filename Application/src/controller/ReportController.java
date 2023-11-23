@@ -1,6 +1,7 @@
 package controller;
 
 import helper.FileHelper;
+import helper.InputHelper;
 import model.Camp;
 import model.CampInformation;
 import model.Enquiry;
@@ -12,7 +13,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 import database.CampDB;
 import database.EnquiryDB;
@@ -30,8 +30,6 @@ import view.CampListView;
 public class ReportController implements BaseController{
 
     private FileHelper fileHelper;
-    private ReportView reportView;
-    private CampListView campListView;
     CampDB campDB;
     EnquiryDB enquiryDB;
 
@@ -44,8 +42,6 @@ public class ReportController implements BaseController{
         this.fileHelper = new FileHelper();
         this.campDB = CampDB.getInstance();
         this.enquiryDB = EnquiryDB.getInstance();
-        this.reportView = new ReportView();
-        this.campListView = new CampListView();
     }
 
     /**
@@ -54,15 +50,14 @@ public class ReportController implements BaseController{
      * @param staff The staff member who is currently logged in.
      */
     public void generateReportsForStaff(Staff staff){
-        reportView.displayReport();
-        Scanner sc = new Scanner(System.in);
-        int choice = sc.nextInt();
+        ReportView.displayReport();
+        int choice = InputHelper.nextInt();
 
         System.out.println("Select the camp you wish to generate a report for:");
         List<Camp> camps = campDB.getAllCamps().values().stream().toList();
-        campListView.displayCampsForStaff(camps);
+        CampListView.displayCampsForStaff(camps);
         System.out.println("Enter the number of the camp you wish to generate a report for:");
-        int campChoice = sc.nextInt();
+        int campChoice = InputHelper.nextInt();
         Camp selectedCamp = camps.get(campChoice - 1);
 
         switch (choice) {

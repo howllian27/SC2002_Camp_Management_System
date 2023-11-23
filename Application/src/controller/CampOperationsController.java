@@ -25,8 +25,6 @@ import view.EditCampView;
 public class CampOperationsController implements BaseController {
 
     CampDB campDB;
-    private CampListView campListView;
-    private CampDetailView campDetailView;
     private EditCampView editCampView;
 
     // Constructor
@@ -38,8 +36,6 @@ public class CampOperationsController implements BaseController {
     @Override
     public void setMasterVariables() {   
         this.campDB = CampDB.getInstance();
-        this.campListView = new CampListView();
-        this.campDetailView = new CampDetailView();
         this.editCampView = new EditCampView();
     }
 
@@ -77,7 +73,7 @@ public class CampOperationsController implements BaseController {
         boolean success = campDB.addCamp(camp.getName(), camp);
         if (success) {
             staff.addCamp(camp.getName(), camp);
-            campDetailView.displayCampDetails(camp);
+            CampDetailView.displayCampDetails(camp);
         }
     }
     /**
@@ -126,7 +122,7 @@ public class CampOperationsController implements BaseController {
         if (userType.equals("staff")) {
             Map<String, Camp> campMap = campDB.getAllCamps();
             camps = campMap.values().stream().toList();
-            campListView.displayCampsForStaff(camps);
+            CampListView.displayCampsForStaff(camps);
         }
         if (userType.equals("student")) {
             Map<String, Camp> campMap = campDB.getAllCamps();
@@ -137,7 +133,7 @@ public class CampOperationsController implements BaseController {
         if (camps.isEmpty()) {
             System.out.println("Camp does not exist.");
         } else {
-            campListView.displayCampsForStudent(camps);
+            CampListView.displayCampsForStudent(camps);
         }
     }
 
@@ -151,7 +147,7 @@ public class CampOperationsController implements BaseController {
         if (camp == null) {
             System.out.println("Camp does not exist.");
         } else {
-            campDetailView.displayCampDetails(camp);
+            CampDetailView.displayCampDetails(camp);
         }
     }
 

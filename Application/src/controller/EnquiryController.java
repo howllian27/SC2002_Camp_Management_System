@@ -22,7 +22,6 @@ import view.EnquiriesView;
 public class EnquiryController implements BaseController {
 
     EnquiryDB enquiryDB;
-    private EnquiriesView enquiriesView;
     CampDB campDB;
     UserDB userDB;
 
@@ -35,7 +34,6 @@ public class EnquiryController implements BaseController {
         this.campDB = CampDB.getInstance();
         this.userDB = UserDB.getInstance();
         this.enquiryDB = EnquiryDB.getInstance();
-        this.enquiriesView = new EnquiriesView();
     }
 
     /**
@@ -66,7 +64,7 @@ public class EnquiryController implements BaseController {
      */
     public void viewEnquiriesByCamp(String campId) {
         List<Enquiry> enquiries = EnquiryDB.getInstance().getEnquiries(campId);
-        enquiriesView.displayEnquiries(enquiries);
+        EnquiriesView.displayEnquiries(enquiries);
     }
 
     /**
@@ -76,7 +74,7 @@ public class EnquiryController implements BaseController {
     */
     public void viewEnquiriesByStudent(String studentID) {
         List<Enquiry> enquiries = enquiryDB.getEnquiriesByStudent(studentID);
-        enquiriesView.displayEnquiries(enquiries);
+        EnquiriesView.displayEnquiries(enquiries);
     }
 
     /**
@@ -148,8 +146,7 @@ public class EnquiryController implements BaseController {
             User user = userDB.getUser(userID, true);
             enquiryToReply.setResponse(replyText);
 
-            if (user instanceof Student) {
-                Student student = (Student) user;
+            if (user instanceof Student student) { //Changed to pattern variable
                 student.addPoints(1);
             } else {
                 System.out.println("The user with ID " + userID + " is not a student.");

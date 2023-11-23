@@ -15,7 +15,6 @@ import view.LoginView;
  */
 public class UserController implements BaseController{
     UserDB userDB;
-    private LoginView loginView;
 
     // Constructor
     public UserController() {
@@ -26,7 +25,6 @@ public class UserController implements BaseController{
     @Override
     public void setMasterVariables() {
         this.userDB = UserDB.getInstance(); // Assuming UserDB is a class that handles user data.
-        this.loginView = new LoginView(); // Assuming LoginView is a class for displaying login-related UI.
     }
 
     /**
@@ -36,15 +34,17 @@ public class UserController implements BaseController{
      * 
      * @param userID The user's ID.
      * @param password The user's password.
+     * @param isStudent A boolean to indicate if we are trying to log in a student or a staff member.
+     * @return The {@code User} object related to the login details provided.
      */
     public User loginUser(String userID, String password, boolean isStudent) {
         User user = userDB.getUser(userID, isStudent);
     
         if (user != null && user.getPassword().equals(password)) {
-            loginView.displayLoginSuccess();
+            LoginView.displayLoginSuccess();
             return user;
         } else {
-            loginView.displayLoginError();
+            LoginView.displayLoginError();
             return null;
         }
     }
@@ -60,9 +60,9 @@ public class UserController implements BaseController{
     public void changePassword(String userID, String newPassword) {
         boolean isUpdated = userDB.updatePassword(userID, newPassword);
         if (isUpdated) {
-            loginView.displayPasswordChangeSuccess();
+            LoginView.displayPasswordChangeSuccess();
         } else {
-            loginView.displayPasswordChangeError();
+            LoginView.displayPasswordChangeError();
         }
     }
 }
