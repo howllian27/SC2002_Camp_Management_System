@@ -43,7 +43,6 @@ public class Main {
 
     // Initialise views
     static CreateCampView createCampView = new CreateCampView();
-    static CampListView campListView = new CampListView();
     static SuggestionsView suggestionsView = new SuggestionsView();
 
     public static void main(String[] args) {
@@ -195,7 +194,7 @@ public class Main {
                     LoggerHelper.clearScreen();
                     HashMap<String, Camp> registeredCamps = student.getRegisteredCamps();
                     List <Camp> camps = new ArrayList<Camp> (registeredCamps.values());
-                    campListView.displayCampsForStudent(camps);
+                    CampListView.displayCampsForStudent(camps);
                     break;
                 case 6:
                     // View/Edit/Delete my enquiries
@@ -312,10 +311,8 @@ public class Main {
             System.out.println("9. Logout");
             System.out.println("-----------------------------------------------------");
             System.out.print("Enter choice: ");
-            Scanner scanner = new Scanner(System.in);
             int choice = InputHelper.nextInt();
-            System.out.println();
-            InputHelper.nextLine();  // Consume newline
+            
             String userType = "staff";
             Staff staff = (Staff) userDB.getUser(userID, false);
 
