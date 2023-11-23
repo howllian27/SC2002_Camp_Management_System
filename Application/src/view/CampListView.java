@@ -5,7 +5,7 @@ import java.util.List;
 import model.Camp;
 
 /**
- * The CampListView class is responsible for displaying a list of available camps.
+ * The {@code CampListView} class is responsible for displaying a list of available camps.
  * It provides a method to display the names of camps within the provided list.
  *
  * @author Cheng Lin
@@ -16,7 +16,7 @@ public class CampListView {
     /* 
      * Displays a list of all available camps by printing their names.
     */
-    public void displayCampsStudentMenu(){
+    public static void displayCampsStudentMenu(){
         System.out.println("\n+------------------------------------------------------------+");
         System.out.println("|                                                             |");
         System.out.println("|                    LIST OF CAMPS YOU ARE IN                 |");
@@ -30,7 +30,7 @@ public class CampListView {
     /***
      * Displays a list of all available camps by printing their names.
      */
-    public void displayCampsStaffMenu(){
+    public static void displayCampsStaffMenu(){
         System.out.println("\n+------------------------------------------------------------+");
         System.out.println("|                                                             |");
         System.out.println("|                  LIST OF CAMPS You Manage                   |");
@@ -45,7 +45,7 @@ public class CampListView {
      * Displays a list of all available camps by printing their names.
      * @param camps A list of Camp objects containing the available camps to be displayed.
      */
-    public void displayCampsForStudent(List<Camp> camps) {
+    public static void displayCampsForStudent(List<Camp> camps) {
         //Displays a list of all available camps.
         displayCampsStudentMenu();
         System.out.println("List of Camps:");
@@ -65,7 +65,7 @@ public class CampListView {
      *
      * @param camps A list of {@code Camp} objects containing the available camps to be displayed.
      */
-    public void displayCampsForStaff(List<Camp> camps){
+    public static void displayCampsForStaff(List<Camp> camps){
         displayCampsStaffMenu();
         System.out.println("List of Camps:");
         System.out.println();
@@ -84,7 +84,7 @@ public class CampListView {
      *
      * @param camps A list of {@code Camp} objects containing the camps to be displayed in detail.
      */
-    public void displayDetailedCamps(List<Camp> camps) {
+    public static void displayDetailedCamps(List<Camp> camps) {
                 System.out.println("\n+------------------------------------------------------------+");
                 System.out.println("|                                                             |");
                 System.out.println("|         LIST OF CAMPS (with details) YOU ARE IN             |");

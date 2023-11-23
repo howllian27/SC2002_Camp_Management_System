@@ -2,7 +2,7 @@ package view;
 import java.util.Scanner;
 
 /**
- * The LoginView class is responsible for displaying login-related pages and messages.
+ * The {@code LoginView} class is responsible for displaying login-related pages and messages.
  * It provides methods to display the login page, login success message, login error message, and password change success message.
  *
  * @author Cheng lin
@@ -14,7 +14,7 @@ public class LoginView {
     /**
      * Displays the login page and prompts the user to enter their user ID and password.
      */
-    public void displayLogin() {
+    public static void displayLogin() {
         // Display the login page
                 System.out.println("\n+------------------------------------------------------------+");
                 System.out.println("|                                                             |");
@@ -35,7 +35,7 @@ public class LoginView {
     /**
      * Displays a message indicating that the login was successful.
      */
-    public void displayLoginSuccess() {
+    public static void displayLoginSuccess() {
         System.out.println("Login Successful \n");
         
     }
@@ -43,15 +43,14 @@ public class LoginView {
     /**
      * Displays a message indicating that the login was unsuccessful due to invalid credentials.
      */
-    public void displayLoginError() {
+    public static void displayLoginError() {
         System.out.println("Login Failed. Please try again. \n");
-        
     }
 
     /**
      * Displays a message indicating that you can change the password.
      */
-    public void changeUserPassword(){
+    public static void changeUserPassword(){
                 System.out.println("\n+------------------------------------------------------------+");
                 System.out.println("|                                                             |");
                 System.out.println("|                 PASSWORD CHANGE PORTAL                      |");
@@ -66,14 +65,14 @@ public class LoginView {
     /**
      * Displays a message indicating that the password change was successful.
      */
-    public void displayPasswordChangeSuccess() {
+    public static void displayPasswordChangeSuccess() {
         System.out.println("Password Change Successful");
     }
 
     /**
      * Displays a message indicating that the password change was unsuccessful.
      */
-    public void displayPasswordChangeError() {
+    public static void displayPasswordChangeError() {
         System.out.println("Password Change Failed. Please try again.");
     }
 }

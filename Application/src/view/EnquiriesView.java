@@ -4,7 +4,7 @@ import model.Enquiry;
 
 import java.util.List;
 /**
- * The EnquiriesView class is responsible for managing student inquiries and staff interactions.
+ * The {@code EnquiriesView} class is responsible for managing student inquiries and staff interactions.
  * It provides methods to display a list of student enquiries and prompt students for inquiries if any.
  *
  * @author Cheng lin
@@ -18,7 +18,7 @@ public class EnquiriesView {
      *
      * @param enquiries A list of strings containing student inquiries.
      */
-    public void displayEnquiries(List<Enquiry> enquiries) {
+    public static void displayEnquiries(List<Enquiry> enquiries) {
                 System.out.println("\n+------------------------------------------------------------+");
                 System.out.println("|                                                             |");
                 System.out.println("|                       ENQUIRIES PORTAL                      |");
@@ -42,7 +42,7 @@ public class EnquiriesView {
     /**
      * Prompts student to enter an enquiry.
      */
-    public void promptForEnquiries() {
+    public static void promptForEnquiries() {
         System.out.println("Please enter your inquiry:");
     }
 }

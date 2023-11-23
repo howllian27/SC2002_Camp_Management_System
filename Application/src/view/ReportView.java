@@ -21,7 +21,7 @@ public class ReportView {
      * and student enquiry report.
      * To return to the main menu, the user can enter '0'.
      */
-    public void displayReport() {
+    public static void displayReport() {
                 System.out.println("\n+------------------------------------------------------------+");
                 System.out.println("|                                                             |");
                 System.out.println("|                       GENERATE REPORT                       |");
