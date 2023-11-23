@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Helper responsible for reading & writing txt file.
+ * Helper responsible for reading and writing txt file.
  * @author Lee Ern Qi Eunice
  * @version 2.0
  * @since 2023-10-29
@@ -16,9 +16,8 @@ public class FileHelper {
     /**
      * Reads student/staff txt file
      * @param filepath The filepath of student/staff txt file
-     * @return List<String>, list of string [name email faculty]
+     * @return List of strings, each element containing [name email faculty]
      */
-
     public List<String> readFile(String filepath) {
         List<String> lines = new ArrayList<>();
         // Construct the absolute path based on the working directory and the relative path
@@ -38,11 +37,11 @@ public class FileHelper {
         return lines;
     }
 
-    /**
-     * Writes txt file 
-     * @param ReportList The List of information to be generated in report
+    /***
+     * Tries to open a file and write a report to it.
+     * @param ReportList The list of reports that we want to output.
+     * @param filename The name of the file that we want to write to.
      */
-
     public void writeFile(List<String> ReportList, String filename){
         try(FileWriter fw = new FileWriter(filename);
             BufferedWriter bw = new BufferedWriter(fw)){
