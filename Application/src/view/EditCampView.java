@@ -46,7 +46,7 @@ public class EditCampView {
         System.out.println("Total Slots: " + camp.getTotalSlots());
         System.out.println("Committee Slots: " + camp.getCommitteeSlots());
         System.out.println("Description: " + camp.getDescription());
-        System.out.println("Visibilty: " + camp.getVisibility());
+        System.out.println("Visibility: " + camp.getVisibility());
         System.out.println();
         while(true){
             System.out.println("What would you like to change?");
@@ -57,7 +57,7 @@ public class EditCampView {
             System.out.println("5. Edit Total Slots " );
             System.out.println("6. Edit No. of Committee Slots " );
             System.out.println("7. Edit Description " );
-            System.out.println("8. Edit Visibilty (true/false) " );
+            System.out.println("8. Edit Visibility (true/false) " );
             System.out.println("9. Exit Edit Portal  " );
             System.out.print("Enter choice: ");
             int choice = InputHelper.nextInt();
@@ -76,42 +76,22 @@ public class EditCampView {
                     switch(datechoice){
                         case 1:
                             System.out.print("Enter new start date (dd-mm-yyyy) ");
-                            String  newStartDateString = InputHelper.nextLine();
-                            Date newStartDate = null;
-
-                            try {
-                                newStartDate = dateFormat.parse(newStartDateString);
-                            } catch (ParseException e) {
-                                e.printStackTrace(); // Handle the exception as needed
-                            }
+                            Date newStartDate = InputHelper.nextDate();
 
                             Date[] dates_Start = {newStartDate, camp.getDates()[1]};
                             camp.setDates(dates_Start);
                             break;
                         case 2:
                             System.out.print("Enter new end date (dd-mm-yyyy) ");
-                            String  newEndDateString = InputHelper.nextLine();
-                            Date newEndDate = null;
+                            Date newEndDate = InputHelper.nextDate();
 
-                            try {
-                                newEndDate = dateFormat.parse(newEndDateString);
-                            } catch (ParseException e) {
-                                e.printStackTrace(); // Handle the exception as needed
-                            }
-
-                            Date dates_End[] = {camp.getDates()[1], newEndDate};
+                            Date[] dates_End = {camp.getDates()[1], newEndDate};
                             camp.setDates(dates_End);
                             break;
                     }
                 case 3:
                     System.out.print("Enter new registration closing date (dd-mm-yyyy) ");
-                    String newRegClosingDateString = InputHelper.nextLine();
-                    Date newRegistrationClosingDate = null;
-                    try {
-                        newRegistrationClosingDate = dateFormat.parse(newRegClosingDateString);
-                    } catch (ParseException e) {
-                        e.printStackTrace(); // Handle the exception as needed
-                    }
+                    Date newRegistrationClosingDate = InputHelper.nextDate();
                     camp.setClosingDate(newRegistrationClosingDate);
                     break;
                 case 4:
