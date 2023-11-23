@@ -11,7 +11,7 @@ import java.util.Date;
  * @version 1.0
 */
 public class DateConversionHelper {
-    public Date convertDate(String dateString) {
+    public static Date convertDate(String dateString) {
         // Define the date format to match the input string
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
