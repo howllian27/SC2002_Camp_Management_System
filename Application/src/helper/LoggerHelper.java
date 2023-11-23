@@ -10,6 +10,9 @@ package helper;
  */
 public class LoggerHelper {
     public static final String LOGGER_WARNING_INTEGER = "Please enter a valid number.";
+    public static final String LOGGER_WARNING_BOOLEAN = "Please enter a valid boolean.";
+    public static final String LOGGER_WARNING_DATE = "Please enter a valid date.";
+    public static final String LOGGER_WARNING_FACULTY = "Please enter a valid faculty.";
 
     // ANSI escape codes for text colors
     private static final String GREEN = "\u001B[32m";
@@ -49,12 +52,20 @@ public class LoggerHelper {
         System.out.println(message + RESET);
     }
 
-    // Clears the screen
+    // Clears the terminal based on the operating system
     public static void clearScreen() {
-        try {
-            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-        } catch (Exception err) {
+        String os = System.getProperty("os.name").toLowerCase();
 
+        try {
+            if (os.contains("win")) {
+                // For Windows
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                // For Unix-like systems (Linux, macOS)
+                new ProcessBuilder("clear").inheritIO().start().waitFor();
+            }
+        } catch (Exception e) {
+            System.out.println("Error while trying to clear the terminal: " + e.getMessage());
         }
     }
 }

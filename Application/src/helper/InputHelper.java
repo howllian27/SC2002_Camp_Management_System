@@ -1,5 +1,10 @@
 package helper;
 
+import model.Faculty;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -12,6 +17,18 @@ import java.util.Scanner;
  */
 public class InputHelper {
     private static final Scanner scanner = new Scanner(System.in);
+
+    private static boolean isValidDate(String dateString) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        simpleDateFormat.setLenient(false);
+
+        try {
+            Date parsedDate = simpleDateFormat.parse(dateString);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
+    }
 
     /**
      * Reads the next line of text from the console.
@@ -36,5 +53,40 @@ public class InputHelper {
         int nextInt = scanner.nextInt();
         scanner.nextLine();
         return nextInt;
+    }
+
+    public static boolean nextBoolean() {
+        while(!scanner.hasNextBoolean()) {
+            LoggerHelper.Warning(LoggerHelper.LOGGER_WARNING_BOOLEAN);
+            scanner.nextLine();
+        }
+        boolean nextBoolean = scanner.nextBoolean();
+        scanner.nextLine();
+        return nextBoolean;
+    }
+
+    public static Date nextDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        dateFormat.setLenient(false);
+
+        while(true) {
+            String dateString = scanner.nextLine();
+            try {
+                return dateFormat.parse(dateString);
+            } catch (ParseException e) {
+                LoggerHelper.Warning(LoggerHelper.LOGGER_WARNING_DATE);
+            }
+        }
+    }
+
+    public static Faculty nextFaculty() {
+        do {
+            String facultyString = scanner.nextLine();
+            try {
+                return Faculty.valueOf(facultyString);
+            } catch (IllegalArgumentException e) {
+                LoggerHelper.Warning(LoggerHelper.LOGGER_WARNING_FACULTY);
+            }
+        } while(true);
     }
 }
