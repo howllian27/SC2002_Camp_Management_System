@@ -134,12 +134,10 @@ public class Main {
             switch (choice) {
                 case 1:
                     // Display available camps
-                    LoggerHelper.clearScreen();
                     campOperationsController.viewCampsForUserType(userType);
                     break;
                 case 2:
                     // Register for a camp
-                    LoggerHelper.clearScreen();
                     campOperationsController.viewCampsForUserType(userType);
                     System.out.println("Type the name of the camp you would like to register for!");
                     String selectedCampID = InputHelper.nextLine();

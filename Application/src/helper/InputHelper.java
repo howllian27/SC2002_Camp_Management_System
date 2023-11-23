@@ -51,7 +51,6 @@ public class InputHelper {
             scanner.nextLine();
         }
         int nextInt = scanner.nextInt();
-        scanner.nextLine();
         return nextInt;
     }
 

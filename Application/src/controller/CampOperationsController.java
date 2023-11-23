@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import database.CampDB;
+import helper.LoggerHelper;
 import model.Camp;
 import model.CampInformation;
 import model.Staff;
@@ -118,6 +119,7 @@ public class CampOperationsController implements BaseController {
      * @param userType The user type to be viewed ("staff" or "student").
      */
     public void viewCampsForUserType(String userType) {
+        LoggerHelper.clearScreen();
         List<Camp> camps = null;
         if (userType.equals("staff")) {
             Map<String, Camp> campMap = campDB.getAllCamps();
