@@ -25,6 +25,7 @@ import model.User;
 import view.CampListView;
 import view.CreateCampView;
 import view.SuggestionsView;
+import view.UserProfileView;
 
 public class Main {
     private static User currentUser = null;
@@ -43,7 +44,6 @@ public class Main {
 
     // Initialise views
     static CreateCampView createCampView = new CreateCampView();
-    static SuggestionsView suggestionsView = new SuggestionsView();
 
     public static void main(String[] args) {
         while (true) {
@@ -128,7 +128,8 @@ public class Main {
             System.out.println("8. View Enquiry Replies");
             System.out.println("9. Withdraw from a Camp");
             System.out.println("10. Change Password");
-            System.out.println("11. Logout");
+            System.out.println("11: View Profile");
+            System.out.println("12. Logout");
             System.out.println("-----------------------------------------------------");
             System.out.print("Enter choice: ");
 
@@ -189,7 +190,7 @@ public class Main {
                     }
 
                     Camp camp = student.getRegisteredCommitteeCamp();
-                    suggestionsView.setMasterView();
+                    SuggestionsView.setMasterView();
                     System.out.println("Your committee camp name is: " + camp.getName() + "\n");
 
                     suggestionController.submitSuggestion(student, camp.getName());
@@ -291,7 +292,11 @@ public class Main {
                     String newPassword = InputHelper.nextLine();
                     userController.changePassword(userID, newPassword);
                     break;
-                case 11:
+                case 11: 
+                    LoggerHelper.clearScreen();
+                    UserProfileView.displayStudentProfile(student);
+                    break;
+                case 12:
                     currentUser = null;
                     return;
                 default:
