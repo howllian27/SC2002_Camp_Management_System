@@ -72,12 +72,33 @@ public class Main {
                             String userID = InputHelper.nextLine();
                             System.out.print("Enter Password: ");
                             String password = InputHelper.nextLine();
-                            System.out.print("Are you a student? (Y/N): ");
-                            String isStudent = InputHelper.nextLine();
-                            boolean isStudentBool = !isStudent.equals("N") && !isStudent.equals("n");
+                            boolean isStudentBool = false;
+                            while(true){
+                                System.out.print("Are you a student? (Y/N): ");
+                                String isStudent = InputHelper.nextLine();
+
+                                if (isStudent.equals("Y") || isStudent.equals("y") || isStudent.equals("N") || isStudent.equals("n")){
+                                    isStudentBool = !isStudent.equals("N") && !isStudent.equals("n");
+                                    break;
+                                }                      
+                            }
+
 
                             User currentUser = userController.loginUser(userID, password, isStudentBool);
                             
+                            if (currentUser == null){
+                                System.out.println("\nYou will be redirect to a new login page within 3 seconds...");
+
+                                // Introduce a 3-second delay using Thread.sleep
+                                try {
+                                    Thread.sleep(3000);
+                                } catch (InterruptedException e) {
+                                    // Handle the exception if needed
+                                    e.printStackTrace();
+                                }
+
+                                continue;
+                            }
                             if (currentUser.getFirstTimeRegistered() == false){
                                 System.out.println("Please enter your new password:");
                                 String newPassword = InputHelper.nextLine();
@@ -139,17 +160,19 @@ public class Main {
             System.out.println();
             String userType = "student";
             Student student = (Student) userDB.getUser(userID, true);
+            HashMap<String, Camp> registeredCamps = student.getRegisteredCamps();
+            List <Camp> camps = new ArrayList<Camp> (registeredCamps.values());
 
             switch (choice) {
                 case 1:
                     // Display available camps
-                    campOperationsController.viewCampsForUserType(userType);
+                    campOperationsController.viewCampsForUserType(student);
                     break;
                 case 2:
                     // Register for a camp
-                    campOperationsController.viewCampsForUserType(userType);
-                    System.out.println("Type the name of the camp you would like to register for!");
-                    String selectedCampID = InputHelper.nextLine();
+                    campOperationsController.viewCampsForUserType(student);
+                    System.out.println("Type the number of the camp you would like to register for!");
+                    int selectedCampID = InputHelper.nextInt();
                     System.out.println("Would you like to register as a participant or a committee member?");
                     System.out.println("1. Participant");
                     System.out.println("2. Committee Member");
@@ -169,7 +192,7 @@ public class Main {
                 case 3:
                     // Submit enquiry for a camp
                     LoggerHelper.clearScreen();
-                    campOperationsController.viewCampsForUserType(userType);
+                    campOperationsController.viewCampsForUserType(user);
                     System.out.println("Type the name of the camp you would like to submit an enquiry for!");
                     String campID = InputHelper.nextLine();
                     if (campDB.getCamp(campID) == null){
@@ -199,8 +222,6 @@ public class Main {
                 case 5:
                     // View registered camps
                     LoggerHelper.clearScreen();
-                    HashMap<String, Camp> registeredCamps = student.getRegisteredCamps();
-                    List <Camp> camps = new ArrayList<Camp> (registeredCamps.values());
                     CampListView.displayRegCampsForStudent(camps, student);
                     break;
                 case 6:
@@ -281,7 +302,7 @@ public class Main {
                 case 9:
                     // Withdraw from a camp
                     LoggerHelper.clearScreen();
-                    campOperationsController.viewCampsForUserType(userType);
+                    CampListView.displayRegCampsForStudent(camps, student);
                     System.out.println("Type the name of the camp you would like to withdraw from.");
                     String withdrawCampID = InputHelper.nextLine();
                     studentCampInteractionController.withdrawFromCamp(userID, withdrawCampID);
@@ -349,12 +370,12 @@ public class Main {
                 case 4 ->{
                     // View all camps
                     LoggerHelper.clearScreen();
-                    campOperationsController.viewCampsForUserType(userType);
+                    campOperationsController.viewCampsForUserType(staff);
                 }
                 case 5 -> {
                     // View registered students for a camp
                     LoggerHelper.clearScreen();
-                    campOperationsController.viewCampsForUserType(userType);
+                    campOperationsController.viewCampsForUserType(staff);
                     System.out.println("Select a camp to view registered students for:");
                     String campToView = InputHelper.nextLine();
                     campOperationsController.viewRegisteredStudents(campToView);
@@ -362,7 +383,7 @@ public class Main {
                 case 6 -> {
                     //View/Reply to camp enquiries
                     LoggerHelper.clearScreen();
-                    campOperationsController.viewCampsForUserType(userType);
+                    campOperationsController.viewCampsForUserType(staff);
                     System.out.println("Which camp would you like to view enquiries for?");
                     String campToViewEnquiries = InputHelper.nextLine();
                     if (!campOperationsController.verifyCampOwnership(campToViewEnquiries, staff)) break;

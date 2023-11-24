@@ -14,6 +14,14 @@ public class UserProfileView {
      * @param student The User object containing the user's profile information.
      */
     public static void displayStudentProfile(Student student) {
+        System.out.println("\n+------------------------------------------------------------+");
+        System.out.println("|                                                             |");
+        System.out.println("|                      YOUR USER PROFILE                      |");
+        System.out.println("|                                                             |");
+        System.out.println("|                                                             |");
+        System.out.println("|        To return to the main menu, simply enter '0'.        |");
+        System.out.println("|                                                             |");
+        System.out.println("+------------------------------------------------------------+\n");
         // Display the profile of a user
         System.out.println("User Profile");
         System.out.println("User ID: " + student.getID());

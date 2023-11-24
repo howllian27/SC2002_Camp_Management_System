@@ -28,6 +28,9 @@ public class EnquiriesView {
                 System.out.println("|                                                             |");
                 System.out.println("+------------------------------------------------------------+\n");
         System.out.println("Displaying student enquiries:");
+        if(enquiries.isEmpty()){
+            System.out.println("No Enquiries so far");
+        }
         int count = 1;
         for (Enquiry enquiry : enquiries) {
             System.out.println(count + ". " + "Enquiry : " + enquiry.getEnquiry());

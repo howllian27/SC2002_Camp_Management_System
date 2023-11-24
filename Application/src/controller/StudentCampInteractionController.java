@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 
 import database.CampDB;
 import database.UserDB;
@@ -73,9 +74,31 @@ public class StudentCampInteractionController implements BaseController {
      * @param campID The ID of the camp.
      * @param role The role of the student in the camp.
      */
-    public void registerForCamp(String userID, String campID, String role) {
+    public void registerForCamp(String userID, int campChoice, String role) {
         Student student = (Student) userDB.getUser(userID, true);
+        List <Camp> camps = campDB.getAllCamps().values().stream().toList();
+        String campID = null;
+
+        // if (campDB.getCamp(campID) != null){
+        //     camp = campDB.getCamp(campID);
+        // } else {
+        //     System.out.println("The camp you typed doesn't exist!");
+        //     return;
+        // }
+
+        for (int i=1; i <= camps.size(); i++){
+            if (campChoice == i){
+                campID = camps.get(campChoice-1).getName();
+            }
+        }
+
+        if (campID == null){
+            System.out.println("Camp not found!");
+            return;
+        }
+
         Camp camp = campDB.getCamp(campID);
+        
         HashMap<String, Camp> registeredCamps = student.getRegisteredCamps();
         
         if (registeredCamps.containsKey(campID)){

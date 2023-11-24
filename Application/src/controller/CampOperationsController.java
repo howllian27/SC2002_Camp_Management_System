@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import model.Camp;
 import model.CampInformation;
 import model.Staff;
 import model.Student;
+import model.User;
 import view.CampListView;
 import view.CampDetailView;
 import view.EditCampView;
@@ -121,26 +123,30 @@ public class CampOperationsController implements BaseController {
     /**
      * View all camps based on user type.
      *
-     * @param userType The user type to be viewed ("staff" or "student").
+     * @param user The user type to be viewed ("staff" or "student").
      */
-    public void viewCampsForUserType(String userType) {
+    public void viewCampsForUserType(User user) {
         LoggerHelper.clearScreen();
         List<Camp> camps = null;
-        if (userType.equals("staff")) {
+        if (user instanceof Staff staff) {
             Map<String, Camp> campMap = campDB.getAllCamps();
             camps = campMap.values().stream().toList();
             CampListView.displayCampsForStaff(camps);
         }
-        if (userType.equals("student")) {
+        if (user instanceof Student student) {
             Map<String, Camp> campMap = campDB.getAllCamps();
             camps = campMap.values().stream()
                               .filter(Camp::getVisibility) // Keep only camps where getVisibility is true
-                              .collect(Collectors.toList());          
+                              .filter(Camp -> Camp.getFaculty() == student.getFaculty()) // Filter camps with correct faculty
+                              .collect(Collectors.toList());
+
+            CampListView.displayCampsForStudent(camps);      
         }
+
+
         if (camps.isEmpty()) {
             System.out.println("Camp does not exist.");
-        } else {
-            CampListView.displayCampsForStudent(camps);
+        } else {        
         }
     }
 
