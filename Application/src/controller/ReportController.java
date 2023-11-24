@@ -50,24 +50,37 @@ public class ReportController implements BaseController{
      * @param staff The staff member who is currently logged in.
      */
     public void generateReportsForStaff(Staff staff){
-        ReportView.displayReport();
-        int choice = InputHelper.nextInt();
-
+        
         System.out.println("Select the camp you wish to generate a report for:");
         List<Camp> camps = campDB.getAllCamps().values().stream().toList();
         CampListView.displayCampsForStaff(camps);
         System.out.println("Enter the number of the camp you wish to generate a report for:");
         int campChoice = InputHelper.nextInt();
         Camp selectedCamp = camps.get(campChoice - 1);
+        
+        ReportView.displayReport();
+        int choice = InputHelper.nextInt();
 
         switch (choice) {
             case 1 -> {
-                System.out.println("Generating Camp Report...");
-                generateStudentReport(selectedCamp, "Attendees");
+                System.out.println("Select the type of report you wish to generate:");
+                System.out.println("1. Camp Attendees");
+                System.out.println("2. Camp Committee");
+                int filterChoice = InputHelper.nextInt();
+                switch (filterChoice){
+                    case 1 -> {
+                        System.out.println("Generating Camp Report...");
+                        generateStudentReport(selectedCamp, "Attendees");
+                    }
+                    case 2 -> {
+                        System.out.println("Generating Camp Performance Report...");
+                        generateStudentReport(selectedCamp, "Camp committee");
+                    }
+                }
             }
             case 2 -> {
                 System.out.println("Generating Camp Performance Report...");
-                generateStudentReport(selectedCamp, "Camp committee");
+                generatePerformanceReport(selectedCamp);
             }
             case 3 -> {
                 System.out.println("Generating Student Enquiry Report...");
@@ -76,6 +89,47 @@ public class ReportController implements BaseController{
         }
     }
 
+    public void generateReportsForCommittee(Student student){
+        List <Camp> camps = null;
+        if (student.getCampCommitteeMemberStatus()){
+            camps.add(student.getRegisteredCommitteeCamp());
+        } else {
+            System.out.println("You aren't a camp committee member!");
+            return;
+        }
+        
+        CampListView.displayCampsForStudent(camps);
+        
+        ReportView.displayReport();
+        int choice = InputHelper.nextInt();
+
+        switch (choice) {
+            case 1 -> {
+                System.out.println("Select the type of report you wish to generate:");
+                System.out.println("1. Camp Attendees");
+                System.out.println("2. Camp Committee");
+                int filterChoice = InputHelper.nextInt();
+                switch (filterChoice){
+                    case 1 -> {
+                        System.out.println("Generating Camp Report...");
+                        generateStudentReport(camps.get(0), "Attendees");
+                    }
+                    case 2 -> {
+                        System.out.println("Generating Camp Performance Report...");
+                        generateStudentReport(camps.get(0), "Camp committee");
+                    }
+                }
+            }
+            case 2 -> {
+                System.out.println("Generating Camp Performance Report...");
+                generatePerformanceReport(camps.get(0));
+            }
+            case 3 -> {
+                System.out.println("Generating Student Enquiry Report...");
+                generateStudentEnquiryReport(camps.get(0));
+            }
+        }
+    }
     /**
      * Generates a report for a camp.
      *
@@ -109,6 +163,13 @@ public class ReportController implements BaseController{
             default -> new HashMap<>();
         };
 
+        String studentHeader = "";
+        if (filterType == "Camp Committee"){
+            studentHeader = "Camp Commmittee Member Details:\n";
+        }
+        else {
+            studentHeader = "Camp Attendee Details:\n";
+        }
 
         for (Student student : CampStudents.values()) {
             if (!concatenatedUserIDs.isEmpty()) {
@@ -121,7 +182,7 @@ public class ReportController implements BaseController{
             }
         }
 
-        ReportList.add(cdetails + concatenatedUserIDs);
+        ReportList.add(cdetails + studentHeader + concatenatedUserIDs);
 
         if (filterType.equals("Attendees")){
             fileHelper.writeFile(ReportList, "CampReport_" + campDetails.campName + ".txt");
@@ -132,6 +193,30 @@ public class ReportController implements BaseController{
         }
     }
 
+    /**
+     * Generates a report for the performance of a camp.
+     *
+     * @param camp The camp to generate the report for.
+     */
+    public void generatePerformanceReport(Camp camp){
+        List<String> reportList = new ArrayList<>();
+        List<Student> committeeMembers = campDB.getCommitteeMembersForCamp(camp.getName()).values().stream().toList();
+
+        // Adding header to the report
+        reportList.add("Camp Performance Report for " + camp.getCampInformation().campName + "\n");
+        reportList.add("List of Committee Members:\n");
+
+        // Formatting each committee member and adding it to the report
+        for (Student committeeMember : committeeMembers) {
+            String committeeMemberEntry = "Student ID: " + committeeMember.getID() + "\n" +
+                    "Name: " + committeeMember.getName() + "\n" +
+                    "Points: " + committeeMember.getPoints() + "\n" +
+                    "----------------------------------------\n";
+            reportList.add(committeeMemberEntry);
+        }
+
+        fileHelper.writeFile(reportList, "CampPerformanceReport_" + camp.getName() + ".txt");
+    }
     /**
      * Generates a report for student enquiries in a camp.
      *

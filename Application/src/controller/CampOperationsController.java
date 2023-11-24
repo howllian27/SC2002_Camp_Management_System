@@ -209,11 +209,26 @@ public class CampOperationsController implements BaseController {
             return;
         }
 
-        HashMap<String, Student> attendees = camp.getAttendees();
+        List<Student> attendees = camp.getAttendees().values().stream()
+                              .filter(student -> !student.getCampCommitteeMemberStatus())
+                              .collect(Collectors.toList());
 
-        for (Map.Entry<String, Student> set :
-             attendees.entrySet()){
-                System.out.println(set.getValue().getName());
+        List <Student> campCommitteeMembers = camp.getCommittee().values().stream().toList();
+
+        System.out.println("\nList of Camp Committee Members:");
+
+        int campCommitteeCount = 1;
+        for (Student student : campCommitteeMembers) {
+            System.out.println(campCommitteeCount + ". " + student.getName());
+            campCommitteeCount++;
+        }
+
+        System.out.println("\nList of Other Camp Attendees:");
+
+        int attendeeCount = 1;
+        for (Student attendee : attendees) {
+            System.out.println(attendeeCount + ". " + attendee.getName());
+            attendeeCount++;
         }
     }
 }
