@@ -150,7 +150,8 @@ public class Main {
             System.out.println("9. Withdraw from a Camp");
             System.out.println("10. Change Password");
             System.out.println("11: View Profile");
-            System.out.println("12. Logout");
+            System.out.println("12: Generate Reports (For Camp Committee Only)");
+            System.out.println("13. Logout");
             System.out.println("-----------------------------------------------------");
             System.out.print("Enter choice: ");
 
@@ -318,6 +319,10 @@ public class Main {
                     UserProfileView.displayStudentProfile(student);
                     break;
                 case 12:
+                    LoggerHelper.clearScreen();
+                    reportController.generateReportsForCommittee(student);
+                    break;
+                case 13:
                     currentUser = null;
                     return;
                 default:
