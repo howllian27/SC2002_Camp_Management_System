@@ -1,0 +1,18 @@
+Camp Information of ori
+
+Camp Name: ori
+Camp Description: lol
+Camp Location: ntu sucks
+
+Camp Dates: [Wed Dec 20 00:00:00 SGT 2023, Sat Dec 23 00:00:00 SGT 2023]
+Camp Registration Closing Date: Fri Dec 15 00:00:00 SGT 2023
+
+Camp Faculty: SCSE
+
+Camp Total Slots: 10
+Camp Committee Slots: 2
+
+Camp In Charge: Datta
+
+Camp Attendee Details:
+CHERN(User ID: YCHERN)

@@ -90,7 +90,7 @@ public class ReportController implements BaseController{
     }
 
     public void generateReportsForCommittee(Student student){
-        List <Camp> camps = null;
+        List <Camp> camps = new ArrayList<>();
         if (student.getCampCommitteeMemberStatus()){
             camps.add(student.getRegisteredCommitteeCamp());
         } else {
