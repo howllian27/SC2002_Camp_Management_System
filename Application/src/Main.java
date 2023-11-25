@@ -297,7 +297,9 @@ public class Main {
                             break;
                         default: 
                             System.out.println("Invalid choice. Try again.");
+                            break;
                     }
+                    break;
                 case 8:
                     // Withdraw from a camp
                     LoggerHelper.clearScreen();

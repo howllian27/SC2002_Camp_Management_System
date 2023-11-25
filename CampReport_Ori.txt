@@ -1,0 +1,21 @@
+Camp Information of Ori
+
+Camp Name: Ori
+Camp Description: This is for SCSE students
+Camp Location: NTU
+
+Camp Dates: [Fri Dec 22 00:00:00 SGT 2023, Sat Dec 23 00:00:00 SGT 2023]
+Camp Registration Closing Date: Mon Dec 18 00:00:00 SGT 2023
+
+Camp Faculty: SCSE
+
+Camp Total Slots: 10
+Camp Committee Slots: 7
+
+Camp In Charge: Datta
+
+Camp Attendee Details:
+CHERN(User ID: YCHERN) | Committee Member
+ 
+LEE(User ID: LE51)| Attendee
+
