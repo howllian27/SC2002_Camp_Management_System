@@ -287,13 +287,17 @@ public class Main {
                     int suggestionChoice = InputHelper.nextInt();
 
                     switch (suggestionChoice) {
-                        case 1 ->
+                        case 1:
                             // Edit my suggestions
-                                suggestionController.editSuggestion(student);
-                        case 2 ->
+                            suggestionController.editSuggestion(student);
+                            break;
+                        case 2:
                             // Delete my suggestions
-                                suggestionController.deleteSuggestion(student);
-                        default -> System.out.println("Invalid choice. Try again.");
+                            suggestionController.deleteSuggestion(student);
+                            break;
+                        default: 
+                            System.out.println("Invalid choice. Try again.");
+                            break;
                     }
                 case 8:
                     // Withdraw from a camp
