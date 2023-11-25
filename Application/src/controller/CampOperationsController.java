@@ -14,7 +14,6 @@ import model.Staff;
 import model.Student;
 import model.User;
 import view.CampListView;
-import view.CampDetailView;
 import view.EditCampView;
 
 /**
@@ -76,7 +75,7 @@ public class CampOperationsController implements BaseController {
         boolean success = campDB.addCamp(camp.getName(), camp);
         if (success) {
             staff.addCamp(camp.getName(), camp);
-            CampDetailView.displayCampDetails(camp);
+            CampListView.displayCampDetails(camp);
         }
     }
     /**
@@ -175,7 +174,7 @@ public class CampOperationsController implements BaseController {
         if (camp == null) {
             System.out.println("Camp does not exist.");
         } else {
-            CampDetailView.displayCampDetails(camp);
+            CampListView.displayCampDetails(camp);
         }
     }
 
