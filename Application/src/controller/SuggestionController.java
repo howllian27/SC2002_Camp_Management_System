@@ -194,7 +194,14 @@ public class SuggestionController implements BaseController {
         switch (choice){
             case 1:
                 suggestion.setApproved(true);
-                selectedCamp.setCampInformation(suggestion.getCampInformation());
+                if (selectedCamp.getCampInformation().campName != suggestion.getCampInformation().campName){
+                    campDB.deleteCamp(selectedCamp.getName());
+                    selectedCamp.setCampInformation(suggestion.getCampInformation());
+                    campDB.addCamp(suggestion.getCampInformation().campName, selectedCamp);
+                } else {
+                    selectedCamp.setCampInformation(suggestion.getCampInformation());
+                }
+                
                 Student suggestionSetter = (Student) userDB.getUser(suggestion.getStudentId(), true);
                 suggestionSetter.addPoints(1);
 

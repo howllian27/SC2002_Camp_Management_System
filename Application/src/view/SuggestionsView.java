@@ -42,39 +42,45 @@ public class SuggestionsView {
         int count = 1;
 
         for (Suggestion suggestion : suggestions) {
-            if (!Objects.equals(suggestion.getCampInformation().campName, originalCampInfo.campName)) {
+            if (!Objects.equals(suggestion.getCampInformation().campName, originalCampInfo.campName) && !suggestion.getIsApproved()) {
                 System.out.println(count + ". Suggestion Made to Change Camp Name to: " + suggestion.getCampInformation().campName + "\n");
+                count++;
             }
 
-            else if (!Objects.equals(suggestion.getCampInformation().description, originalCampInfo.description)) {
+            else if (!Objects.equals(suggestion.getCampInformation().description, originalCampInfo.description) && !suggestion.getIsApproved()) {
                 System.out.println(count + ". Suggestion Made to Change Camp Description to: " + suggestion.getCampInformation().description + "\n");
+                count++;
             }
 
-            else if (!Objects.equals(suggestion.getCampInformation().location, originalCampInfo.location)){
+            else if (!Objects.equals(suggestion.getCampInformation().location, originalCampInfo.location) && !suggestion.getIsApproved()){
                 System.out.println(count + ". Suggestion Made to Change Camp Location to: " + suggestion.getCampInformation().location + "\n");
+                count++;
             }
 
-            else if (suggestion.getCampInformation().dates[0] != originalCampInfo.dates[0]){
+            else if (suggestion.getCampInformation().dates[0] != originalCampInfo.dates[0] && !suggestion.getIsApproved()){
                 System.out.println(count + ". Suggestion Made to Change Camp Start Date to: " + suggestion.getCampInformation().dates[0] + "\n");
+                count++;
             }
 
-            else if (suggestion.getCampInformation().dates[1] != originalCampInfo.dates[1]){
+            else if (suggestion.getCampInformation().dates[1] != originalCampInfo.dates[1] && !suggestion.getIsApproved()){
                 System.out.println(count + ". Suggestion Made to Change Camp End Date to: " + suggestion.getCampInformation().dates[1] + "\n");
+                count++;
             }
 
-            else if (suggestion.getCampInformation().registrationClosingDate != originalCampInfo.registrationClosingDate){
+            else if (suggestion.getCampInformation().registrationClosingDate != originalCampInfo.registrationClosingDate && !suggestion.getIsApproved()){
                 System.out.println(count + ". Suggestion Made to Change Camp Registration Closing Date to: " + suggestion.getCampInformation().registrationClosingDate + "\n");
+                count++;
             }
 
-            else if (suggestion.getCampInformation().totalSlots != originalCampInfo.totalSlots){
+            else if (suggestion.getCampInformation().totalSlots != originalCampInfo.totalSlots && !suggestion.getIsApproved()){
                 System.out.println(count + ". Suggestion Made to Change Number of Camp Total Slots to: " + suggestion.getCampInformation().totalSlots + "\n");
+                count++;
             }
 
-            else if (suggestion.getCampInformation().committeeSlots != originalCampInfo.committeeSlots){
+            else if (suggestion.getCampInformation().committeeSlots != originalCampInfo.committeeSlots && !suggestion.getIsApproved()){
                 System.out.println(count + ". Suggestion Made to Change Number of Camp Committee Slots to: " + suggestion.getCampInformation().committeeSlots + "\n");
+                count++;
             }
-
-            count++;
         }
     }
 
