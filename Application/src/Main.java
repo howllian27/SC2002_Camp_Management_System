@@ -146,12 +146,11 @@ public class Main {
             System.out.println("5. View Registered Camps");
             System.out.println("6. View/Edit/Delete/Reply to Enquiries");
             System.out.println("7. View/Edit/Delete Suggestions");
-            System.out.println("8. View Enquiry Replies");
-            System.out.println("9. Withdraw from a Camp");
-            System.out.println("10. Change Password");
-            System.out.println("11: View Profile");
-            System.out.println("12: Generate Reports (For Camp Committee Only)");
-            System.out.println("13. Logout");
+            System.out.println("8. Withdraw from a Camp");
+            System.out.println("9. Change Password");
+            System.out.println("10: View Profile");
+            System.out.println("11: Generate Reports (For Camp Committee Only)");
+            System.out.println("12. Logout");
             System.out.println("-----------------------------------------------------");
             System.out.print("Enter choice: ");
 
@@ -297,10 +296,6 @@ public class Main {
                         default -> System.out.println("Invalid choice. Try again.");
                     }
                 case 8:
-                    // View my enquiry replies
-                    LoggerHelper.clearScreen();
-                    break;
-                case 9:
                     // Withdraw from a camp
                     LoggerHelper.clearScreen();
                     CampListView.displayRegCampsForStudent(camps, student);
@@ -308,21 +303,21 @@ public class Main {
                     String withdrawCampID = InputHelper.nextLine();
                     studentCampInteractionController.withdrawFromCamp(userID, withdrawCampID);
                     break;
-                case 10:
+                case 9:
                     LoggerHelper.clearScreen();
                     System.out.println("Please enter your new password:");
                     String newPassword = InputHelper.nextLine();
                     userController.changePassword(userID, newPassword);
                     break;
-                case 11: 
+                case 10: 
                     LoggerHelper.clearScreen();
                     UserProfileView.displayStudentProfile(student);
                     break;
-                case 12:
+                case 11:
                     LoggerHelper.clearScreen();
                     reportController.generateReportsForCommittee(student);
                     break;
-                case 13:
+                case 12:
                     currentUser = null;
                     return;
                 default:
