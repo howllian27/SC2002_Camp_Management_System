@@ -164,15 +164,15 @@ public class CampListView {
         System.out.println("|        To return to the main menu, simply enter '0'.        |");
         System.out.println("|                                                             |");
         System.out.println("+------------------------------------------------------------+\n");
-System.out.println("Camp Details");
-System.out.println("Camp Name: " + camp.getName());
-System.out.println("Dates: " + Arrays.toString(camp.getDates()));
-System.out.println("Registration closing date: " + camp.getClosingDate());
-System.out.println("Location: " + camp.getLocation());
-System.out.println("Total Slots: " + camp.getTotalSlots());
-System.out.println("Remaining Slots: " + camp.getRemainingSlots());
-System.out.println("Description: " + camp.getDescription());
-System.out.println("Staff In Charge: " + camp.getInCharge().getName());
-System.out.println("Visibility: " + camp.getVisibility() + "\n");
-}
+        System.out.println("Camp Details");
+        System.out.println("Camp Name: " + camp.getName());
+        System.out.println("Dates: " + Arrays.toString(camp.getDates()));
+        System.out.println("Registration closing date: " + camp.getClosingDate());
+        System.out.println("Location: " + camp.getLocation());
+        System.out.println("Total Slots: " + camp.getTotalSlots());
+        System.out.println("Remaining Slots: " + camp.getRemainingSlots());
+        System.out.println("Description: " + camp.getDescription());
+        System.out.println("Staff In Charge: " + camp.getInCharge().getName());
+        System.out.println("Visibility: " + camp.getVisibility() + "\n");
+    }
 }
