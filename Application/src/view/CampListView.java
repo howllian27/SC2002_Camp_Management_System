@@ -41,6 +41,18 @@ public class CampListView {
         System.out.println("|                                                             |");
         System.out.println("+------------------------------------------------------------+\n");
     }
+
+
+    public static void displayAllCampsStaffMenu(){
+        System.out.println("\n+------------------------------------------------------------+");
+        System.out.println("|                                                             |");
+        System.out.println("|                      LIST OF ALL CAMPS                      |");
+        System.out.println("|                                                             |");
+        System.out.println("|                                                             |");
+        System.out.println("|        To return to the main menu, simply enter '0'.        |");
+        System.out.println("|                                                             |");
+        System.out.println("+------------------------------------------------------------+\n");
+    }
     
     /**
      * Displays a list of all available camps by printing their names.
@@ -91,16 +103,20 @@ public class CampListView {
      *
      * @param camps A list of {@code Camp} objects containing the available camps to be displayed.
      */
-    public static void displayCampsForStaff(List<Camp> camps){
-        displayCampsStaffMenu();
+    public static void displayCampsForStaff(List<Camp> camps, boolean allCamps){
+        if (allCamps){
+            displayAllCampsStaffMenu();
+        } else {
+            displayCampsStaffMenu();
+        }
         System.out.println("List of Camps:");
         System.out.println();
         int count = 1;
         for (Camp camp : camps) {
             System.out.println(count + ". " + "Camp Name: " + camp.getName());
-            System.out.println("    " + "Total Slots: " + camp.getTotalSlots());
-            System.out.println("    " + "Remaining Slots: " + camp.getRemainingSlots());
-            System.out.println("    " + "Remaining Committee Slots: " + camp.getCommitteeSlots());
+            System.out.println("   " + "Total Slots: " + camp.getTotalSlots());
+            System.out.println("   " + "Remaining Slots: " + camp.getRemainingSlots());
+            System.out.println("   " + "Remaining Committee Slots: " + camp.getCommitteeSlots());
             count++;
         }
     }

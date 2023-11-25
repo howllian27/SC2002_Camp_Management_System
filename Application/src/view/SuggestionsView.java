@@ -73,6 +73,8 @@ public class SuggestionsView {
             else if (suggestion.getCampInformation().committeeSlots != originalCampInfo.committeeSlots){
                 System.out.println(count + ". Suggestion Made to Change Number of Camp Committee Slots to: " + suggestion.getCampInformation().committeeSlots + "\n");
             }
+
+            count++;
         }
     }
 

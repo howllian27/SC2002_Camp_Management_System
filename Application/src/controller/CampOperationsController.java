@@ -130,7 +130,7 @@ public class CampOperationsController implements BaseController {
         if (user instanceof Staff staff) {
             Map<String, Camp> campMap = campDB.getAllCamps();
             camps = campMap.values().stream().toList();
-            CampListView.displayCampsForStaff(camps);
+            CampListView.displayCampsForStaff(camps, true);
         }
         if (user instanceof Student student) {
             Map<String, Camp> campMap = campDB.getAllCamps();
@@ -154,13 +154,15 @@ public class CampOperationsController implements BaseController {
      *
      * @param userType The user type to be viewed ("staff" or "student").
      */
-    public void viewIndivCamps(Staff staff) {
+    public boolean viewIndivCamps(Staff staff) {
         LoggerHelper.clearScreen();
         List <Camp> camps = staff.getCamps().values().stream().toList();
         if (camps.isEmpty()) {
             System.out.println("You do not own any camps!");
+            return false;
         } else {
-            CampListView.displayCampsForStaff(camps);
+            CampListView.displayCampsForStaff(camps, false);
+            return true;
         }
     }
 

@@ -61,20 +61,34 @@ public class EnquiryController implements BaseController {
      * Allows staff to view enquiries related to a camp.
      *
      * @param campId The ID of the camp.
+     * @return True if there are enquiries to display; false otherwise.
      */
-    public void viewEnquiriesByCamp(String campId) {
+    public boolean viewEnquiriesByCamp(String campId) {
         List<Enquiry> enquiries = EnquiryDB.getInstance().getEnquiries(campId);
         EnquiriesView.displayEnquiries(enquiries);
+
+        if (enquiries.size() == 0) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
      * Allows staff to view enquiries related to a student.
      *
      * @param studentID The Id of the student
+     * @return True if there are enquiries to display; false otherwise.
     */
-    public void viewEnquiriesByStudent(String studentID) {
+    public boolean viewEnquiriesByStudent(String studentID) {
         List<Enquiry> enquiries = enquiryDB.getEnquiriesByStudent(studentID);
         EnquiriesView.displayEnquiries(enquiries);
+
+        if (enquiries.size() == 0) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -89,14 +103,12 @@ public class EnquiryController implements BaseController {
         Enquiry enquiryToReply = null;
         
         int count = 1;
-        for (Enquiry enquiry : enquiries) {
-            if(enquiry.getResponse() != null) {
+        for (Enquiry enquiry : enquiries) {            
+            if (enquiryToReplyIndex == count && enquiry.getResponse() != null) {
                 System.out.println("You had already previously replied to this enquiry as follows:");
                 System.out.println("Response : " + enquiry.getResponse() + "\n");
                 return;
-            }
-            
-            if (enquiryToReplyIndex == count) {
+            } else if (enquiryToReplyIndex == count) {
                 enquiryToReply = enquiry;
             }
 
@@ -229,19 +241,22 @@ public class EnquiryController implements BaseController {
      * @param enquiryReplyIndex The index of the enquiry to check.
      * @param campId The ID of the camp.
      */
-    public void checkIfEnquiryReplied(int enquiryReplyIndex, String campId){
-        List<Enquiry> enquiries = enquiryDB.getEnquiriesByCamp(campId);
+    public boolean checkIfEnquiryReplied(int enquiryReplyIndex, String userId){
+        List<Enquiry> enquiries = enquiryDB.getEnquiriesByStudent(userId);
         int count = 1;
 
         for(Enquiry enquiry : enquiries){
             if (count == enquiryReplyIndex){
                 if(enquiry.getResponse() != null){
-                    System.out.println("Enquiry has already been replied to! \n");
+                    System.out.println("\nEnquiry has already been replied to!");
                     System.out.println("Response : " + enquiry.getResponse());
+                    return true;
                 }
             }
 
             count++;
         }
+
+        return false;
     }
 }
