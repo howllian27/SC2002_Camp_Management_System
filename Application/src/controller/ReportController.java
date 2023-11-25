@@ -53,7 +53,7 @@ public class ReportController implements BaseController{
         
         System.out.println("Select the camp you wish to generate a report for:");
         List<Camp> camps = campDB.getAllCamps().values().stream().toList();
-        CampListView.displayCampsForStaff(camps);
+        CampListView.displayCampsForStaff(camps, false);
         System.out.println("Enter the number of the camp you wish to generate a report for:");
         int campChoice = InputHelper.nextInt();
         Camp selectedCamp = camps.get(campChoice - 1);

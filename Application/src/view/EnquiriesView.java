@@ -27,7 +27,7 @@ public class EnquiriesView {
                 System.out.println("|        To return to the main menu, simply enter '0'.        |");
                 System.out.println("|                                                             |");
                 System.out.println("+------------------------------------------------------------+\n");
-        System.out.println("Displaying student enquiries:");
+        System.out.println("Displaying Enquiries:");
         if(enquiries.isEmpty()){
             System.out.println("No Enquiries so far");
         }

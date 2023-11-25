@@ -87,7 +87,7 @@ public class Main {
                             User currentUser = userController.loginUser(userID, password, isStudentBool);
                             
                             if (currentUser == null){
-                                System.out.println("\nYou will be redirect to a new login page within 3 seconds...");
+                                System.out.println("\nYou will be redirected to a new login page within 3 seconds...");
 
                                 // Introduce a 3-second delay using Thread.sleep
                                 try {
@@ -172,9 +172,9 @@ public class Main {
                 case 2:
                     // Register for a camp
                     campOperationsController.viewCampsForUserType(student);
-                    System.out.println("Type the number of the camp you would like to register for!");
+                    System.out.println("\nType the number of the camp you would like to register for!");
                     int selectedCampID = InputHelper.nextInt();
-                    System.out.println("Would you like to register as a participant or a committee member?");
+                    System.out.println("\nWould you like to register as a participant or a committee member?");
                     System.out.println("1. Participant");
                     System.out.println("2. Committee Member");
                     int roleChoice = InputHelper.nextInt();
@@ -238,10 +238,10 @@ public class Main {
                     switch (enquiryChoice) {
                         case 1:
                             // Edit my enquiries
-                            enquiryController.viewEnquiriesByStudent(userID);
+                            if (!enquiryController.viewEnquiriesByStudent(userID)) break;
                             System.out.println("Type the enquiry you would like to edit!");
                             int enquiryToEditIndex = InputHelper.nextInt();
-                            enquiryController.checkIfEnquiryReplied(enquiryToEditIndex, userID);
+                            if (enquiryController.checkIfEnquiryReplied(enquiryToEditIndex, userID)) break;
                             InputHelper.nextLine();
                             System.out.println("Type the new enquiry you would like to make!");
                             String newEnquiry = InputHelper.nextLine();
@@ -249,10 +249,10 @@ public class Main {
                             break;
                         case 2:
                             // Delete my enquiries
-                            enquiryController.viewEnquiriesByStudent(userID);
+                            if (!enquiryController.viewEnquiriesByStudent(userID)) break;
                             System.out.println("Type the number of the enquiry you would like to delete!");
                             int enquiryToDeleteIndex = InputHelper.nextInt();
-                            enquiryController.checkIfEnquiryReplied(enquiryToDeleteIndex, userID);
+                            if (enquiryController.checkIfEnquiryReplied(enquiryToDeleteIndex, userID)) break;
                             enquiryController.deleteEnquiry(enquiryToDeleteIndex, userID);
                             break;
                         case 3:
@@ -271,11 +271,11 @@ public class Main {
                             System.out.println("Type the reply you would like to make!");
                             String reply = InputHelper.nextLine();
                             enquiryController.replyToEnquiryAsCommittee(enquiryToReplyIndex, reply, campIdToReply, userID);
+                            break;
                         default:
                             System.out.println("Invalid choice. Try again.");
                             break;
                     }
-                    enquiryController.viewEnquiriesByStudent(userID);
                     break;
                 case 7:
                     // View/Edit/Delete my suggestions
@@ -367,7 +367,7 @@ public class Main {
                 case 3 -> {
                     // Edit an existing camp
                     LoggerHelper.clearScreen();
-                    campOperationsController.viewIndivCamps(staff);
+                    if (!campOperationsController.viewIndivCamps(staff)) break;
                     System.out.println("Which camp would you like to edit?");
                     String campToEdit = InputHelper.nextLine();
                     campOperationsController.editCamp(campToEdit, staff);
@@ -392,7 +392,7 @@ public class Main {
                     System.out.println("Which camp would you like to view enquiries for?");
                     String campToViewEnquiries = InputHelper.nextLine();
                     if (!campOperationsController.verifyCampOwnership(campToViewEnquiries, staff)) break;
-                    enquiryController.viewEnquiriesByCamp(campToViewEnquiries);
+                    if (!enquiryController.viewEnquiriesByCamp(campToViewEnquiries)) break;
                     System.out.println("Type the number of the enquiry you wish to reply to.");
                     int enquiryToReply = InputHelper.nextInt();
                     System.out.println("Type the reply you would like to make!");

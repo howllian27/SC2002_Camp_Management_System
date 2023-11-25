@@ -156,7 +156,7 @@ public class SuggestionController implements BaseController {
 
         //Get list of staff camps
         List <Camp> camps = staffCamps.values().stream().toList();
-        CampListView.displayCampsForStaff(camps);
+        CampListView.displayCampsForStaff(camps, false);
 
         // Get staff input on which camp to view suggestions
         System.out.println("Enter the number of the camp you want to view suggestions for: ");
