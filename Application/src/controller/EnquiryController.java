@@ -138,7 +138,7 @@ public class EnquiryController implements BaseController {
         
         int count = 1;
         for (Enquiry enquiry : enquiries) {
-            if(enquiry.getResponse() != null) {
+            if(enquiry.getResponse() != null && enquiryToReplyIndex == count) {
                 System.out.println("This enquiry has already previously been replied as follows:");
                 System.out.println("Response : " + enquiry.getResponse() + "\n");
                 return;

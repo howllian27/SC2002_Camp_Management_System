@@ -34,7 +34,7 @@ public class EnquiriesView {
         int count = 1;
         for (Enquiry enquiry : enquiries) {
             System.out.println(count + ". " + "Enquiry : " + enquiry.getEnquiry());
-            System.out.println("   Camp : " + enquiry.getCamp().getName());
+            System.out.println("   Camp : " + enquiry.getCamp().getName() + (enquiry.getResponse() == null ? "\n" : ""));
             if(enquiry.getResponse() != null) System.out.println("   Response : " + enquiry.getResponse() + "\n");
             count++;
         }
