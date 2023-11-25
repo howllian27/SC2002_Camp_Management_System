@@ -175,7 +175,7 @@ public class ReportController implements BaseController{
             if (!concatenatedUserIDs.isEmpty()) {
                 concatenatedUserIDs.append(", ");
             }
-            concatenatedUserIDs.append(student.getName()).append("(User ID: ").append(student.getID()).append(")").append((student.getCampCommitteeMemberStatus() )? "\nCommittee Member " : "\nAttendee");
+            concatenatedUserIDs.append(student.getName()).append("(User ID: ").append(student.getID()).append(")").append((student.getCampCommitteeMemberStatus() )? "| Committee Member " : "| Attendee");
 
             if (filterType == "Camp Committee"){
                 concatenatedUserIDs.append("Total Points: ").append(student.getPoints()).append("\n");
