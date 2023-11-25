@@ -184,13 +184,9 @@ public class ReportController implements BaseController{
 
         ReportList.add(cdetails + studentHeader + concatenatedUserIDs);
 
-        if (filterType.equals("Attendees")){
-            fileHelper.writeFile(ReportList, "CampReport_" + campDetails.campName + ".txt");
-            System.out.println("Camp Report generated successfully!");
-        } else {
-            fileHelper.writeFile(ReportList, "CampPerformanceReport_" + campDetails.campName + ".txt");
-            System.out.println("Camp Performance Report generated successfully!");
-        }
+        fileHelper.writeFile(ReportList, "CampReport_" + campDetails.campName + ".txt");
+        System.out.println("Camp Report generated successfully!");
+
     }
 
     /**
