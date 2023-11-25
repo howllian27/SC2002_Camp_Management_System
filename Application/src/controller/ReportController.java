@@ -98,7 +98,7 @@ public class ReportController implements BaseController{
             return;
         }
         
-        CampListView.displayCampsForStudent(camps);
+        // CampListView.displayRegCampsForStudent(camps, student);
         
         ReportView.displayReport();
         int choice = InputHelper.nextInt();

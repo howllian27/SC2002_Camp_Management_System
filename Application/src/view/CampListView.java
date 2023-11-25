@@ -43,7 +43,7 @@ public class CampListView {
     }
 
 
-    public static void displayAllCampsStaffMenu(){
+    public static void displayAllCampsMenu(){
         System.out.println("\n+------------------------------------------------------------+");
         System.out.println("|                                                             |");
         System.out.println("|                      LIST OF ALL CAMPS                      |");
@@ -60,7 +60,7 @@ public class CampListView {
      */
     public static void displayCampsForStudent(List<Camp> camps) {
         //Displays a list of all available camps.
-        displayCampsStudentMenu();
+        displayAllCampsMenu();
         System.out.println("List of Camps:");
         System.out.println();
         int count = 1;
@@ -105,7 +105,7 @@ public class CampListView {
      */
     public static void displayCampsForStaff(List<Camp> camps, boolean allCamps){
         if (allCamps){
-            displayAllCampsStaffMenu();
+            displayAllCampsMenu();
         } else {
             displayCampsStaffMenu();
         }
