@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.HashMap;
 
 import database.SuggestionDB;
@@ -171,7 +172,9 @@ public class SuggestionController implements BaseController {
         Camp selectedCamp = camps.get(campNumber-1);
 
 
-        List<Suggestion> suggestions = suggestionDB.getSuggestionsByCamp(selectedCamp.getName());
+        List<Suggestion> suggestions = suggestionDB.getSuggestionsByCamp(selectedCamp.getName()).stream()
+        .filter(suggestion -> !suggestion.getIsApproved())
+        .collect(Collectors.toList());
         if (suggestions.isEmpty()){
             System.out.println("No suggestions found for this camp!");
             return;
@@ -196,10 +199,62 @@ public class SuggestionController implements BaseController {
                 suggestion.setApproved(true);
                 if (selectedCamp.getCampInformation().campName != suggestion.getCampInformation().campName){
                     campDB.deleteCamp(selectedCamp.getName());
+                    for (Suggestion s : suggestions){
+                        if (s.getCampInformation().campName.equals(selectedCamp.getName()) && s != suggestion){
+                            s.setCampID(suggestion.getCampInformation().campName);
+                        }
+                    }
                     selectedCamp.setCampInformation(suggestion.getCampInformation());
                     campDB.addCamp(suggestion.getCampInformation().campName, selectedCamp);
+
                 } else {
+                    for (Suggestion s : suggestions){
+                        if (s.getCampInformation().campName.equals(selectedCamp.getName()) && s != suggestion){
+                            if (suggestion.getCampInformation().committeeSlots != selectedCamp.getCommitteeSlots()){
+                                CampInformation newCampInfo = s.getCampInformation();
+                                newCampInfo.committeeSlots = suggestion.getCampInformation().committeeSlots;
+                                s.setCampInformation(newCampInfo);
+                            }
+
+                            if (suggestion.getCampInformation().totalSlots != selectedCamp.getTotalSlots()){
+                                CampInformation newCampInfo = s.getCampInformation();
+                                newCampInfo.totalSlots = suggestion.getCampInformation().totalSlots;
+                                s.setCampInformation(newCampInfo);
+                            }
+
+                            if (suggestion.getCampInformation().dates[0] != selectedCamp.getDates()[0]){
+                                CampInformation newCampInfo = s.getCampInformation();
+                                newCampInfo.dates[0] = suggestion.getCampInformation().dates[0];
+                                s.setCampInformation(newCampInfo);
+                            }
+
+                            if (suggestion.getCampInformation().dates[1] != selectedCamp.getDates()[1]){
+                                CampInformation newCampInfo = s.getCampInformation();
+                                newCampInfo.dates[1] = suggestion.getCampInformation().dates[1];
+                                s.setCampInformation(newCampInfo);
+                            }
+
+                            if (suggestion.getCampInformation().registrationClosingDate != selectedCamp.getClosingDate()){
+                                CampInformation newCampInfo = s.getCampInformation();
+                                newCampInfo.registrationClosingDate = suggestion.getCampInformation().registrationClosingDate;
+                                s.setCampInformation(newCampInfo);
+                            }
+
+                            if (suggestion.getCampInformation().location != selectedCamp.getLocation()){
+                                CampInformation newCampInfo = s.getCampInformation();
+                                newCampInfo.location = suggestion.getCampInformation().location;
+                                s.setCampInformation(newCampInfo);
+                            }
+
+                            if (suggestion.getCampInformation().description != selectedCamp.getDescription()){
+                                CampInformation newCampInfo = s.getCampInformation();
+                                newCampInfo.description = suggestion.getCampInformation().description;
+                                s.setCampInformation(newCampInfo);
+                            }
+                        }
+                    }
                     selectedCamp.setCampInformation(suggestion.getCampInformation());
+                    campDB.updateCamp(selectedCamp.getName(), selectedCamp);
                 }
                 
                 Student suggestionSetter = (Student) userDB.getUser(suggestion.getStudentId(), true);

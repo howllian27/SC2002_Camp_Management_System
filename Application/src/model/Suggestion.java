@@ -8,8 +8,8 @@ package model;
  * @version 1.1
  */
 public class Suggestion {
-    private final String campId;
     private final String studentId;
+    private String campId;
     private CampInformation campInformation;
     private boolean isApproved;
 
@@ -29,10 +29,9 @@ public class Suggestion {
     }
 
     //Setters
-    public void setApproved(boolean status) {
-        this.isApproved = status;
-    }
+    public void setApproved(boolean status) { this.isApproved = status; }
     public void setCampInformation(CampInformation campInformation) { this.campInformation = campInformation; }
+    public void setCampID(String campID) { this.campId = campID; }
 
     //Getters
     public CampInformation getCampInformation() { return this.campInformation; }
