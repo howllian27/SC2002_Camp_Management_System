@@ -114,4 +114,20 @@ public class Student extends User {
     public void addPoints(int points) {
         this.points += points;
     }
+
+    /**
+     * Removes points from the student's account.
+     * 
+     * @param oldCampId
+     * @param newCampId
+    */
+    public void changeCampId(String oldCampId, String newCampId) {
+        Camp camp = registeredCamps.get(oldCampId);
+        registeredCamps.remove(oldCampId);
+        registeredCamps.put(newCampId, camp);
+
+        camp = previouslyRegisteredCamps.get(oldCampId);
+        previouslyRegisteredCamps.remove(oldCampId);
+        previouslyRegisteredCamps.put(newCampId, camp);
+    }
 }

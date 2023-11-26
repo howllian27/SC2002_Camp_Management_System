@@ -202,11 +202,21 @@ public class SuggestionController implements BaseController {
                     for (Suggestion s : suggestions){
                         if (s.getCampInformation().campName.equals(selectedCamp.getName()) && s != suggestion){
                             s.setCampID(suggestion.getCampInformation().campName);
+                            CampInformation newCampInfo = s.getCampInformation();
+                            newCampInfo.campName = suggestion.getCampInformation().campName;
+                            s.setCampInformation(newCampInfo);
                         }
                     }
+                    // Edit campIDs
+                    for (Student student : selectedCamp.getAttendees().values()){
+                        student.changeCampId(selectedCamp.getName(), suggestion.getCampInformation().campName);
+                    }
+
+                    selectedCamp.getInCharge().changeCampId(selectedCamp.getName(), suggestion.getCampInformation().campName);
+
+                    // Reset camp information
                     selectedCamp.setCampInformation(suggestion.getCampInformation());
                     campDB.addCamp(suggestion.getCampInformation().campName, selectedCamp);
-
                 } else {
                     for (Suggestion s : suggestions){
                         if (s.getCampInformation().campName.equals(selectedCamp.getName()) && s != suggestion){

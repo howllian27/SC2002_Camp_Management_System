@@ -99,6 +99,12 @@ public class CampOperationsController implements BaseController {
         if (!updatedCamp.getName().equals(campID)){
             campDB.deleteCamp(campID);
             campDB.addCamp(updatedCamp.getName(), updatedCamp);
+
+            for (Student student : updatedCamp.getAttendees().values()) {
+                student.changeCampId(campID, updatedCamp.getName());
+            }
+
+            updatedCamp.getInCharge().changeCampId(campID, updatedCamp.getName());
         } else {
             campDB.updateCamp(campID, updatedCamp);
         }

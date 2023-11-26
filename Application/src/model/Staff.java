@@ -63,4 +63,16 @@ public class Staff extends User {
     public void removeCamp(String campId) {
         createdCamps.remove(campId);
     }
+
+    /***
+     * Changes the camp Id of a camp in the staff's created camp list.
+     *
+     * @param oldCampId The old camp Id.
+     * @param newCampId The new camp Id.
+     */
+    public void changeCampId(String oldCampId, String newCampId) {
+        Camp camp = createdCamps.get(oldCampId);
+        createdCamps.remove(oldCampId);
+        createdCamps.put(newCampId, camp);
+    }
 }
